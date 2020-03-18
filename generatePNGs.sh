@@ -1,12 +1,11 @@
-mkdir -p ./src/png
+mkdir -p ./static/png
+rm static/png/*
 magick mogrify \
   -verbose \
-  -path src/png \
-  -resize 200x200 \
+  -path static/png \
+  -resize 256x256 \
   -format png \
   -background none \
   -gravity center \
-  -extent 200x200 \
-  src/svg/*
-
-# mogrify -format png -path $PWD/png -resize 100x100 svg/*.svg
+  -extent 256x256 \
+  static/svg/*

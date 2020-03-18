@@ -1,0 +1,59 @@
+Year	Tech	Color	Group	Origin	Pro	n00b
+2007	HTML	#E34F26	Templates
+2009	CSS	#002561	Styles
+2012	JavaScript	#F7DF1E	Programming		TRUE
+2011	PHP	#8892BE	Programming	HTML
+2011	httpd	#D7242A	Server
+2013	Nginx	#0B6237	Server
+2018	Traefik	#00BDD2	Server	Docker
+2020	Caddy	#18b125	Server			TRUE
+2013	Linux	#34be5b	System
+2006	Windows	#0078d7	System
+2017	Docker	#0db7ed	System	Linux	TRUE
+2013	Photoshop	#8BC3FC	Design
+2015	Illustrator	#FF7C25	Design
+2013	Bash	#2A3539	DevOps	Linux
+2016	DNS	#144070	Networking
+2017	Jira	#0052cc	Tools
+2019	Prometheus	#E6522C	DevOps	Linux
+2019	Grafana	#F7CF3D	DevOps	Prometheus
+2017	NPM	#CB3837	Programming	JavaScript
+2018	yarn	#1690B8	Programming	JavaScript
+2017	React	#00d8ff	Programming	JavaScript, HTML	TRUE
+2017	Styled Components	#db7093	Styles	CSS, React
+2015	SASS	#D46798	Styles	CSS
+2015	less	#43759e	Styles	CSS
+2014	Bootstrap	#7952b3	Styles	CSS
+2014	Foundation	#074E68	Styles	CSS
+2019	Ant Design	#1890FF	Styles	CSS, React
+2016	gulp	#D54749	Programming	JavaScript, NodeJS
+2016	Grunt	#E9853F	Programming	JavaScript, NodeJS
+2017	ESLint	#4B32C3	Testing	JavaScript, NodeJS
+2018	stylelint	#253238	Testing	CSS
+2018	webpack	#1a6bac	Programming	JavaScript, NodeJS
+2018	Redux	#764abc	Programming	React
+2018	React Router	#d0021b	Programming	React
+2018	Formik	#0059C7	Programming	React
+2017	NodeJS	#026e00	Programming	JavaScript
+2018	VueJS	#29B687	Programming	JavaScript, HTML, CSS		TRUE
+2017	Jest	#10910e	Testing	JavaScript
+2019	Puppeteer	#01D6A6	Testing	JavaScript
+2020	Cypress	#182733	Testing	JavaScript		TRUE
+2018	PWA	#5D2CC2	Programming	HTML, JavaScript
+2020	WorkBox	#EE7024	Programming	PWA
+2012	Git	#FC4E2F	Programming
+2012	GitHub	#24292E	Tools	Git
+2017	GitLab	#fa7035	Tools	Git
+2018	GitLab CI	#fa7035	DevOps	GitLab, Docker
+2014	Composer	#8C5431	Programming	PHP
+2013	WebSockets	#FF6520	Programming	JavaScript
+2018	WebRTC	#008BC8	Programming	JavaScript, WebSockets
+2019	GraphQL	#E71E93	Database
+2019	PostgreSQL	#336791	Database
+2012	MySQL	#e97b00	Database
+2018	MongoDB	#13aa52	Database			TRUE
+2017	Material-UI	#007ACD	Styles	CSS, React
+2019	Fusion 360	#faa21b	Design
+2019	Hasura	#102852	Programming	GraphQL
+2019	oAuth2	#000000	Programming
+2020	AWS	#FF9900	Server
