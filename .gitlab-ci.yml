@@ -31,7 +31,8 @@ build-gatsby:
 
 pages:
   stage: deploy
-  GIT_STRATEGY: none
+  variables:
+    GIT_STRATEGY: none
   script:
     - echo deploy
   artifacts:
