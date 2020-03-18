@@ -1,15 +1,10 @@
-image: node:12-alpine
-
 stages:
   - prebuild
   - build
+  - deploy
 
 before_script:
   - npm ci
-
-cache:
-  paths:
-  - ./node_modules/
 
 prepare-images:
   image: alpine
@@ -23,9 +18,24 @@ prepare-images:
       - static/png
 
 build-gatsby:
+  image: node:12-alpine
   stage: build
   script:
     - npm run build
   artifacts:
     paths:
-    - public
+      - public
+  cache:
+    paths:
+    - ./node_modules/
+
+pages:
+  stage: deploy
+  GIT_STRATEGY: none
+  script:
+    - echo deploy
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
