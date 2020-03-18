@@ -5,7 +5,7 @@ stages:
   - build
 
 before_script:
-  - npm
+  - npm ci
 
 cache:
   paths:
