@@ -30,10 +30,10 @@ build-svelte:
   before_script:
     - npm ci
   script:
-    - npm run build
+    - npm run export
   artifacts:
     paths:
-      - public
+      - __sapper__
   cache:
     paths:
     - node_modules
@@ -43,7 +43,7 @@ pages:
   variables:
     GIT_STRATEGY: none
   script:
-    - echo deploy
+    - cp -r __sapper__/export public
   artifacts:
     paths:
       - public
