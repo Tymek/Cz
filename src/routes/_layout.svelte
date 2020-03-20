@@ -1,7 +1,14 @@
 <script>
-	import Nav from '../components/Nav.svelte';
+	import { onMount } from 'svelte'
+	import { locale, getBrowserLocale } from 'svelte-intl'
 
-	export let segment;
+	onMount(() => {
+		locale.set(getBrowserLocale('en'))
+	});
+
+	// import Nav from '../components/Nav.svelte';
+
+	// export let segment;
 </script>
 
 <style>
@@ -15,7 +22,7 @@
 	}
 </style>
 
-<Nav {segment}/>
+<!-- <Nav {segment}/> -->
 
 <main>
 	<slot></slot>
