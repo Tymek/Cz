@@ -1,25 +1,26 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.tymek.cz">
-    <img alt="Gatsby" src="https://avatars2.githubusercontent.com/u/2625371" width="120" style="border-radius: 50%"/>
-  </a>
-</p>
 <h1 align="center">
-  Ahoy
+  Tymek.Cz
 </h1>
 
-### Compile logos from SVGs
-Requires ImageMagick. Run under Linux.
+### Precompile assets
+Requires `imagemagick`, `wget`, `unzip` and `woff2_compress`. Run under Linux.
+``` sh
+./generatePNGs.sh && ./generateFonts.sh
 ```
-./generatePNGs.sh
+
+Or use docker
+``` sh
+docker run -it -v ${PWD}:/srv -w /srv scrlk/woff2 sh -c "apk add --no-cache imagemagick && ./generatePNGs.sh &&./generateFonts.sh"
 ```
 
 ### Start Gatsby
-Requires NodeJS
+Requires `nodejs`
 
 ``` sh
-npm i
-npm start
+npm i && npm start
+```
 
-# npm run build
+Or
+``` sh
+docker run -it -p "8000:8000" -v ${PWD}:/srv -w /srv node:12 sh -c "npm i && npm start"
 ```

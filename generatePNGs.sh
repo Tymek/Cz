@@ -1,11 +1,11 @@
-mkdir -p ./static/png
-rm static/png/*
+mkdir -p ./content/assets/logos/png
+rm content/assets/logos/png/*
 magick mogrify \
   -verbose \
-  -path static/png \
+  -path content/assets/logos/png \
   -resize 256x256 \
   -format png \
   -background none \
   -gravity center \
   -extent 256x256 \
-  static/svg/*
+  content/assets/logos/svg/*
