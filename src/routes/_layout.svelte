@@ -1,14 +1,18 @@
 <script>
 	import { onMount } from 'svelte'
-	import { locale, getBrowserLocale } from 'svelte-intl'
+	import { locale, translations, getBrowserLocale } from 'svelte-intl'
+	translations.update({
+		en: {},
+		pl: {},
+	})
+
+	locale.set('en')
 
 	onMount(() => {
 		locale.set(getBrowserLocale('en'))
 	});
 
-	// import Nav from '../components/Nav.svelte';
-
-	// export let segment;
+	export let segment
 </script>
 
 <style>
@@ -21,8 +25,6 @@
 		box-sizing: border-box;
 	}
 </style>
-
-<!-- <Nav {segment}/> -->
 
 <main>
 	<slot></slot>

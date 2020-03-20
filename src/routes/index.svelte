@@ -1,12 +1,26 @@
 <script>
+import Typewritter from '../components/typewritter.svelte';
+import Graph from '../components/graph.svelte';
 import { translations, _ } from 'svelte-intl';
 
 translations.update({
 	en: {
-		hello: 'Hello!',
+		description: [
+			'Problem solver',
+			'Self-taught coder',
+			'Self-taught programmer',
+			'Web front-end expert',
+			'ReactJS expert',
+			'ReactJS developer',
+			'Open-source fan',
+			'Open-source contributor',
+			'Human being',
+		].join('; '),
 	},
 	pl: {
-		hello: 'Hej!',
+		description: [
+			'Programista. Rozwiązywacz problemów. Specjalista od internetu. Koder ReactJS. Człowiek. Fan open-source',
+		],
 	},
 })
 </script>
@@ -38,6 +52,9 @@ translations.update({
 	<title>Tymoteusz Czech &ndash; www.tymek.cz</title>
 </svelte:head>
 
-<h1>{$_('hello')}</h1>
+<h1>Tymoteusz Czech</h1>
+<p>
+	<Typewritter lines={$_('description').split('; ')} />
+</p>
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<Graph />
