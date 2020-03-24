@@ -1,8 +1,6 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
   import { writable } from 'svelte/store'
-  import Papa from 'papaparse'
-  import * as THREE from 'three'
   import {
     pipe,
     uniq,
@@ -49,20 +47,24 @@
     map(id => ({ id })),
   )
 
-  const getData = input => new Promise(resolve => Papa.parse(input, {
-    worker: true,
-    header: true,
-    complete: function(results) {
-      resolve(
-        pipe(
-          filter(({ id }) => id !== ''),
-          addIds,
-          addImages,
-          originsToArray,
-        )(results.data)
-      )
-    },
-  }))
+  const getData = async (input) => {
+    const Papa = (await import('papaparse')).default
+
+    return new Promise(resolve => Papa.parse(input, {
+      worker: true,
+      header: true,
+      complete: function(results) {
+        resolve(
+          pipe(
+            filter(({ id }) => id !== ''),
+            addIds,
+            addImages,
+            originsToArray,
+          )(results.data)
+        )
+      },
+    }))
+  }
 
   const getLinks = data => {
     const links = []
@@ -98,8 +100,16 @@
 
   const create3dGraph = async gData => {
     // IMPORTANT NOTE: Implementation of 'github.com/vasturiano/3d-force-graph' was blocking scroll, hence I scaveged it into './customRenderer'
-    const ForceGraph3D = (await import('./customRenderer/forceGraph.js')).default
     // const ForceGraph3D = (await import('3d-force-graph')).default
+    const ForceGraph3D = (await import('./customRenderer/forceGraph')).default
+    const {
+      SphereGeometry,
+      Mesh,
+      MeshBasicMaterial,
+      SpriteMaterial,
+      TextureLoader,
+      Sprite,
+    } = await import('three')
 
     graph = ForceGraph3D()
     graph.backgroundColor('rgba(0,0,0,0)')
@@ -134,15 +144,15 @@
       const img = img3d || '/null.png'
 
       // use a sphere as a drag handle
-      const obj = new THREE.Mesh(
-        new THREE.SphereGeometry(9),
-        new THREE.MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0 }),
+      const obj = new Mesh(
+        new SphereGeometry(9),
+        new MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0 }),
       )
 
       // add img sprite as child
-      const imgTexture = new THREE.TextureLoader().load(img)
-      const material = new THREE.SpriteMaterial({ map: imgTexture, })
-      const sprite = new THREE.Sprite(material)
+      const imgTexture = new TextureLoader().load(img)
+      const material = new SpriteMaterial({ map: imgTexture, })
+      const sprite = new Sprite(material)
       sprite.scale.set(20, 20)
       obj.add(sprite)
 
