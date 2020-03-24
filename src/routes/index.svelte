@@ -1,6 +1,6 @@
 <script>
-import Typewritter from '../components/typewritter.svelte';
-import Graph from '../components/graph.svelte';
+// import Typewritter from '../components/typewritter.svelte';
+import Graph from '../components/Graph/graph.svelte';
 import { translations, _ } from 'svelte-intl';
 
 translations.update({
@@ -19,16 +19,21 @@ translations.update({
 	},
 	pl: {
 		description: [
-			'Programista. Rozwiązywacz problemów. Specjalista od internetu. Koder ReactJS. Człowiek. Fan open-source',
-		],
+			'Programista',
+			'Rozwiązywacz problemów',
+			'Specjalista od internetu',
+			'Koder ReactJS',
+			'Człowiek',
+			'Fan open-source',
+		].join('; '),
 	},
 })
 </script>
 <style>
-	h1, p {
+	/* h1, p {
 		text-align: center;
 		margin: 0 auto;
-	}
+	} */
 
 	h1 {
 		font-size: 2.8em;
@@ -37,9 +42,9 @@ translations.update({
 		margin: 0 0 0.5em 0;
 	}
 
-	p {
+	/* p {
 		margin: 1em auto;
-	}
+	} */
 
 	@media (min-width: 480px) {
 		h1 {
@@ -53,8 +58,34 @@ translations.update({
 </svelte:head>
 
 <h1>Tymoteusz Czech</h1>
-<p>
+<!-- <p>
 	<Typewritter lines={$_('description').split('; ')} />
-</p>
+</p> -->
 
 <Graph />
+
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
+<p>Test</p>
