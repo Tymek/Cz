@@ -34,3 +34,11 @@ code {
 		font-size: 16px;
 	}
 }
+
+.typed-cursor {
+	display: inline-block;
+	height: 1.2em;
+	width: 2px;
+	background: #444;
+	margin: 0 0 -0.2em 2px;
+}

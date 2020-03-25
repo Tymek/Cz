@@ -47,6 +47,13 @@
     map(id => ({ id })),
   )
 
+  const addLinkCount = data => map(item => ({
+    ...item,
+    inboundLinksCount: (
+      () => data.filter(({ links }) => links.includes(item.tech)).length
+    )(),
+  }))(data)
+
   const getData = async (input) => {
     const Papa = (await import('papaparse')).default
 
@@ -60,6 +67,7 @@
             addIds,
             addImages,
             originsToArray,
+            addLinkCount,
           )(results.data)
         )
       },
@@ -109,6 +117,7 @@
       SpriteMaterial,
       TextureLoader,
       Sprite,
+      // AxesHelper,
     } = await import('three')
 
     graph = ForceGraph3D()
@@ -140,12 +149,13 @@
         3000  // ms transition duration
       );
     });
-    graph.nodeThreeObject(({ img3d }) => {
+    graph.nodeThreeObject(({ img3d, inboundLinksCount }) => {
       const img = img3d || '/null.png'
+      const size = img3d ? 16 + inboundLinksCount : 5
 
       // use a sphere as a drag handle
       const obj = new Mesh(
-        new SphereGeometry(9),
+        new SphereGeometry(size / 2),
         new MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0 }),
       )
 
@@ -153,7 +163,7 @@
       const imgTexture = new TextureLoader().load(img)
       const material = new SpriteMaterial({ map: imgTexture, })
       const sprite = new Sprite(material)
-      sprite.scale.set(20, 20)
+      sprite.scale.set(size, size)
       obj.add(sprite)
 
       return obj
@@ -161,11 +171,22 @@
     const distance = 250
 
     graph(container).graphData(gData)
+
+    // graph.scene().add( new AxesHelper( 20 ) )
+
     graph.cameraPosition({
-      x: -32.52637986278481,
-      y: 159.98034756723706,
-      z: 476.1402222391635,
+      x: 562,
+      y: 259,
+      z: -276,
     });
+    // TODO: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
+    setTimeout(() => {
+      graph.cameraPosition({
+        x: 232*0.75,
+        y: 159*0.75,
+        z: 576*0.75,
+      }, undefined, 1500);
+    }, 1000)
 
     return graph
   }
@@ -205,18 +226,50 @@
 	div {
 		position: relative;
 		width: 100%;
-		height: 70vh;
-		background-color: #eee;
+		height: 66vh;
+		/* background-color: #eee; */
 		margin: 0;
 		box-sizing: border-box;
+    overflow: hidden;
+    background-image: url('/noisy-texture.png'),
+      radial-gradient(circle farthest-corner,#f8f8f8 0, #bbbbbb 80%);
+		background-repeat: repeat;
+		background-attachment: fixed, scroll;
+    cursor: grab;
+  }
+
+  div:active {
+    cursor: grabbing;
+  }
+
+  div:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    width: 120%;
+    height: 1rem;
+    top: -1rem;
+    left: -10%;
+    box-shadow: 0 5px 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  div:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    width: 120%;
+    height: 1rem;
+    bottom: -1rem;
+    left: -10%;
+    box-shadow: 0 5px 2rem rgba(0, 0, 0, 0.15);
   }
 </style>
-
 
 <h2>Welcome in my universe</h2>
 <div
   bind:this={container}
   bind:clientWidth={width}
   bind:clientHeight={height}
-/>
+></div>
+
 <h2>Glad you came</h2>

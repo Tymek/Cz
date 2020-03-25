@@ -301,7 +301,7 @@ var CustomTrackballControls = function ( object, domElement ) {
 	};
 
 	// listeners
-
+	/*
 	function keydown( event ) {
 		if ( _this.enabled === false ) return;
 
@@ -318,13 +318,16 @@ var CustomTrackballControls = function ( object, domElement ) {
 		}
 
 	}
+	*/
 
+	/*
 	function keyup() {
 		if ( _this.enabled === false ) return;
 
 		_keyState = STATE.NONE;
 		window.addEventListener( 'keydown', keydown, false );
 	}
+	*/
 
 	function mousedown( event ) {
 
