@@ -17,7 +17,7 @@
     "d3": "^5.16.0",
     "format-message": "^6.2.3",
     "papaparse": "^5.2.0",
-    "polka": "next",
+    "polka": "1.0.0-next.11",
     "ramda": "^0.27.0",
     "sirv": "^0.4.2",
     "svelte-intl": "^1.1.1",

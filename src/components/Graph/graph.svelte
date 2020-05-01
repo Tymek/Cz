@@ -1,16 +1,27 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
+  import { translations, _ } from 'svelte-intl'
   import { writable } from 'svelte/store'
   import {
-    pipe,
-    uniq,
-    map,
-    prop,
     filter,
+    map,
+    once,
+    pipe,
+    prop,
+    uniq,
   } from 'ramda'
 
+  translations.update({
+    en: {
+      stackHeadline: 'Welcome in my universe'
+    },
+    pl: {
+      stackHeadline: 'Witaj w moim świecie'
+    },
+  })
   // import { CustomTrackballControls } from './customControls'
 
+  let y = 0
   let container
   let graph
   let width, height
@@ -106,7 +117,7 @@
     return links
   }
 
-  const create3dGraph = async gData => {
+  const create3dGraph = async data => {
     // IMPORTANT NOTE: Implementation of 'github.com/vasturiano/3d-force-graph' was blocking scroll, hence I scaveged it into './customRenderer'
     // const ForceGraph3D = (await import('3d-force-graph')).default
     const ForceGraph3D = (await import('./customRenderer/forceGraph')).default
@@ -170,7 +181,7 @@
     })
     const distance = 250
 
-    graph(container).graphData(gData)
+    graph(container).graphData(data)
 
     // graph.scene().add( new AxesHelper( 20 ) )
 
@@ -179,14 +190,8 @@
       y: 259,
       z: -276,
     });
-    // TODO: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
-    setTimeout(() => {
-      graph.cameraPosition({
-        x: 232*0.75,
-        y: 159*0.75,
-        z: 576*0.75,
-      }, undefined, 1500);
-    }, 1000)
+
+    graph.pauseAnimation()
 
     return graph
   }
@@ -197,6 +202,32 @@
       graph.height(height)
     }, 300)
   }
+
+  const initialize = once(async () => {
+    console.log('initialize')
+
+    setTimeout(() => {
+      graph.resumeAnimation()
+    }, 500)
+
+    setTimeout(() => {
+      graph.resumeAnimation()
+      graph.cameraPosition({
+        x: 232*0.75,
+        y: 159*0.75,
+        z: 576*0.75,
+      }, undefined, 3000);
+    }, 1500)
+
+    window.addEventListener('orientationchange', onOrientationChange, { passive: true })
+  })
+
+  const observer = new IntersectionObserver(() => {
+    if (y > 0 || window.location.hash === '#stack') {
+      observer.unobserve(container)
+      initialize()
+    }
+  })
 
   onMount(async () => {
     const skills = await fetch('/skills.tsv')
@@ -211,14 +242,19 @@
       nodes: [ ...nodes/*, ...groupNodes*/ ],
       links: [ ...links, ...groupLinks ],
     }
-
+  
     await create3dGraph(data)
 
-    window.addEventListener('orientationchange', onOrientationChange, { passive: true })
+    if (window.location.hash === '#stack') {
+      initialize()
+    } else {
+      observer.observe(container)
+    }
   })
 
   onDestroy(() => {
     window.removeEventListener('orientationchange', onOrientationChange)
+    observer.unobserve(container)
   })
 </script>
 
@@ -265,11 +301,11 @@
   }
 </style>
 
-<h2>Welcome in my universe</h2>
+<svelte:window bind:scrollY={y} />
+<h2 id="stack">{$_('stackHeadline')}</h2>
 <div
   bind:this={container}
   bind:clientWidth={width}
   bind:clientHeight={height}
 ></div>
-
-<h2>Glad you came</h2>
+<!-- <h2>Glad you came</h2> -->

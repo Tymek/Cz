@@ -276,7 +276,7 @@ export default Kapsule({
 
     // configure controls
     state.controls = new CustomTrackballControls(state.camera, state.renderer.domElement)
-    console.log(controlType)
+    // console.log(controlType)
     // state.controls = new ({
     //   trackball: ThreeTrackballControls,
     //   orbit: ThreeOrbitControls,

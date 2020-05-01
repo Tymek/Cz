@@ -1,81 +1,151 @@
 <script>
-import Typewritter from './typewritter.svelte';
-import { translations, _ } from 'svelte-intl';
+import Typewritter from './typewritter.svelte'
+import { translations, _ } from 'svelte-intl'
+import LinkIcon from './link.svg'
+import BuildIcon from './build.svg'
+import EnvelopeIcon from './envelope.svg'
 
 translations.update({
 	en: {
 		description: [
-			'Self-taught coder',
-			'Self-taught programmer',
-			'Web front-end expert',
-			'Problem solver',
-			'ReactJS developer',
-			'ReactJS expert',
-			'DevOps advocate',
-			'Computer user',
-			'Human being',
-		].join('; '),
+			'Hi! I\'m Tymek. You can call me Tim.',
+			'I use new technology to make life better.',
+			'This pursuit lead me to specialize in creating websites.',
+		].join('\n'),
+		links: 'Links',
+		stack: 'Stack',
+		contact: 'Contact'
 	},
 	pl: {
 		description: [
-			'Programista',
-			'Rozwiązywacz problemów',
-			'Specjalista od internetu',
-			'Programista ReactJS',
-			'Programista ReactJS \u2013 Ekspert',
-			'Użytkownik komputera',
-			'Człowiek',
-			'Fan open-source',
-		].join('; '),
+			'Hej! Jestem Tymek.',
+			'Używam nowych technologii, by żyło się łatwiej i ciekawiej.',
+			'Moje zainteresowania sprawiły, że specjalizuję się w tworzeniu stron internetowych.',
+		].join('\n'),
+		links: 'Linki',
+		stack: 'Stack',
+		contact: 'Kontakt'
 	},
 })
+
 </script>
 <style>
   .container {
-    padding: 2rem;
-  }
-
-	h1 {
-		font-size: 2.441em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0;
+		box-sizing: border-box;
+    padding: 2rem 10vw;
+		position: relative;
+		height: 100vh;
+		display: flex;
+		align-items: center;
 	}
 
-	/* @media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-  } */
+	.title {
+		font-size: 4.188036796rem;
+		line-height: 1.2em;
+		/* text-transform: uppercase; */
+		font-weight: 700;
+		color: #253854;
+		margin: 0 0 2rem;
+	}
 
-  figure {
+	.description {
+		padding-bottom: 1.11646975rem;
+		color: #4B3445;
+		font-size: 1.11646975rem;
+		line-height: 1.6em;
+	}
+
+  /* figure {
     max-width: 30vw;
-    position: relative;
+    position: absolute;
+		right: 5vw;
+		bottom: 0;
     padding: 1px;
+		margin: 0;
     border: 1px solid rgba(0, 0, 0, 0.25);
   }
 
-  img {
+  figure img {
     width: 100%;
     display: block;
+	} */
+
+	.buttons {
+		padding-bottom: 1rem;
 	}
-	
-	.bio {
-		display: flex;
+
+	.button {
+		display: inline-flex;
+		/* border: 1px solid rgba(0, 0, 0, 0.3); */
+		border: 1px solid transparent;
+		box-shadow: 0 2px 0 rgba(0,0,0,.045);
+		font-size: 1rem;
+		line-height: 1.6em;
+		/* font-weight: bold; */
+		margin: 0 8px 0 0;
+		padding: 0.25em 1em;
+		border-radius: 4px;
+		align-items: center;
+		cursor: pointer;
+		text-decoration: none;
+
+	}
+
+	.links.button {
+		background: #F1CD5F;
+		color: #4B3445;
+	}
+
+	.stack.button {
+		background: #B43C3C;
+		color: #ffffff;
+	}
+
+	.contact.button {
+		background: #3C8458;
+		color: #ffffff;
+	}
+
+	.button .icon {
+		height: 1em;
+		font-size: 1.25rem;
+		display: block;
+		margin-right: 0.4em;
+	}
+
+	.button .label {
+		padding-top: 0.2em;
+	}
+
+	:global(.icon svg) {
+		height: 1em;
 	}
 </style>
 
 <div class="container">
-  <h1>
-    <span>Tymoteusz<br />Czech</span>
-  </h1>
-  <Typewritter lines={$_('description').split('; ')} />
-	<div class="bio">
+	<div class="block">
+		<h1 class="title">
+			Tymoteusz <br />Czech
+		</h1>
 		<div class="description">
-			<p>Hi! I'm Tymek. You can call me Tim. I use new technology to make life better. This pursuit lead me to specialize in creating websites.</p>
+			<p>{@html $_('description').replace(/\n/g, '<br />')}</p>
 		</div>
-		<figure>
-			<img src="/photo.jpg" alt="Tymek" />
-		</figure>
+		<div class="buttons">
+			<a href="#contact" class="button contact">
+				<span class="icon" aria-hidden="true">{@html EnvelopeIcon}</span>
+				<span class="label">{$_('contact')}</span>
+			</a>
+			<a href="#stack" class="button stack">
+				<span class="icon" aria-hidden="true">{@html BuildIcon}</span>
+				<span class="label">{$_('stack')}</span>
+			</a>
+			<a href="#links" class="button links">
+				<span class="icon" aria-hidden="true">{@html LinkIcon}</span>
+				<span class="label">{$_('links')}</span>
+			</a>
+		</div>
 	</div>
+	<!-- <figure>
+		<img src="/photo.jpg" alt="Tymek" />
+	</figure> -->
 </div>

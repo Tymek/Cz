@@ -19,7 +19,7 @@
 	main {
 		position: relative;
 		box-sizing: border-box;
-		background-color: #f4f4f4;
+		/* background-color: #f4f4f4; */
 		line-height: 1.65em;
 	}
 </style>
