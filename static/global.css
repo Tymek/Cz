@@ -1,9 +1,3 @@
-:root, html, body {
-	/* font-size: 16px; */
-	/* font-size: 1.2vw; */
-	font-size: 0.833333333vw;
-}
-
 body {
 	margin: 0;
 	font-family: Spartan, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -35,11 +29,3 @@ code {
 		font-size: 16px;
 	}
 } */
-
-.typed-cursor {
-	display: inline-block;
-	height: 1.2em;
-	width: 2px;
-	background: #444;
-	margin: 0 0 -0.2em 2px;
-}

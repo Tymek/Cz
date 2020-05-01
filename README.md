@@ -13,14 +13,9 @@ Or use docker
 docker run -it -v ${PWD}:/srv -w /srv scrlk/woff2 sh -c "apk add --no-cache imagemagick && ./generatePNGs.sh &&./generateFonts.sh"
 ```
 
-### Start Gatsby
+### Start project
 Requires `nodejs`
 
 ``` sh
-npm i && npm start
-```
-
-Or
-``` sh
-docker run -it -p "8000:8000" -v ${PWD}:/srv -w /srv node:12 sh -c "npm i && npm start"
+npm i && npm run dev
 ```

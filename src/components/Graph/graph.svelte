@@ -208,10 +208,12 @@
 
     setTimeout(() => {
       graph.resumeAnimation()
+      graph.d3ReheatSimulation()
     }, 500)
 
     setTimeout(() => {
       graph.resumeAnimation()
+      graph.d3ReheatSimulation()
       graph.cameraPosition({
         x: 232*0.75,
         y: 159*0.75,

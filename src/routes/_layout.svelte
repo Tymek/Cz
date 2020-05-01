@@ -15,7 +15,15 @@
 	export let segment
 </script>
 
-<style>
+<style type="text/scss">
+	:global(:root, html, body) {
+		font-size: 0.833333333vw;
+
+		@media screen and (min-width: 600px) {
+			font-size: 16px;
+		}
+	}
+
 	main {
 		position: relative;
 		box-sizing: border-box;

@@ -24,7 +24,17 @@
   })
 </script>
 
-<div>
+<style>
+  :global(.typed-cursor) {
+    display: inline-block;
+    height: 1.2em;
+    width: 2px;
+    background: #444;
+    margin: 0 0 -0.2em 2px;
+  }
+</style>
+
+<div class="typewritter">
   <span bind:this={container} />
   <span>&nbsp;</span> 
 </div>
