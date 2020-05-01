@@ -16,20 +16,4 @@ import Graph from '../components/Graph/graph.svelte';
 <p>&hellip;</p>
 <p>&hellip;</p>
 <p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<p>&hellip;</p>
-<Graph />
+<!-- <Graph /> -->

@@ -67,7 +67,7 @@ translations.update({
 
 <div class="container">
   <h1>
-    <span>Tymoteusz Czech</span>
+    <span>Tymoteusz<br />Czech</span>
   </h1>
   <Typewritter lines={$_('description').split('; ')} />
 	<div class="bio">
