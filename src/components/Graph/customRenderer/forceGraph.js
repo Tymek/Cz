@@ -1,27 +1,27 @@
 // @ts-nocheck
-import { AmbientLight, DirectionalLight, Vector3 } from 'three';
+import { AmbientLight, DirectionalLight, Vector3 } from 'three'
 
 const three = window.THREE
   ? window.THREE // Prefer consumption from global THREE, if exists
-  : { AmbientLight, DirectionalLight, Vector3 };
+  : { AmbientLight, DirectionalLight, Vector3 }
 
-import ThreeDragControls from './dragControls';
-import ThreeForceGraph from 'three-forcegraph';
-import ThreeRenderObjects from './renderObjects';
+import ThreeDragControls from './dragControls'
+import ThreeForceGraph from 'three-forcegraph'
+import ThreeRenderObjects from './renderObjects'
 
-import accessorFn from 'accessor-fn';
-import Kapsule from 'kapsule';
+import accessorFn from 'accessor-fn'
+import Kapsule from 'kapsule'
 
-import linkKapsule from './kapsule-link.js';
+import linkKapsule from './kapsule-link.js'
 
 //
 
-const CAMERA_DISTANCE2NODES_FACTOR = 170;
+const CAMERA_DISTANCE2NODES_FACTOR = 170
 
 //
 
 // Expose config from forceGraph
-const bindFG = linkKapsule('forceGraph', ThreeForceGraph);
+const bindFG = linkKapsule('forceGraph', ThreeForceGraph)
 const linkedFGProps = Object.assign(...[
   'jsonUrl',
   'graphData',
@@ -68,29 +68,29 @@ const linkedFGProps = Object.assign(...[
   'cooldownTicks',
   'cooldownTime',
   'onEngineTick',
-  'onEngineStop'
-].map(p => ({ [p]: bindFG.linkProp(p)})));
+  'onEngineStop',
+].map(p => ({ [p]: bindFG.linkProp(p)})))
 
 const linkedFGMethods = Object.assign(...[
   'refresh',
   'd3Force',
   'd3ReheatSimulation',
-  'emitParticle'
-].map(p => ({ [p]: bindFG.linkMethod(p)})));
+  'emitParticle',
+].map(p => ({ [p]: bindFG.linkMethod(p)})))
 
 // Expose config from renderObjs
-const bindRenderObjs = linkKapsule('renderObjs', ThreeRenderObjects);
+const bindRenderObjs = linkKapsule('renderObjs', ThreeRenderObjects)
 const linkedRenderObjsProps = Object.assign(...[
   'width',
   'height',
   'backgroundColor',
   'showNavInfo',
   'enablePointerInteraction',
-  'postProcessingComposer'
-].map(p => ({ [p]: bindRenderObjs.linkProp(p)})));
+  'postProcessingComposer',
+].map(p => ({ [p]: bindRenderObjs.linkProp(p)})))
 const linkedRenderObjsMethods = Object.assign(...[
-  'cameraPosition'
-].map(p => ({ [p]: bindRenderObjs.linkMethod(p)})));
+  'cameraPosition',
+].map(p => ({ [p]: bindRenderObjs.linkMethod(p)})))
 
 //
 
@@ -103,12 +103,12 @@ export default Kapsule({
     enableNavigationControls: {
       default: true,
       onChange(enable, state) {
-        const controls = state.renderObjs.controls();
+        const controls = state.renderObjs.controls()
         if (controls) {
-          controls.enabled = enable;
+          controls.enabled = enable
         }
       },
-      triggerUpdate: false
+      triggerUpdate: false,
     },
     enableNodeDrag: { default: true, triggerUpdate: false },
     onNodeDrag: { default: () => {}, triggerUpdate: false },
@@ -122,42 +122,42 @@ export default Kapsule({
     onBackgroundClick: { default: () => {}, triggerUpdate: false },
     onBackgroundRightClick: { default: () => {}, triggerUpdate: false },
     ...linkedFGProps,
-    ...linkedRenderObjsProps
+    ...linkedRenderObjsProps,
   },
 
   methods: {
     graph2ScreenCoords: function(state, x, y, z) {
-      const vec = new three.Vector3(x, y, z);
-      vec.project(this.camera()); // project to the camera plane
+      const vec = new three.Vector3(x, y, z)
+      vec.project(this.camera()) // project to the camera plane
       return { // align relative pos to canvas dimensions
         x: (vec.x + 1) * state.width / 2,
         y: -(vec.y - 1) * state.height / 2,
-      };
+      }
     },
     pauseAnimation: function(state) {
       if (state.animationFrameRequestId !== null) {
-        cancelAnimationFrame(state.animationFrameRequestId);
-        state.animationFrameRequestId = null;
+        cancelAnimationFrame(state.animationFrameRequestId)
+        state.animationFrameRequestId = null
       }
-      return this;
+      return this
     },
 
     resumeAnimation: function(state) {
       if (state.animationFrameRequestId === null) {
-        this._animationCycle();
+        this._animationCycle()
       }
-      return this;
+      return this
     },
     _animationCycle(state) {
       if (state.enablePointerInteraction) {
         // reset canvas cursor (override dragControls cursor)
-        this.renderer().domElement.style.cursor = null;
+        this.renderer().domElement.style.cursor = null
       }
 
       // Frame cycle
-      state.forceGraph.tickFrame();
-      state.renderObjs.tick();
-      state.animationFrameRequestId = requestAnimationFrame(this._animationCycle);
+      state.forceGraph.tickFrame()
+      state.renderObjs.tick()
+      state.animationFrameRequestId = requestAnimationFrame(this._animationCycle)
     },
     scene: state => state.renderObjs.scene(), // Expose scene
     camera: state => state.renderObjs.camera(), // Expose camera
@@ -165,41 +165,41 @@ export default Kapsule({
     controls: state => state.renderObjs.controls(), // Expose controls
     tbControls: state => state.renderObjs.tbControls(), // To be deprecated
     _destructor: function() {
-      this.pauseAnimation();
-      this.graphData({ nodes: [], links: []});
+      this.pauseAnimation()
+      this.graphData({ nodes: [], links: []})
     },
     ...linkedFGMethods,
-    ...linkedRenderObjsMethods
+    ...linkedRenderObjsMethods,
   },
 
   stateInit: ({ controlType, rendererConfig }) => ({
     forceGraph: new ThreeForceGraph(),
-    renderObjs: ThreeRenderObjects({ controlType, rendererConfig })
+    renderObjs: ThreeRenderObjects({ controlType, rendererConfig }),
   }),
 
   init: function(domNode, state) {
     // Wipe DOM
-    domNode.innerHTML = '';
+    domNode.innerHTML = ''
 
     // Add relative container
-    domNode.appendChild(state.container = document.createElement('div'));
-    state.container.style.position = 'relative';
+    domNode.appendChild(state.container = document.createElement('div'))
+    state.container.style.position = 'relative'
 
     // Add renderObjs
-    const roDomNode = document.createElement('div');
-    state.container.appendChild(roDomNode);
-    state.renderObjs(roDomNode);
-    const camera = state.renderObjs.camera();
-    const renderer = state.renderObjs.renderer();
-    const controls = state.renderObjs.controls();
-    controls.enabled = !!state.enableNavigationControls;
-    state.lastSetCameraZ = camera.position.z;
+    const roDomNode = document.createElement('div')
+    state.container.appendChild(roDomNode)
+    state.renderObjs(roDomNode)
+    const camera = state.renderObjs.camera()
+    const renderer = state.renderObjs.renderer()
+    const controls = state.renderObjs.controls()
+    controls.enabled = !!state.enableNavigationControls
+    state.lastSetCameraZ = camera.position.z
 
     // Add info space
-    let infoElem;
-    state.container.appendChild(infoElem = document.createElement('div'));
-    infoElem.className = 'graph-info-msg';
-    infoElem.textContent = '';
+    let infoElem
+    state.container.appendChild(infoElem = document.createElement('div'))
+    infoElem.className = 'graph-info-msg'
+    infoElem.textContent = ''
 
     // config forcegraph
     state.forceGraph
@@ -207,186 +207,187 @@ export default Kapsule({
       .onFinishLoading(() => { infoElem.textContent = '' })
       .onUpdate(() => {
         // sync graph data structures
-        state.graphData = state.forceGraph.graphData();
+        state.graphData = state.forceGraph.graphData()
 
         // re-aim camera, if still in default position (not user modified)
         if (camera.position.x === 0 && camera.position.y === 0 && camera.position.z === state.lastSetCameraZ && state.graphData.nodes.length) {
-          camera.lookAt(state.forceGraph.position);
-          state.lastSetCameraZ = camera.position.z = Math.cbrt(state.graphData.nodes.length) * CAMERA_DISTANCE2NODES_FACTOR;
+          camera.lookAt(state.forceGraph.position)
+          state.lastSetCameraZ = camera.position.z = Math.cbrt(state.graphData.nodes.length) * CAMERA_DISTANCE2NODES_FACTOR
         }
       })
       .onFinishUpdate(() => {
         // Setup node drag interaction
         if (state._dragControls) {
-          const curNodeDrag = state.graphData.nodes.find(node => node.__initialFixedPos && !node.__disposeControlsAfterDrag); // detect if there's a node being dragged using the existing drag controls
+          const curNodeDrag = state.graphData.nodes.find(node => node.__initialFixedPos && !node.__disposeControlsAfterDrag) // detect if there's a node being dragged using the existing drag controls
           if (curNodeDrag) {
-            curNodeDrag.__disposeControlsAfterDrag = true; // postpone previous controls disposal until drag ends
+            curNodeDrag.__disposeControlsAfterDrag = true // postpone previous controls disposal until drag ends
           } else {
-            state._dragControls.dispose(); // cancel previous drag controls
+            state._dragControls.dispose() // cancel previous drag controls
           }
 
-          state._dragControls = undefined;
+          state._dragControls = undefined
         }
 
         if (state.enableNodeDrag && state.enablePointerInteraction && state.forceEngine === 'd3') { // Can't access node positions programatically in ngraph
           const dragControls = state._dragControls = new ThreeDragControls(
             state.graphData.nodes.map(node => node.__threeObj).filter(obj => obj),
             camera,
-            renderer.domElement
-          );
+            renderer.domElement,
+          )
 
           dragControls.addEventListener('dragstart', function (event) {
-            controls.enabled = false; // Disable controls while dragging
+            controls.enabled = false // Disable controls while dragging
 
-            const node = event.object.__data;
-            !node.__initialFixedPos && (node.__initialFixedPos = {fx: node.fx, fy: node.fy, fz: node.fz});
+            const node = event.object.__data
+            !node.__initialFixedPos && (node.__initialFixedPos = {fx: node.fx, fy: node.fy, fz: node.fz})
             !node.__initialPos && (node.__initialPos = {x: node.x, y: node.y, z: node.z});
 
             // lock node
-            ['x', 'y', 'z'].forEach(c => node[`f${c}`] = node[c]);
+            ['x', 'y', 'z'].forEach(c => node[`f${c}`] = node[c])
 
             // drag cursor
-            renderer.domElement.classList.add('grabbable');
-          });
+            renderer.domElement.classList.add('grabbable')
+          })
 
           dragControls.addEventListener('drag', function (event) {
-            state.ignoreOneClick = true; // Don't click the node if it's being dragged
+            state.ignoreOneClick = true // Don't click the node if it's being dragged
 
-            const node = event.object.__data;
-            const newPos = event.object.position;
+            const node = event.object.__data
+            const newPos = event.object.position
             const translate = {x: newPos.x - node.x, y: newPos.y - node.y, z: newPos.z - node.z};
             // Move fx/fy/fz (and x/y/z) of nodes based on object new position
-            ['x', 'y', 'z'].forEach(c => node[`f${c}`] = node[c] = newPos[c]);
+            ['x', 'y', 'z'].forEach(c => node[`f${c}`] = node[c] = newPos[c])
 
             state.forceGraph
               .d3AlphaTarget(0.3) // keep engine running at low intensity throughout drag
-              .resetCountdown();  // prevent freeze while dragging
+              .resetCountdown()  // prevent freeze while dragging
 
-            node.__dragged = true;
-            state.onNodeDrag(node, translate);
-          });
+            node.__dragged = true
+            state.onNodeDrag(node, translate)
+          })
 
           dragControls.addEventListener('dragend', function (event) {
-            const node = event.object.__data;
+            const node = event.object.__data
 
             // dispose previous controls if needed
             if (node.__disposeControlsAfterDrag) {
-              dragControls.dispose();
-              delete(node.__disposeControlsAfterDrag);
+              dragControls.dispose()
+              delete(node.__disposeControlsAfterDrag)
             }
 
-            const initFixedPos = node.__initialFixedPos;
-            const initPos = node.__initialPos;
-            const translate = {x: initPos.x - node.x, y: initPos.y - node.y, z: initPos.z - node.z};
+            const initFixedPos = node.__initialFixedPos
+            const initPos = node.__initialPos
+            const translate = {x: initPos.x - node.x, y: initPos.y - node.y, z: initPos.z - node.z}
             if (initFixedPos) {
               ['x', 'y', 'z'].forEach(c => {
-                const fc = `f${c}`;
+                const fc = `f${c}`
                 if (initFixedPos[fc] === undefined) {
                   delete(node[fc])
                 }
-              });
-              delete(node.__initialFixedPos);
-              delete(node.__initialPos);
+              })
+              delete(node.__initialFixedPos)
+              delete(node.__initialPos)
               if (node.__dragged) {
-                delete(node.__dragged);
-                state.onNodeDragEnd(node, translate);
+                delete(node.__dragged)
+                state.onNodeDragEnd(node, translate)
               }
             }
 
             state.forceGraph
               .d3AlphaTarget(0)   // release engine low intensity
-              .resetCountdown();  // let the engine readjust after releasing fixed nodes
+              .resetCountdown()  // let the engine readjust after releasing fixed nodes
 
             if (state.enableNavigationControls) {
-              controls.enabled = true; // Re-enable controls
+              controls.enabled = true // Re-enable controls
             }
 
             // clear cursor
-            renderer.domElement.classList.remove('grabbable');
-          });
+            renderer.domElement.classList.remove('grabbable')
+          })
         }
-      });
+      })
 
     // config renderObjs
     const getGraphObj = object => {
-      let obj = object;
+      let obj = object
       // recurse up object chain until finding the graph object
+      // eslint-disable-next-line no-prototype-builtins
       while (obj && !obj.hasOwnProperty('__graphObjType')) {
-        obj = obj.parent;
+        obj = obj.parent
       }
-      return obj;
-    };
+      return obj
+    }
 
     state.renderObjs
       .objects([ // Populate scene
         new three.AmbientLight(0xbbbbbb),
         new three.DirectionalLight(0xffffff, 0.6),
-        state.forceGraph
+        state.forceGraph,
       ])
       .hoverOrderComparator((a, b) => {
         // Prioritize graph objects
-        const aObj = getGraphObj(a);
-        if (!aObj) return 1;
-        const bObj = getGraphObj(b);
-        if (!bObj) return -1;
+        const aObj = getGraphObj(a)
+        if (!aObj) return 1
+        const bObj = getGraphObj(b)
+        if (!bObj) return -1
 
         // Prioritize nodes over links
-        const isNode = o => o.__graphObjType === 'node';
-        return isNode(bObj) - isNode(aObj);
+        const isNode = o => o.__graphObjType === 'node'
+        return isNode(bObj) - isNode(aObj)
       })
       .tooltipContent(obj => {
-        const graphObj = getGraphObj(obj);
-        return graphObj ? accessorFn(state[`${graphObj.__graphObjType}Label`])(graphObj.__data) || '' : '';
+        const graphObj = getGraphObj(obj)
+        return graphObj ? accessorFn(state[`${graphObj.__graphObjType}Label`])(graphObj.__data) || '' : ''
       })
       .onHover(obj => {
         // Update tooltip and trigger onHover events
-        const hoverObj = getGraphObj(obj);
+        const hoverObj = getGraphObj(obj)
 
         if (hoverObj !== state.hoverObj) {
-          const prevObjType = state.hoverObj ? state.hoverObj.__graphObjType : null;
-          const prevObjData = state.hoverObj ? state.hoverObj.__data : null;
-          const objType = hoverObj ? hoverObj.__graphObjType : null;
-          const objData = hoverObj ? hoverObj.__data : null;
+          const prevObjType = state.hoverObj ? state.hoverObj.__graphObjType : null
+          const prevObjData = state.hoverObj ? state.hoverObj.__data : null
+          const objType = hoverObj ? hoverObj.__graphObjType : null
+          const objData = hoverObj ? hoverObj.__data : null
           if (prevObjType && prevObjType !== objType) {
             // Hover out
-            state[`on${prevObjType === 'node' ? 'Node' : 'Link'}Hover`](null, prevObjData);
+            state[`on${prevObjType === 'node' ? 'Node' : 'Link'}Hover`](null, prevObjData)
           }
           if (objType) {
             // Hover in
-            state[`on${objType === 'node' ? 'Node' : 'Link'}Hover`](objData, prevObjType === objType ? prevObjData : null);
+            state[`on${objType === 'node' ? 'Node' : 'Link'}Hover`](objData, prevObjType === objType ? prevObjData : null)
           }
 
-          state.hoverObj = hoverObj;
+          state.hoverObj = hoverObj
         }
       })
       .onClick((obj, ev) => {
         // Handle click events on objects
         if (state.ignoreOneClick) {
           // f.e. because of dragend event
-          state.ignoreOneClick = false;
-          return;
+          state.ignoreOneClick = false
+          return
         }
 
-        const graphObj = getGraphObj(obj);
+        const graphObj = getGraphObj(obj)
         if (graphObj) {
-          state[`on${graphObj.__graphObjType === 'node' ? 'Node' : 'Link'}Click`](graphObj.__data, ev);
+          state[`on${graphObj.__graphObjType === 'node' ? 'Node' : 'Link'}Click`](graphObj.__data, ev)
         } else {
-          state.onBackgroundClick(ev);
+          state.onBackgroundClick(ev)
         }
       })
       .onRightClick((obj, ev) => {
         // Handle right-click events
-        const graphObj = getGraphObj(obj);
+        const graphObj = getGraphObj(obj)
         if (graphObj) {
-          state[`on${graphObj.__graphObjType === 'node' ? 'Node' : 'Link'}RightClick`](graphObj.__data, ev);
+          state[`on${graphObj.__graphObjType === 'node' ? 'Node' : 'Link'}RightClick`](graphObj.__data, ev)
         } else {
-          state.onBackgroundRightClick(ev);
+          state.onBackgroundRightClick(ev)
         }
-      });
+      })
 
     //
 
     // Kick-off renderer
-    this._animationCycle();
-  }
-});
+    this._animationCycle()
+  },
+})

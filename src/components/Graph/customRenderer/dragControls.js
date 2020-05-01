@@ -248,7 +248,7 @@ function DragControls(_objects, _camera, _domElement) {
 
   }
 
-  function onDocumentTouchEnd(event) {
+  function onDocumentTouchEnd() {
 
     // event.preventDefault();
 

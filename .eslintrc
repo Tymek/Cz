@@ -1,12 +1,16 @@
 {
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 11,
     "sourceType": "module"
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "cypress/globals": true
   },
+  "plugins": [
+    "cypress"
+  ],
   "extends": "eslint:recommended",
   "rules": {
     "semi": ["warn", "never", { "beforeStatementContinuationChars": "always"}],

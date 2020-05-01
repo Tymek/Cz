@@ -96,7 +96,7 @@ var CustomTrackballControls = function ( object, domElement ) {
 		return function getMouseOnScreen( pageX, pageY ) {
 			vector.set(
 				( pageX - _this.screen.left ) / _this.screen.width,
-				( pageY - _this.screen.top ) / _this.screen.height
+				( pageY - _this.screen.top ) / _this.screen.height,
 			)
 
 			return vector
@@ -109,7 +109,7 @@ var CustomTrackballControls = function ( object, domElement ) {
 		return function getMouseOnCircle( pageX, pageY ) {
 			vector.set(
 				( ( pageX - _this.screen.width * 0.5 - _this.screen.left ) / ( _this.screen.width * 0.5 ) ),
-				( ( _this.screen.height + 2 * ( _this.screen.top - pageY ) ) / _this.screen.width ) // screen.width intentional
+				( ( _this.screen.height + 2 * ( _this.screen.top - pageY ) ) / _this.screen.width ), // screen.width intentional
 			)
 
 			return vector

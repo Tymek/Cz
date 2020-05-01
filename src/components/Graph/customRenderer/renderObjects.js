@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 /**
  * @see https://github.com/vasturiano/three-render-objects/blob/2efc0a145945a05d283db9e705d42c5baa7b1f81/src/three-render-objects.js
  */
@@ -177,7 +178,7 @@ export default Kapsule({
         return Object.assign(
           (new three.Vector3(0, 0, -1000))
             .applyQuaternion(camera.quaternion)
-            .add(camera.position)
+            .add(camera.position),
         )
       }
     },
