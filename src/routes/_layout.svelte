@@ -17,10 +17,10 @@
 
 <style type="text/scss">
 	:global(:root, html, body) {
-		font-size: 0.833333333vw;
+		font-size: 14px;
 
-		@media screen and (min-width: 600px) {
-			font-size: 16px;
+		@media (min-width: 1681px) {
+			font-size: 0.833333333vw;
 		}
 	}
 

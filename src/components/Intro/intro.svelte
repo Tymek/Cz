@@ -29,14 +29,18 @@ translations.update({
 })
 
 </script>
-<style>
+<style type="text/scss">
   .container {
 		box-sizing: border-box;
-    padding: 2rem 10vw;
 		position: relative;
 		height: 100vh;
 		display: flex;
 		align-items: center;
+    padding: 2rem 2rem;
+
+		@media (orientation: landscape) {
+			padding: 2rem 10vw;
+		}
 	}
 
 	.title {
@@ -84,7 +88,7 @@ translations.update({
 		/* font-weight: bold; */
 		margin: 0 8px 0 0;
 		padding: 0.25em 1em;
-		border-radius: 4px;
+		border-radius: (4 / 14) * 1em;
 		align-items: center;
 		cursor: pointer;
 		text-decoration: none;
@@ -130,7 +134,7 @@ translations.update({
 		<div class="description">
 			<p>{@html $_('description').replace(/\n/g, '<br />')}</p>
 		</div>
-		<div class="buttons">
+		<!-- <div class="buttons">
 			<a href="#contact" class="button contact">
 				<span class="icon" aria-hidden="true">{@html EnvelopeIcon}</span>
 				<span class="label">{$_('contact')}</span>
@@ -143,7 +147,7 @@ translations.update({
 				<span class="icon" aria-hidden="true">{@html LinkIcon}</span>
 				<span class="label">{$_('links')}</span>
 			</a>
-		</div>
+		</div> -->
 	</div>
 	<!-- <figure>
 		<img src="/photo.jpg" alt="Tymek" />

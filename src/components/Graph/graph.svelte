@@ -264,7 +264,7 @@
 	div {
 		position: relative;
 		width: 100%;
-		height: 66vh;
+		height: 80vh;
 		/* background-color: #eee; */
 		margin: 0;
 		box-sizing: border-box;
