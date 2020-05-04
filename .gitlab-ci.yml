@@ -5,6 +5,10 @@ stages:
   - build
   - deploy
 
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+
 cache: {}
 
 .nodejs:
@@ -15,13 +19,18 @@ cache: {}
     key: "JS-$CI_COMMIT_REF_SLUG"
     paths:
       - node_modules
+      - .npm
+      - cache/Cypress  
     policy: pull-push
 
 
 test:
   stage: prepare
   extends: .nodejs
+  image: cypress/base:14.0.0
   script:
+    - npx cypress cache path
+    - npx cypress cache list
     - npm run test
 
 prepare-images:

@@ -9,3 +9,6 @@ static/fonts
 yarn-error.log
 /cypress/screenshots/
 /__sapper__/
+
+.npm
+cache
