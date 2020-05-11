@@ -1,4 +1,11 @@
-var THREE = require('three')
+import {
+	Camera,
+	EventDispatcher,
+  Plane,
+  Raycaster,
+	Vector2,
+  Vector3,
+} from 'three'
 
 /*
  * @see https://github.com/keqingrong/three-dragcontrols/blob/64ebaca4f526b6af673b2a421e52aa523552eb85/lib/index.js
@@ -9,7 +16,7 @@ var THREE = require('three')
 
 function DragControls(_objects, _camera, _domElement) {
 
-  if (_objects instanceof THREE.Camera) {
+  if (_objects instanceof Camera) {
 
     console.warn('THREE.DragControls: Constructor now expects ( objects, camera, domElement )')
     var temp = _objects
@@ -18,12 +25,12 @@ function DragControls(_objects, _camera, _domElement) {
 
   }
 
-  var _plane = new THREE.Plane()
-  var _raycaster = new THREE.Raycaster()
+  var _plane = new Plane()
+  var _raycaster = new Raycaster()
 
-  var _mouse = new THREE.Vector2()
-  var _offset = new THREE.Vector3()
-  var _intersection = new THREE.Vector3()
+  var _mouse = new Vector2()
+  var _offset = new Vector3()
+  var _intersection = new Vector3()
 
   var _selected = null,
     _hovered = null
@@ -310,7 +317,7 @@ function DragControls(_objects, _camera, _domElement) {
 
 }
 
-DragControls.prototype = Object.create(THREE.EventDispatcher.prototype)
+DragControls.prototype = Object.create(EventDispatcher.prototype)
 DragControls.prototype.constructor = DragControls
 
-module.exports = DragControls
+export default DragControls

@@ -129,7 +129,7 @@
       TextureLoader,
       Sprite,
       // AxesHelper,
-    } = await import('three')
+    } = await import('./customRenderer/three.js')
 
     graph = ForceGraph3D()
     graph.backgroundColor('rgba(0,0,0,0)')

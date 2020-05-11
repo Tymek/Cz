@@ -56,21 +56,27 @@ build-svelte:
   stage: build
   extends: .nodejs
   script:
-    - npm run export
+    - npm run build
+    - npm ci --production
   artifacts:
     paths:
       - __sapper__
+      - node_modules
   cache:
     policy: pull
 
-pages:
-  stage: deploy
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - cp -r __sapper__/export public
-  artifacts:
-    paths:
-      - public
-  only:
-    - master
+# pages:
+#   stage: deploy
+#   variables:
+#     GIT_STRATEGY: none
+#   script:
+#     - cp -r __sapper__/export public
+#   artifacts:
+#     paths:
+#       - public
+#   only:
+#     - master
+
+include:
+  - project: 'Tymek/CI'
+    file: '/.dockerize.yml'

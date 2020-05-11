@@ -7,14 +7,13 @@
  * @author Luca Antiga 	/ http://lantiga.github.io
  */
 
-import * as THREE from 'three'
-const {
+import {
 	EventDispatcher,
 	MOUSE,
 	Quaternion,
 	Vector2,
 	Vector3,
-} = THREE
+} from 'three'
 
 var CustomTrackballControls = function ( object, domElement ) {
 
