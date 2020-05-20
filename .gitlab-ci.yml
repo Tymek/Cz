@@ -41,7 +41,7 @@ prepare-images:
     - ./generatePNGs.sh
   artifacts:
     paths:
-      - static/logs/png
+      - static/logos/png
 
 prepare-fonts:
   stage: prepare
