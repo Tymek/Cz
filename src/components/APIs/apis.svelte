@@ -5,7 +5,7 @@
 
 </script>
 
-<style type="text/scss">
+<style type="text/scss" lang="scss">
   .wrapper {
     padding: 2rem 2rem;
 

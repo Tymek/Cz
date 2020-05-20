@@ -12,10 +12,10 @@
 		locale.set(getBrowserLocale('en'))
 	});
 
-	export let segment
+	// export let segment
 </script>
 
-<style type="text/scss">
+<style type="text/scss" lang="scss">
 	:global(:root, html, body) {
 		font-size: 14px;
 

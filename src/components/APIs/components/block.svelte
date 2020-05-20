@@ -5,7 +5,7 @@ export let color = 'black'
 export let background = 'transparent'
 </script>
 
-<style type="text/scss">
+<style type="text/scss" lang="scss">
   .block {
     border-radius: 4px;
     padding: 1rem;

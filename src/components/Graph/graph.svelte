@@ -11,12 +11,13 @@
     uniq,
   } from 'ramda'
 
+  const texts = {
+    stackHeadline: 'Welcome in my universe'
+  }
+
   translations.update({
-    en: {
-      stackHeadline: 'Welcome in my universe'
-    },
     pl: {
-      stackHeadline: 'Witaj w moim świecie'
+      [texts.stackHeadline]: 'Witaj w moim świecie'
     },
   })
   // import { CustomTrackballControls } from './customControls'
@@ -25,6 +26,7 @@
   let container
   let graph
   let width, height
+  let observer = null
 
   const addIds = data => data.map(item => ({
     id: item.tech,
@@ -224,18 +226,18 @@
     window.addEventListener('orientationchange', onOrientationChange, { passive: true })
   })
 
-  const observer = new IntersectionObserver(() => {
-    if (y > 0 || window.location.hash === '#stack') {
-      observer.unobserve(container)
-      initialize()
-    }
-  })
-
   onMount(async () => {
     const skills = await fetch('/skills.tsv')
     const text = await skills.text()
     const nodes = await getData(text)
     const links = getLinks(nodes)
+
+    observer = IntersectionObserver ? new IntersectionObserver(() => {
+      if (y > 0 || window.location.hash === '#stack') {
+        observer.unobserve(container)
+        initialize()
+      }
+    }) : null
 
     // const groupNodes = getGroups(nodes)
     const groupLinks = getGroupLinks(nodes)
@@ -250,17 +252,26 @@
     if (window.location.hash === '#stack') {
       initialize()
     } else {
-      observer.observe(container)
+      if (observer) {
+        observer.observe(container)
+      }
     }
   })
 
   onDestroy(() => {
-    window.removeEventListener('orientationchange', onOrientationChange)
-    observer.unobserve(container)
+    if(process.browser === true) {
+      if (window !== undefined) {
+        window.removeEventListener('orientationchange', onOrientationChange)
+      }
+
+      if (observer) {
+        observer.unobserve(container)
+      }
+    }
   })
 </script>
 
-<style type="text/scss">
+<style type="text/scss" lang="scss">
   .container {
 		box-sizing: border-box;
     padding: 0 2rem;
@@ -271,7 +282,7 @@
 		}
 	}
 
-	div {
+	figure {
 		position: relative;
 		width: 100%;
 		height: 80vh;
@@ -286,11 +297,11 @@
     cursor: grab;
   }
 
-  div:active {
+  figure:active {
     cursor: grabbing;
   }
 
-  div:before {
+  figure:before {
     content: ' ';
     display: block;
     position: absolute;
@@ -301,7 +312,7 @@
     box-shadow: 0 5px 2rem rgba(0, 0, 0, 0.15);
   }
 
-  div:after {
+  figure:after {
     content: ' ';
     display: block;
     position: absolute;
@@ -314,10 +325,11 @@
 </style>
 
 <svelte:window bind:scrollY={y} />
-<h2 id="stack" class="container">{$_('stackHeadline')}</h2>
-<div
+<h2 id="stack" class="container">{$_(texts.stackHeadline)}</h2>
+<!-- TODO: aria-label="list of my skills" -->
+<figure
   bind:this={container}
   bind:clientWidth={width}
   bind:clientHeight={height}
-></div>
+></figure>
 <!-- <h2>Glad you came</h2> -->
