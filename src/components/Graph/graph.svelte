@@ -204,7 +204,7 @@
   }
 
   const initialize = once(async () => {
-    console.log('initialize')
+    // console.log('initialize')
 
     setTimeout(() => {
       graph.resumeAnimation()
@@ -260,7 +260,17 @@
   })
 </script>
 
-<style>
+<style type="text/scss">
+  .container {
+		box-sizing: border-box;
+    padding: 0 2rem;
+    color: #253854;
+
+		@media (orientation: landscape) {
+			padding: 0 10vw;
+		}
+	}
+
 	div {
 		position: relative;
 		width: 100%;
@@ -304,7 +314,7 @@
 </style>
 
 <svelte:window bind:scrollY={y} />
-<h2 id="stack">{$_('stackHeadline')}</h2>
+<h2 id="stack" class="container">{$_('stackHeadline')}</h2>
 <div
   bind:this={container}
   bind:clientWidth={width}

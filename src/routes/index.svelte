@@ -1,7 +1,7 @@
 <script>
 import Intro from '../components/Intro/intro.svelte'
 // import APIs from '../components/APIs/apis.svelte'
-// import Graph from '../components/Graph/graph.svelte'
+import Graph from '../components/Graph/graph.svelte'
 // import Contact from '../components/Contact/contact.svelte'
 </script>
 <svelte:head>
@@ -9,6 +9,6 @@ import Intro from '../components/Intro/intro.svelte'
 </svelte:head>
 
 <Intro />
-<!-- <APIs />
+<!-- <APIs /> -->
 <Graph />
-<Contact /> -->
+<!-- <Contact /> -->
