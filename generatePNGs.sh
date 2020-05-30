@@ -3,9 +3,9 @@ rm static/logos/png/*
 magick mogrify \
   -verbose \
   -path static/logos/png \
-  -resize 256x256 \
+  -resize 128x128 \
   -format png \
   -background none \
   -gravity center \
-  -extent 256x256 \
+  -extent 128x128 \
   static/logos/svg/*
