@@ -22,8 +22,8 @@
   })
   // import { CustomTrackballControls } from './customControls'
 
-  let y = 0
   let container
+  let isInitialized = false;
   let graph
   let width, height
   let observer = null
@@ -206,13 +206,6 @@
   }
 
   const initialize = once(async () => {
-    // console.log('initialize')
-
-    setTimeout(() => {
-      graph.resumeAnimation()
-      graph.d3ReheatSimulation()
-    }, 500)
-
     setTimeout(() => {
       graph.resumeAnimation()
       graph.d3ReheatSimulation()
@@ -232,11 +225,16 @@
     const nodes = await getData(text)
     const links = getLinks(nodes)
 
-    observer = IntersectionObserver ? new IntersectionObserver(() => {
-      if (y > 0 || window.location.hash === '#stack') {
-        observer.unobserve(container)
-        initialize()
-      }
+    observer = IntersectionObserver ? new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          initialize()
+          graph.resumeAnimation()
+          graph.d3ReheatSimulation()
+        } else {
+          graph.pauseAnimation()
+        }
+      })
     }) : null
 
     // const groupNodes = getGroups(nodes)
@@ -249,12 +247,10 @@
   
     await create3dGraph(data)
 
-    if (window.location.hash === '#stack') {
-      initialize()
+    if (observer) {
+      observer.observe(container)
     } else {
-      if (observer) {
-        observer.observe(container)
-      }
+      initialize()
     }
   })
 
@@ -324,7 +320,6 @@
   }
 </style>
 
-<svelte:window bind:scrollY={y} />
 <h2 id="stack" class="container">{$_(texts.stackHeadline)}</h2>
 <!-- TODO: aria-label="list of my skills" -->
 <figure
