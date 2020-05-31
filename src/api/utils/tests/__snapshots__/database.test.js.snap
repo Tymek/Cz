@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`server/utils/db create new database file 1`] = `
+"{
+  \\"test\\": \\"value\\"
+}"
+`;
+
+exports[`server/utils/db saves complex path 1`] = `
+"{
+  \\"different_test\\": {
+    \\"path\\": {
+      \\"to\\": {
+        \\"set\\": {
+          \\"value\\": []
+        }
+      }
+    }
+  }
+}"
+`;

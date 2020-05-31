@@ -9,9 +9,13 @@
     "cypress/globals": true
   },
   "plugins": [
-    "cypress"
+    "cypress",
+    "security"
   ],
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:security/recommended"
+  ],
   "rules": {
     "semi": ["warn", "never", { "beforeStatementContinuationChars": "always"}],
     "comma-dangle": ["error", "always-multiline"]

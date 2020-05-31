@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`api/utils/stringify serializes curcular structure 1`] = `"{\\"a\\":\\"foo\\"}"`;
+
+exports[`api/utils/stringify serializes deep curcular structure 1`] = `"{\\"id\\":201,\\"box\\":{\\"owner\\":null,\\"key\\":\\"storm\\"},\\"lines\\":[\\"item1\\",23]}"`;
