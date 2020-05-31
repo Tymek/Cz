@@ -75,52 +75,52 @@ translations.update({
     display: block;
 	} */
 
-	// .buttons {
-	// 	padding-bottom: 1rem;
-	// }
+	.buttons {
+		padding-bottom: 1rem;
+	}
 
-	// .button {
-	// 	display: inline-flex;
-	// 	/* border: 1px solid rgba(0, 0, 0, 0.3); */
-	// 	border: 1px solid transparent;
-	// 	box-shadow: 0 2px 0 rgba(0,0,0,.045);
-	// 	font-size: 1rem;
-	// 	line-height: 1.6em;
-	// 	/* font-weight: bold; */
-	// 	margin: 0 8px 0 0;
-	// 	padding: 0.25em 1em;
-	// 	border-radius: (4 / 14) * 1em;
-	// 	align-items: center;
-	// 	cursor: pointer;
-	// 	text-decoration: none;
+	.button {
+		display: inline-flex;
+		/* border: 1px solid rgba(0, 0, 0, 0.3); */
+		border: 1px solid transparent;
+		box-shadow: 0 2px 0 rgba(0,0,0,.045);
+		font-size: 1rem;
+		line-height: 1.6em;
+		/* font-weight: bold; */
+		margin: 0 8px 0 0;
+		padding: 0.25em 1em;
+		border-radius: (4 / 14) * 1em;
+		align-items: center;
+		cursor: pointer;
+		text-decoration: none;
 
-	// }
+	}
 
-	// .links.button {
-	// 	background: #F1CD5F;
-	// 	color: #4B3445;
-	// }
+	.links.button {
+		background: #F1CD5F;
+		color: #4B3445;
+	}
 
-	// .stack.button {
-	// 	background: #B43C3C;
-	// 	color: #ffffff;
-	// }
+	.stack.button {
+		background: #B43C3C;
+		color: #ffffff;
+	}
 
 	// .contact.button {
 	// 	background: #3C8458;
 	// 	color: #ffffff;
 	// }
 
-	// .button .icon {
-	// 	height: 1em;
-	// 	font-size: 1.25rem;
-	// 	display: block;
-	// 	margin-right: 0.4em;
-	// }
+	.button .icon {
+		height: 1em;
+		font-size: 1.25rem;
+		display: block;
+		margin-right: 0.4em;
+	}
 
-	// .button .label {
-	// 	padding-top: 0.2em;
-	// }
+	.button .label {
+		padding-top: 0.2em;
+	}
 
 	:global(.icon svg) {
 		height: 1em;
@@ -135,11 +135,11 @@ translations.update({
 		<div class="description">
 			<p>{@html $_(texts.description).replace(/\n/g, '<br />')}</p>
 		</div>
-		<!-- <div class="buttons">
-			<a href="#contact" class="button contact">
+		<div class="buttons">
+			<!-- <a href="#contact" class="button contact">
 				<span class="icon" aria-hidden="true">{@html EnvelopeIcon}</span>
 				<span class="label">{$_(texts.contact)}</span>
-			</a>
+			</a> -->
 			<a href="#stack" class="button stack">
 				<span class="icon" aria-hidden="true">{@html BuildIcon}</span>
 				<span class="label">{$_(texts.stack)}</span>
@@ -148,7 +148,7 @@ translations.update({
 				<span class="icon" aria-hidden="true">{@html LinkIcon}</span>
 				<span class="label">{$_(texts.links)}</span>
 			</a>
-		</div> -->
+		</div>
 	</div>
 	<!-- <figure>
 		<img src="/photo.jpg" alt="Tymek" />

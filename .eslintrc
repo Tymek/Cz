@@ -4,17 +4,21 @@
     "sourceType": "module"
   },
   "env": {
+    "es6": true,
     "browser": true,
     "node": true,
-    "cypress/globals": true
+    "cypress/globals": true,
+    "jest": true
   },
   "plugins": [
     "cypress",
-    "security"
+    "security",
+    "import"
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:security/recommended"
+    "plugin:security/recommended",
+    "plugin:import/errors"
   ],
   "rules": {
     "semi": ["warn", "never", { "beforeStatementContinuationChars": "always"}],

@@ -1,12 +1,12 @@
 import fs from 'fs'
-import { resolve } from 'path'
+import resolvePath from './resolvePath'
 import {
   lensPath,
   view,
   set as setPath,
 } from 'ramda'
 
-const file = resolve(__dirname, '../db.json') // FIXME: file location
+const file = resolvePath('./db.json')
 
 const save = () => fs.writeFileSync( // eslint-disable-line security/detect-non-literal-fs-filename
   file,

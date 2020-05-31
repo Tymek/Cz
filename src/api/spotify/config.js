@@ -1,3 +1,7 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 const scopes = [
   // 'app-remote-control',
   // 'playlist-modify-private',
@@ -23,7 +27,7 @@ export const throttle = 15
 export const scope = scopes.join(' ')
 export const client_id = process.env.SPOTIFY_CLIENT_ID
 export const client_secret = process.env.SPOTIFY_CLIENT_SECRET
-export const redirect_uri = process.env.SPOTIFY_REDIRECT_URI || 'http://localhost/spotify/login'
+export const redirect_uri = process.env.SPOTIFY_REDIRECT_URI || 'http://localhost:3000/spotify/login'
 export const showDialog = process.env.SPOTIFY_SHOW_DIALOG !== undefined
   ? process.env.SPOTIFY_SHOW_DIALOG
   : process.env.DEV

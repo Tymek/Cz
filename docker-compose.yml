@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  server:
+    image: ${IMAGE}
+    container_name: ${NAME}
+    restart: always
+    command: ['node', '.']
+    volumes:
+      - ./.env:/srv/.env
+      - ./database.json:/srv/db.json
+    labels:
+      - traefik.enable=true
+      - traefik.port=3000
+      - traefik.frontend.rule=Host:${DOMAIN},www.${DOMAIN}
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.SSLHost=www.${DOMAIN}
+      - traefik.frontend.headers.SSLForceHost=true
+      - com.ouroboros.enable=true
+      - com.centurylinklabs.watchtower.enable=true
+    networks:
+      - wan
+
+networks:
+  wan:
+    external: true

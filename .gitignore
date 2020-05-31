@@ -1,5 +1,9 @@
+.env
+db.json
+
 public
 .tmp
+
 static/logos/png
 static/fonts
 
@@ -9,6 +13,7 @@ static/fonts
 yarn-error.log
 /cypress/screenshots/
 /__sapper__/
+/coverage
 
 .npm
 cache

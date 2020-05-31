@@ -1,3 +1,5 @@
+/* eslint-disable security/detect-object-injection */
+
 export default function(kapsulePropName, kapsuleType) {
 
   const dummyK = new kapsuleType() // To extract defaults

@@ -1,4 +1,4 @@
-/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-prototype-builtins, security/detect-object-injection */
 /**
  * @see https://github.com/vasturiano/three-render-objects/blob/2efc0a145945a05d283db9e705d42c5baa7b1f81/src/three-render-objects.js
  */

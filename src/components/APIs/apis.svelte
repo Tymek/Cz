@@ -1,6 +1,7 @@
 <script>
   import GitHub from './components/github.svelte'
-  import Spotify from './components/spotify.svelte'
+  import GitLab from './components/gitlab.svelte'
+  import Spotify from './components/spotify/spotify.svelte'
   import StackOverflow from './components/stackoverflow.svelte'
 
 </script>
@@ -25,8 +26,9 @@
 
 <div id="links" class="wrapper">
   <Spotify />
-  <GitHub />
+  <GitLab />
   <StackOverflow />
+  <GitHub />
   gitlab?
   other?
   instagram?

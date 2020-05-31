@@ -1,4 +1,5 @@
 // @ts-nocheck
+/* eslint-disable security/detect-object-injection */
 import { AmbientLight, DirectionalLight, Vector3 } from 'three'
 
 const three = window.THREE

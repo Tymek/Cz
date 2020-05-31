@@ -1,3 +1,7 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 export const throttle = 900
 export const scopes = []
 export const available_scopes = [
