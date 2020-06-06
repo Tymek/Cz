@@ -9,8 +9,9 @@ import {
   map,
   mergeRight,
   path,
+  pathOr,
   pick,
-  replace,
+  // replace,
   take,
 } from 'ramda'
 import { cached } from '../utils'
@@ -60,10 +61,12 @@ const filterUserPublicEvents = compose(
       [
         pick(['created_at', 'id']),
         applySpec({
-          type: compose(
-            replace(/Event$/, ''),
-            path(['type']),
-          ),
+          type: path(['type']),
+          action: pathOr(null, ['payload', 'action']),
+          // type: compose(
+          //   replace(/Event$/, ''),
+          //   path(['type']),
+          // ),
           repo: path(['repo', 'name']),
         }),
       ],

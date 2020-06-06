@@ -6,6 +6,7 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
 import svg from 'rollup-plugin-svg'
+import json from '@rollup/plugin-json'
 import pkg from './package.json'
 
 const commonSvelteConfig = require('./svelte.config.js')
@@ -26,6 +27,7 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode),
 			}),
 			svg(),
+			json(),
 			svelte({
 				dev,
 				hydratable: true,
@@ -72,6 +74,7 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode),
 			}),
 			svg(),
+			json(),
 			svelte({
 				generate: 'ssr',
 				dev,

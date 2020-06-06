@@ -7,6 +7,7 @@
     isEmpty,
   } from 'ramda'
   import Block from './block.svelte'
+  import Flair from './flair.svelte'
 
   const texts = {
     recentlyPlayed: 'Recently played:',
@@ -36,26 +37,6 @@
 </script>
 
 <style type="text/scss" lang="scss">
-  img {
-    width: 4rem;
-  }
-
-  .columns {
-    display: flex;
-    margin-bottom: 1.5rem;
-  }
-
-  .flair {
-    display: flex;
-    flex-direction: column;
-    margin: 0.5rem 0 0 0.67rem;
-  }
-
-  .name {
-		font-size: 1.243539882rem;
-    font-weight: 500;
-  }
-
   .medal {
     &::before {
       content: ' ';
@@ -89,19 +70,14 @@
   height={1}
   link="https://stackoverflow.com/users/1729641/tymek"
 >
-  <div class="columns">
-    <img src={data.profile_image} alt="avatar" />
-
-    <div class="flair">
-      <div class="name">{data.display_name}</div>
-
-      <div>
-        <span class="gold medal">{data.badge_counts.gold}</span>
-        <span class="silver medal">{data.badge_counts.silver}</span>
-        <span class="bronze medal">{data.badge_counts.bronze}</span>
-      </div>
-    </div>
-  </div>
+  <Flair
+    image={data.profile_image}
+    name={data.display_name}
+  >
+    <span class="gold medal">{data.badge_counts.gold}</span>
+    <span class="silver medal">{data.badge_counts.silver}</span>
+    <span class="bronze medal">{data.badge_counts.bronze}</span>
+  </Flair>
 
   <p>
     {$_(texts.memberSince)} {moment(data.creation_date * 1000).format('MMMM YYYY')}

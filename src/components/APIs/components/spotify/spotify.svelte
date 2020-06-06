@@ -79,7 +79,7 @@
   background="#2ebd59"
   color="white"
   title="Spotify"
-  height={2}
+  height={3}
   link="https://open.spotify.com/user/jpp2v0ccdb23k3yvjjvb"
 >
   {#if !isEmpty(nowPlaying)}

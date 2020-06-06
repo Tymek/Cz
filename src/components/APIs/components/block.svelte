@@ -8,13 +8,24 @@ export let background = 'transparent'
 
 <style type="text/scss" lang="scss">
   .block {
-    border-radius: 4px;
+    border-radius: (4rem / 16);
     padding: 1rem;
   }
 
   .title {
     margin-top: 0.25rem;
     font-size: 1.546391438rem;
+
+    a {
+      display: block;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: underline;
+      }
+    }
   }
 </style>
 

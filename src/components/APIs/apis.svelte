@@ -1,5 +1,5 @@
 <script>
-  import GitHub from './components/github.svelte'
+  import GitHub from './components/github/github.svelte'
   import GitLab from './components/gitlab.svelte'
   import Spotify from './components/spotify/spotify.svelte'
   import StackOverflow from './components/stackoverflow.svelte'
