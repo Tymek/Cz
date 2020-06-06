@@ -1,4 +1,5 @@
 <script>
+export let height = 1
 export let title = ''
 export let link = ''
 export let color = 'black'
@@ -12,13 +13,14 @@ export let background = 'transparent'
   }
 
   .title {
-    margin-top: 0;
+    margin-top: 0.25rem;
+    font-size: 1.546391438rem;
   }
 </style>
 
 <div
   class="block"
-  style="color: {color}; background: {background};"
+  style="color: {color}; background: {background}; grid-row-start: span {height};"
 >
   <h3 class="title">
     {#if link}

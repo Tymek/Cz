@@ -19,9 +19,10 @@
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     // grid-template-rows: repeat(auto-fit, 1fr);
     align-content: start;
+    grid-auto-flow: column;
     gap: 1rem;
   }
-  
+
 </style>
 
 <section id="links" class="wrapper">

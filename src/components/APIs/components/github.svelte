@@ -27,6 +27,7 @@
 <Block
   background={'#24292E'}
   color="white"
+  height={2}
   title="GitHub"
   link={link}
 >

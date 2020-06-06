@@ -52,9 +52,8 @@
         ...now_playing,
         url: now_playing['spotify'],
       }
-
-      console.log(nowPlaying)
     }
+
     activeDevice = devices && devices.length && find(prop('is_active'), devices)
   }
 
@@ -75,10 +74,12 @@
   }
 </style>
 
+{#if !isEmpty(songs)}
 <Block
   background="#2ebd59"
   color="white"
   title="Spotify"
+  height={2}
   link="https://open.spotify.com/user/jpp2v0ccdb23k3yvjjvb"
 >
   {#if !isEmpty(nowPlaying)}
@@ -116,3 +117,4 @@
     title=""
   ></iframe>
 </Block>
+{/if}
