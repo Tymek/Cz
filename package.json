@@ -13,6 +13,7 @@
     "cy:test": "start-server-and-test dev 3000 cy:run",
     "lint": "eslint . --ignore-path .gitignore",
     "unit": "jest ./src",
+    "unit:update": "jest -u ./src",
     "unit:watch": "npm run test -- --watch",
     "test": "run-p lint unit cy:test",
     "storybook": "start-storybook -p 6006",

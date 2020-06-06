@@ -12,4 +12,4 @@ Object {
 }
 `;
 
-exports[`/spotify/login redirects to authorization 1`] = `"https://accounts.spotify.com/authorize?response_type=code&scope=user-follow-read%20user-library-read%20user-read-birthdate%20user-read-currently-playing%20user-read-email%20user-read-playback-state%20user-read-private%20user-read-recently-played%20user-top-read&client_id=&redirect_uri=http%3A%2F%2Flocalhost%2Fspotify%2Flogin&showDialog="`;
+exports[`/spotify/login redirects to authorization 1`] = `"https://accounts.spotify.com/authorize?response_type=code&scope=user-follow-read%20user-library-read%20user-read-birthdate%20user-read-currently-playing%20user-read-email%20user-read-playback-state%20user-read-private%20user-read-recently-played%20user-top-read&client_id=&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fspotify%2Flogin&showDialog="`;
