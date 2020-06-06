@@ -24,12 +24,11 @@
   
 </style>
 
-<div id="links" class="wrapper">
+<section id="links" class="wrapper">
   <Spotify />
   <GitLab />
   <StackOverflow />
   <GitHub />
-  gitlab?
   other?
   instagram?
-</div>
+</section>

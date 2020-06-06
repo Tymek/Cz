@@ -127,7 +127,7 @@ translations.update({
 	}
 </style>
 
-<div class="container">
+<section class="container">
 	<div class="block">
 		<h1 class="title">
 			Tymoteusz <br />Czech
@@ -153,4 +153,4 @@ translations.update({
 	<!-- <figure>
 		<img src="/photo.jpg" alt="Tymek" />
 	</figure> -->
-</div>
+</section>

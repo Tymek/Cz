@@ -320,11 +320,13 @@
   }
 </style>
 
-<h2 id="stack" class="container">{$_(texts.stackHeadline)}</h2>
-<!-- TODO: aria-label="list of my skills" -->
-<figure
-  bind:this={container}
-  bind:clientWidth={width}
-  bind:clientHeight={height}
-></figure>
-<!-- <h2>Glad you came</h2> -->
+<section>
+  <h2 id="stack" class="container">{$_(texts.stackHeadline)}</h2>
+  <!-- TODO: aria-label="list of my skills" -->
+  <figure
+    bind:this={container}
+    bind:clientWidth={width}
+    bind:clientHeight={height}
+  ></figure>
+  <!-- <h2>Glad you came</h2> -->
+</section>

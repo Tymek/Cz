@@ -14,7 +14,9 @@
     "lint": "eslint . --ignore-path .gitignore",
     "unit": "jest ./src",
     "unit:watch": "npm run test -- --watch",
-    "test": "run-p lint unit cy:test"
+    "test": "run-p lint unit cy:test",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "engines": {
     "node": ">=14.2"
@@ -40,9 +42,15 @@
     "@rollup/plugin-commonjs": "12.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-replace": "^2.3.2",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/svelte": "^5.3.19",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/svelte": "^3.0.0",
     "babel-jest": "^26.0.1",
+    "babel-loader": "^8.1.0",
     "cypress": "^4.7.0",
     "d3": "^5.16.0",
     "eslint": "^7.1.0",
@@ -68,6 +76,7 @@
     "supertest": "^4.0.2",
     "svelte": "^3.23.0",
     "svelte-intl": "^1.1.1",
+    "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^3.7.4",
     "three": "^0.117.1",
     "three-forcegraph": "^1.33.0",

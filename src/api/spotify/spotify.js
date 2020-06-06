@@ -69,7 +69,7 @@ const getTrackPlayed = compose(
   ),
 )
 
-const getComputerApp = name => (test(/web player/i, name) ? 'Computer (Web Player)' : 'Computer (Standalone App)')
+const getComputerApp = name => (test(/web player/i, name) ? 'Computer (Web Player)' : 'Computer (Native App)')
 
 const getDeviceType = ({ type, name }) => ({
   type: type === 'Computer' ? getComputerApp(name) : type,
