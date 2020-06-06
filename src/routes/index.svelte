@@ -10,5 +10,5 @@ import Graph from '../components/Graph/graph.svelte'
 
 <Intro />
 <APIs />
-<!-- <Graph /> -->
+<Graph />
 <!-- <Contact /> -->

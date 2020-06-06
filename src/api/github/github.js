@@ -63,6 +63,7 @@ const filterUserPublicEvents = compose(
         applySpec({
           type: path(['type']),
           action: pathOr(null, ['payload', 'action']),
+          ref_type: pathOr(null, ['payload', 'ref_type']),
           // type: compose(
           //   replace(/Event$/, ''),
           //   path(['type']),

@@ -5,17 +5,9 @@
   import {
     isEmpty,
   } from 'ramda'
-  import {
-    eye as octiconEye,
-  } from '@primer/octicons-v2'
   import Event from './components/event.svelte'
   import Block from '../block.svelte'
   import Flair from '../flair.svelte'
-
-  const texts = {
-    followLabel: 'Follow @Tymek on GitHub',
-    followText: 'Follow @Tymek',
-  }
 
   const link = 'https://github.com/Tymek'
   // https://github.com/primer/octicons-v2
@@ -23,13 +15,19 @@
   let data = {}
   let bio = ''
 
+  const texts = {
+    followLabel: 'Follow @Tymek on GitHub',
+    followText: 'Follow @Tymek',
+    activity: 'Activity'
+  }
+
   translations.update({
     pl: {
       [texts.followLabel]: 'Obserwuj @Tymek na GitHub\'ie',
       [texts.followText]: 'Obserwuj @Tymek',
+      [texts.activity]: 'Aktywność',
     },
   })
-
 
   const loadData = async () => {
     const response = await axios.get('/api/github')
@@ -53,8 +51,13 @@
   }
 
   ul {
+    margin: 0.5rem (2rem / 16) 1rem;
     padding: 0;
     list-style: none;
+  }
+
+  h4 {
+    margin-bottom: 0.5rem;
   }
 </style>
 
@@ -73,6 +76,7 @@
       {@html bio}
     </Flair>
 
+    <h4>{$_(texts.activity)}</h4>
     <ul>
       {#each data.events as event}
         <Event {event} />

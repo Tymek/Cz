@@ -1,15 +1,22 @@
 <script>
 	import { onMount } from 'svelte'
 	import { locale, translations, getBrowserLocale } from 'svelte-intl'
+	import moment from 'moment'
+	import 'moment/locale/pl'
+
 	translations.update({
 		en: {},
 		pl: {},
 	})
 
 	locale.set('en')
+	moment.locale('en')
 
 	onMount(() => {
-		locale.set(getBrowserLocale('en'))
+		const browserLocale = getBrowserLocale('en')
+
+		locale.set(browserLocale)
+		moment.locale(browserLocale)
 	});
 
 	// export let segment

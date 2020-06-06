@@ -7,6 +7,7 @@ import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
 import svg from 'rollup-plugin-svg'
 import json from '@rollup/plugin-json'
+import moment from 'moment'
 import pkg from './package.json'
 
 const commonSvelteConfig = require('./svelte.config.js')
@@ -16,6 +17,14 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning)
 
+const commonPlugins = [
+	svg(),
+	json(),
+	commonjs(),
+]
+
+const __buildDate__ = () => moment().toISOString()
+
 export default {
 	client: {
 		input: config.client.input(),
@@ -23,11 +32,11 @@ export default {
 		preserveEntrySignatures: 'strict',
 		plugins: [
 			replace({
+				__buildDate__,
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode),
 			}),
-			svg(),
-			json(),
+			...commonPlugins,
 			svelte({
 				dev,
 				hydratable: true,
@@ -38,7 +47,6 @@ export default {
 				browser: true,
 				dedupe: ['svelte'],
 			}),
-			commonjs(),
 
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
@@ -70,11 +78,11 @@ export default {
 		output: config.server.output(),
 		plugins: [
 			replace({
+				__buildDate__,
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode),
 			}),
-			svg(),
-			json(),
+			...commonPlugins,
 			svelte({
 				generate: 'ssr',
 				dev,
@@ -83,7 +91,6 @@ export default {
 			resolve({
 				dedupe: ['svelte'],
 			}),
-			commonjs(),
 		],
 		external: Object.keys(pkg.dependencies).concat(
 			require('module').builtinModules || Object.keys(process.binding('natives')),
