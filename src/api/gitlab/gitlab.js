@@ -4,9 +4,6 @@ import { path } from 'ramda'
 import { cached } from '../utils'
 import { user, apiUrl, throttle } from './config.js'
 
-console.log(`${apiUrl}${user}/calendar.json`)
-
-
 const router = express.Router()
 
 const getData = cached(

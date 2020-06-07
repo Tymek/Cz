@@ -3,9 +3,11 @@ db.json
 
 public
 .tmp
+tmp
 
 static/logos/png
 static/fonts
+static/uploads
 
 .DS_Store
 /node_modules/
