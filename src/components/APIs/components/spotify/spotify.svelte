@@ -30,6 +30,13 @@
   let nowPlaying = {}
 
   const loadData = async () => {
+
+    try {
+      const response = await axios.get('/api/stackexchange')
+    } catch (err) {
+      return console.error(err)
+    }
+
     const response = await axios.get('/api/spotify')
 
     const {

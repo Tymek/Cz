@@ -4,6 +4,7 @@
   import GitLab from './components/gitlab.svelte'
   import Spotify from './components/spotify/spotify.svelte'
   import StackOverflow from './components/stackoverflow.svelte'
+  import Instagram from './components/instagram.svelte'
   import Block from './components/block.svelte'
   import moment from 'moment'
 
@@ -42,14 +43,6 @@
     // grid-auto-flow: column;
     gap: 1rem;
   }
-
-  h4 {
-    margin-bottom: 0.5rem;
-  }
-  ul {
-    list-style: square;
-    margin-top: 0;
-  }
 </style>
 
 <section id="links" class="wrapper">
@@ -57,21 +50,13 @@
   <StackOverflow />
   <GitHub />
   <GitLab />
+  <Instagram />
   <Block
     background={'#e8e8e8'}
-    color="white"
+    color="#4B3445"
     height={1}
     title={$_(texts.moreToCome)}
   >
     {$_(texts.lastBuild, { time: `${moment(buildTimestamp).format('LLLL Z')} (${moment(buildTimestamp).fromNow()})` })}
-
-    <h4>{$_(texts.planned)}</h4>
-    <ul>
-      <li>Instagram</li>
-      <li>{$_(texts.location)}</li>
-    </ul>
   </Block>
-
-  <!-- other?
-  instagram? -->
 </section>
