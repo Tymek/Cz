@@ -54,9 +54,9 @@
 
 <section id="links" class="wrapper">
   <Spotify />
-  <!-- <GitLab /> -->
   <StackOverflow />
   <GitHub />
+  <GitLab />
   <Block
     background={'#e8e8e8'}
     color="white"
@@ -67,7 +67,6 @@
 
     <h4>{$_(texts.planned)}</h4>
     <ul>
-      <li>GitLab</li>
       <li>Instagram</li>
       <li>{$_(texts.location)}</li>
     </ul>

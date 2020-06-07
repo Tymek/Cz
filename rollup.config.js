@@ -76,6 +76,7 @@ export default {
 	server: {
 		input: config.server.input(),
 		output: config.server.output(),
+		preserveEntrySignatures: 'strict',
 		plugins: [
 			replace({
 				__buildDate__,
