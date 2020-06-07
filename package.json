@@ -41,7 +41,7 @@
     "babel-jest": "26.0.1",
     "cypress": "4.7.0",
     "d3": "5.16.0",
-    "eslint": "7.1.0",
+    "eslint": "7.2.0",
     "eslint-plugin-cypress": "2.11.1",
     "eslint-plugin-security": "1.4.0",
     "format-message": "6.2.3",
