@@ -2,10 +2,34 @@
   "extends": [
     "config:base"
   ],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
+  "automergeType": "branch",
   "packageRules": [
     {
       "updateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": true,
+      "depTypeList": ["devDependencies"],
+      "automergeType": "branch",
+      "schedule": [ "every weekend" ]
+    },
+    {
+      "packagePatterns": [ "eslint" ],
+      "groupName": "eslint"
+    },
+    {
+      "packagePatterns": [ "svelte" ],
+      "groupName": "svelte"
+    },
+    {
+      "packagePatterns": [ "rollup" ],
+      "groupName": "rollup"
+    },
+    {
+      "packagePatterns": [ "babel" ],
+      "groupName": "babel"
     }
   ]
 }
