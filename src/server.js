@@ -1,5 +1,6 @@
-import sirv from 'sirv'
 import polka from 'polka'
+import sirv from 'sirv'
+import morgan from 'morgan'
 import compression from 'compression'
 import * as sapper from '@sapper/server'
 import dotenv from 'dotenv'
@@ -11,6 +12,7 @@ const { PORT, NODE_ENV } = process.env
 const dev = NODE_ENV === 'development'
 
 polka()
+	.use(morgan('combined'))
 	.use('/api', api)
 	.use(
 		compression({ threshold: 0 }),

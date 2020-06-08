@@ -4,11 +4,15 @@ services:
   server:
     image: ${IMAGE}
     container_name: ${NAME}
+    build: .
     restart: always
     command: ['node', '.']
+    environment:
+      NODE_ENV: development
     volumes:
       - ./.env:/srv/.env
       - ./database.json:/srv/db.json
+      # - ./uploads:/srv/static/uploads
     labels:
       - traefik.enable=true
       - traefik.port=3000

@@ -1,5 +1,6 @@
 .env
 db.json
+database.json
 
 public
 .tmp

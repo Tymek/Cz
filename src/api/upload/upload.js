@@ -2,7 +2,7 @@ import {
   rmdirSync,
   existsSync,
   mkdirSync,
-  renameSync,
+  copyFileSync,
 } from 'fs'
 import { extname } from 'path'
 import express from 'express'
@@ -36,20 +36,25 @@ if (!existsSync(uploadsDir)){
   mkdirSync(uploadsDir)
 }
 
-router.post('/', auth, upload.single('file'), function (req, res, next) {
+router.post('/', auth, upload.single('file'), function (req, res) {
   try {
     const newFile = `${req.file.filename}${extname(req.file.originalname)}`
-    renameSync( req.file.path, resolvePath(uploadsDir, newFile))
+    copyFileSync( req.file.path, resolvePath(uploadsDir, newFile))
     db.set(`/uploads/${newFile}`, [req.body.target])
 
-    res.send({
+    cleanup()
+    return res.send({
       x: [req.file, req.body],
     })
   } catch (err) {
-    next(err)
-  }
+    console.log(err)
 
-  cleanup()
+    res.status(500).send({
+      err,
+    })
+
+    cleanup()
+  }
 })
 
 router.get('/login', auth, function (req, res) {
