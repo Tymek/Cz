@@ -23,7 +23,7 @@
     "node": ">=14.2"
   },
   "dependencies": {
-    "@primer/octicons-v2": "0.0.0-a58c58c",
+    "@primer/octicons-v2": "0.0.0-ff9cdef",
     "axios": "^0.19.2",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
