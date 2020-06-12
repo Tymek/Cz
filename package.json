@@ -35,7 +35,7 @@
     "multer": "^1.4.2",
     "polka": "1.0.0-next.11",
     "ramda": "^0.27.0",
-    "sirv": "^0.4.6",
+    "sirv": "^1.0.0",
     "systeminformation": "^4.26.9"
   },
   "devDependencies": {
