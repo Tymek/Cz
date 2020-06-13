@@ -80,7 +80,7 @@
     "svelte-intl": "1.1.1",
     "svelte-preprocess": "3.9.6",
     "three": "0.117.1",
-    "three-forcegraph": "1.33.0",
+    "three-forcegraph": "1.35.0",
     "typed.js": "2.0.11"
   }
 }
