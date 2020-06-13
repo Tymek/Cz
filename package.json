@@ -53,7 +53,7 @@
     "@testing-library/jest-dom": "5.10.0",
     "@testing-library/svelte": "3.0.0",
     "babel-jest": "26.0.1",
-    "cypress": "4.7.0",
+    "cypress": "4.8.0",
     "d3": "5.16.0",
     "eslint": "7.1.0",
     "eslint-plugin-cypress": "2.11.1",
