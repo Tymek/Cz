@@ -77,7 +77,7 @@
     "start-server-and-test": "1.11.2",
     "supertest": "4.0.2",
     "svelte": "3.24.0",
-    "svelte-intl": "1.1.1",
+    "svelte-intl": "1.1.2",
     "svelte-preprocess": "3.9.12",
     "three": "0.118.3",
     "three-forcegraph": "1.36.1",
