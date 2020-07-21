@@ -119,7 +119,7 @@
     return links
   }
 
-  const create3dGraph = async data => {
+  const create3dGraph = async (data, groups) => {
     // IMPORTANT NOTE: Implementation of 'github.com/vasturiano/3d-force-graph' was blocking scroll, hence I scaveged it into './customRenderer'
     // const ForceGraph3D = (await import('3d-force-graph')).default
     const ForceGraph3D = (await import('./customRenderer/forceGraph')).default
@@ -136,7 +136,8 @@
     graph = ForceGraph3D()
     graph.backgroundColor('rgba(0,0,0,0)')
     graph.linkWidth(1)
-    graph.linkOpacity(0.025)
+    graph.linkOpacity(0.033)
+    graph.linkVisibility(({ source }) => !groups.has(source.id))
     graph.linkColor(() => "#000000")
     graph.showNavInfo(false)
     graph.width(width)
@@ -205,7 +206,7 @@
     }, 300)
   }
 
-  const initialize = once(async () => {
+  const initialize = once(async (groups) => {
     setTimeout(() => {
       graph.resumeAnimation()
       graph.d3ReheatSimulation()
@@ -224,11 +225,13 @@
     const text = await skills.text()
     const nodes = await getData(text)
     const links = getLinks(nodes)
+    const groups = new Set(getGroups(nodes).map(prop('id')))
 
     observer = IntersectionObserver ? new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          initialize()
+          initialize(groups)
+          graph.linkColor(({ source }) => groups.has(source) ? "#ffffff00" : "#000000")
           graph.resumeAnimation()
           graph.d3ReheatSimulation()
         } else {
@@ -237,7 +240,6 @@
       })
     }) : null
 
-    // const groupNodes = getGroups(nodes)
     const groupLinks = getGroupLinks(nodes)
 
     const data = {
@@ -245,12 +247,12 @@
       links: [ ...links, ...groupLinks ],
     }
   
-    await create3dGraph(data)
+    await create3dGraph(data, groups)
 
     if (observer) {
       observer.observe(container)
     } else {
-      initialize()
+      initialize(groups)
     }
   })
 

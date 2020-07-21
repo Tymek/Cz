@@ -1,4 +1,4 @@
-year	tech	color	group	origin	pro	n00b
+year	tech	color	group	origin	pro
 2007	HTML	#E34F26	
 2009	CSS	#002561	Styles
 2012	JavaScript	#F7DF1E	Coding		TRUE
@@ -35,10 +35,9 @@ year	tech	color	group	origin	pro	n00b
 2018	React Router	#d0021b	Coding	React
 2018	Formik	#0059C7	Coding	React
 2017	NodeJS	#026e00	Coding	JavaScript
-2018	VueJS	#29B687	Coding	JavaScript, HTML, CSS		TRUE
+2018	VueJS	#29B687	Coding	JavaScript, HTML, CSS
 2017	Jest	#10910e	Testing	JavaScript
 2019	Puppeteer	#01D6A6	Testing	JavaScript
-2020	Cypress	#182733	Testing	JavaScript		TRUE
 2018	PWA	#5D2CC2	Coding	HTML, JavaScript
 2020	WorkBox	#EE7024	Coding	PWA
 2012	Git	#FC4E2F	Coding
@@ -51,12 +50,13 @@ year	tech	color	group	origin	pro	n00b
 2019	GraphQL	#E71E93	Databases
 2019	PostgreSQL	#336791	Databases
 2012	MySQL	#e97b00	Databases
-2018	MongoDB	#13aa52	Databases			TRUE
+2018	MongoDB	#13aa52	Databases
 2017	Material-UI	#007ACD	Styles	CSS, React
 2019	Fusion 360	#faa21b	Design
 2019	Hasura	#102852	Coding	GraphQL, PostgreSQL
 2019	oAuth2	#000000	Coding
 2020	AWS	#FF9900	DevOps
+2020	TypeScript	#007ACC	Coding	JavaScript, React, NodeJS
 	Coding			Design, DevOps, Databases, System
 	DevOps			Databases, System
 	Design
