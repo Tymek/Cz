@@ -41,6 +41,7 @@ export default {
 				dev,
 				hydratable: true,
 				emitCss: true,
+				preserveComments: true,
 				...commonSvelteConfig,
 			}),
 			resolve({
@@ -87,6 +88,7 @@ export default {
 			svelte({
 				generate: 'ssr',
 				dev,
+				preserveComments: true,
 				...commonSvelteConfig,
 			}),
 			resolve({
