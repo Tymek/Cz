@@ -1,6 +1,6 @@
 <script>
   import { translations, _ } from 'svelte-intl'
-  import octicons from '@primer/octicons-v2'
+  import octicons from '@primer/octicons'
   import moment from 'moment'
   import { isEmpty } from 'ramda'
 
