@@ -60,7 +60,7 @@
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-security": "1.4.0",
     "format-message": "6.2.3",
-    "jest": "26.1.0",
+    "jest": "26.2.2",
     "jest-transform-svelte": "2.1.1",
     "mockdate": "3.0.2",
     "moxios": "0.4.0",
