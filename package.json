@@ -52,7 +52,7 @@
     "@storybook/addon-knobs": "5.3.19",
     "@testing-library/jest-dom": "5.11.3",
     "@testing-library/svelte": "3.0.0",
-    "babel-jest": "26.2.2",
+    "babel-jest": "26.3.0",
     "cypress": "4.12.1",
     "d3": "5.16.0",
     "eslint": "7.6.0",
