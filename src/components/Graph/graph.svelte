@@ -224,7 +224,10 @@
     const skills = await fetch('/skills.tsv')
     const text = await skills.text()
     const nodes = await getData(text)
-    const links = getLinks(nodes)
+    const links = getLinks(nodes).map(link => {
+      // link.distance = size * 2
+      return link
+    })
     const groups = new Set(getGroups(nodes).map(prop('id')))
 
     observer = IntersectionObserver ? new IntersectionObserver(entries => {
