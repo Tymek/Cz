@@ -12,7 +12,7 @@
   } from 'ramda'
 
   const texts = {
-    stackHeadline: 'Welcome in my universe'
+    stackHeadline: 'Welcome to my universe'
   }
 
   translations.update({
