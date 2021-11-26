@@ -1,8 +1,10 @@
 {
-	"name": "cz",
+	"name": "tymek-cz",
 	"version": "0.0.1",
 	"type": "module",
+	"license": "GPL-3",
 	"scripts": {
+		"vercel": "vercel dev",
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
@@ -34,6 +36,7 @@
 		"svelte-check": "2.2.10",
 		"svelte-preprocess": "4.9.8",
 		"tslib": "2.3.1",
-		"typescript": "4.5.2"
+		"typescript": "4.5.2",
+		"vercel": "^23.1.2"
 	}
 }
