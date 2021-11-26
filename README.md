@@ -16,7 +16,7 @@ Development environment starts by default on [localhost:3000](http://localhost:3
 
 ## Building
 
-Project is set up with Vercel adapter for SvelteKit.
+Project is set up with Vercel adapter for SvelteKit. Remember to set `.env` variables!
 
 ```bash
 yarn build
