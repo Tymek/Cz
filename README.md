@@ -37,3 +37,9 @@ Or use docker
 ```sh
 docker run -it -v ${PWD}:/srv -w /srv scrlk/woff2 sh -c "apk add --no-cache imagemagick && ./generatePNGs.sh &&./generateFonts.sh"
 ```
+
+## Authentication for integrated services
+
+OAuth2 is a mess. With slightly different request formats in each service unification and abstracting the flow is not important.
+Client libraries focus on acting as proxy for browsers.
+I need to do something different - grab tokens and pass in to the database for use in server-side fetching later.

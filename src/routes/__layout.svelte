@@ -1,4 +1,6 @@
 <script>
+	import Analytics from '../components/Analytics.svelte'
+
 	import { onMount } from 'svelte'
 	import { locale, translations, getBrowserLocale } from 'svelte-intl'
 	// import moment from 'moment'
@@ -24,6 +26,7 @@
 
 <main>
 	<slot />
+	<Analytics />
 </main>
 
 <style type="text/scss" lang="scss">
