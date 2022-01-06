@@ -15,5 +15,6 @@
 	},
 	"svg.preview.background": "transparent",
 	"editor.tabSize": 2,
-	"editor.detectIndentation": false
+	"editor.detectIndentation": false,
+	"workbench.panel.defaultLocation": "right"
 }
