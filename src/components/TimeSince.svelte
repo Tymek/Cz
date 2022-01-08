@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte'
 	import { locale } from 'svelte-intl'
 	import { formatDistance, parseISO } from 'date-fns'
-	import pl from 'date-fns/locale/pl'
+	import pl from 'date-fns/locale/pl/index'
 
 	export let date: string
 	export let addSuffix: boolean = false

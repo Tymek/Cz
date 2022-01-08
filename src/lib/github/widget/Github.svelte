@@ -3,8 +3,8 @@
 	import { translations, _ } from 'svelte-intl'
 	import Event from './components/event.svelte'
 	import Button from './components/button.svelte'
-	import Block from '../../../components/block.svelte'
-	import Flair from '../../../components/flair.svelte'
+	import Block from '../../../components/Block.svelte'
+	import Flair from '../../../components/Flair.svelte'
 	import { format, formatDistance, parseISO } from 'date-fns'
 	import TimeSince from '$components/TimeSince.svelte'
 

@@ -4,8 +4,8 @@
 	import axios from 'axios'
 	import moment from 'moment'
 	import { isEmpty } from 'ramda'
-	import Block from '../../block.svelte'
-	import Flair from '../../flair.svelte'
+	import Block from '../../Block.svelte'
+	import Flair from '../../Flair.svelte'
 
 	const texts = {
 		recentlyPlayed: 'Recently played:',

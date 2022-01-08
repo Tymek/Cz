@@ -68,23 +68,22 @@
 		align-items: center;
 		min-height: 80vh;
 		width: 100%;
-	}
 
-	.container {
-		width: 100%;
-		box-sizing: border-box;
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		/* align-items: center; */
-		padding: 2rem 2rem;
-		justify-content: space-evenly;
+		.container {
+			width: 100%;
+			box-sizing: border-box;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			padding: 2rem 2rem;
+			justify-content: space-evenly;
 
-		@media (orientation: landscape) {
-			padding: 2rem 10vw;
-			flex-direction: row-reverse;
-			justify-content: space-between;
-			align-items: center;
+			@media (orientation: landscape) {
+				padding: 2rem 10vw;
+				flex-direction: row-reverse;
+				justify-content: space-between;
+				align-items: center;
+			}
 		}
 	}
 
@@ -92,19 +91,72 @@
 		font-size: 4.188036796rem;
 		line-height: 1.2em;
 		font-weight: 700;
-		color: #253854;
 		margin: 0 0 2rem;
+
+		color: var(--color-catalina-blue);
+		@media (prefers-color-scheme: dark) {
+			color: var(--color-bright);
+		}
 	}
 
 	.block {
-		align-self: flex-end;
-	}
+		align-self: center;
+		@media (orientation: landscape) {
+			padding-top: 5vh;
+		}
 
-	.description {
-		padding-bottom: 1.11646975rem;
-		color: #4b3445;
-		font-size: 1.11646975rem;
-		line-height: 1.6em;
+		.description {
+			padding-bottom: 1.11646975rem;
+			font-size: 1.11646975rem;
+			line-height: 1.6em;
+		}
+
+		.buttons {
+			padding-bottom: 1rem;
+		}
+
+		.button {
+			display: inline-flex;
+			border: 1px solid transparent;
+			box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+			font-size: 1rem;
+			line-height: 1.6em;
+			margin: 0 8px 0 0;
+			padding: 0.25em 1em;
+			border-radius: math.div(4, 14) * 1em;
+			align-items: center;
+			cursor: pointer;
+			text-decoration: none;
+
+			&.links {
+				background: #f1cd5f;
+				color: #4b3445;
+			}
+
+			&.stack {
+				background: #b43c3c;
+				color: #ffffff;
+			}
+
+			&.contact {
+				background: #3c8458;
+				color: #ffffff;
+			}
+
+			.icon {
+				height: 1em;
+				font-size: 1.25rem;
+				display: block;
+				margin-right: 0.4em;
+				:global(svg) {
+					height: 1em;
+				}
+			}
+
+			.label {
+				padding-top: 0.2em;
+			}
+		}
 	}
 
 	.photo {
@@ -112,63 +164,15 @@
 		position: relative;
 		display: flex;
 		justify-content: center;
+		padding-bottom: 5vh;
 
 		@media (orientation: landscape) {
 			height: 50vh;
+			padding-bottom: 0;
 		}
 
 		:global(svg) {
 			height: 100%;
-		}
-	}
-
-	.buttons {
-		padding-bottom: 1rem;
-	}
-
-	.button {
-		display: inline-flex;
-		border: 1px solid transparent;
-		box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
-		font-size: 1rem;
-		line-height: 1.6em;
-		margin: 0 8px 0 0;
-		padding: 0.25em 1em;
-		border-radius: math.div(4, 14) * 1em;
-		align-items: center;
-		cursor: pointer;
-		text-decoration: none;
-	}
-
-	.links.button {
-		background: #f1cd5f;
-		color: #4b3445;
-	}
-
-	.stack.button {
-		background: #b43c3c;
-		color: #ffffff;
-	}
-
-	.contact.button {
-		background: #3c8458;
-		color: #ffffff;
-	}
-
-	.button .icon {
-		height: 1em;
-		font-size: 1.25rem;
-		display: block;
-		margin-right: 0.4em;
-	}
-
-	.button .label {
-		padding-top: 0.2em;
-	}
-
-	.icon {
-		:global(svg) {
-			height: 1em;
 		}
 	}
 </style>

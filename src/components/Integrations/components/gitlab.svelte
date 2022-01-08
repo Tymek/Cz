@@ -1,5 +1,5 @@
 <script>
-	import Block from '../../block.svelte'
+	import Block from '../../Block.svelte'
 	import { onMount } from 'svelte'
 	import axios from 'axios'
 	import { range, isEmpty } from 'ramda'

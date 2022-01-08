@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { translations, _ } from 'svelte-intl'
-	import Block from '$components/block.svelte'
+	import Block from '$components/Block.svelte'
 	import Song from './components/song.svelte'
 	import type { Song as SongType } from './types'
 

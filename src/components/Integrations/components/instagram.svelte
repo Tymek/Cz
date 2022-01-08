@@ -3,7 +3,7 @@
 	import { translations, _ } from 'svelte-intl'
 	import axios from 'axios'
 	import { isEmpty } from 'ramda'
-	import Block from '../../block.svelte'
+	import Block from '../../Block.svelte'
 
 	const texts = {
 		thisYear: 'this year'
