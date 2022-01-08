@@ -5,7 +5,7 @@
 	import moment from 'moment'
 	import { isEmpty } from 'ramda'
 	import Block from '../../block.svelte'
-	import Flair from './flair.svelte'
+	import Flair from '../../flair.svelte'
 
 	const texts = {
 		recentlyPlayed: 'Recently played:',

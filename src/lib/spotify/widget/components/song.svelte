@@ -20,7 +20,7 @@
 
 <a target="_blank" rel="noopener noreferrer" href={url}>
 	<img class="cover" src={images?.[0]?.url} {srcSet} alt={album} title={album} />
-	{title}
+	<span>{title}</span>
 </a>
 
 <style lang="scss">
@@ -35,6 +35,17 @@
 		overflow-y: visible;
 		text-overflow: ellipsis;
 		margin-bottom: math.div(0.8967474303rem, 4);
+
+		span {
+			text-decoration: underline;
+			text-decoration-color: rgba(255, 255, 255, 0.25);
+		}
+
+		&:hover {
+			span {
+				text-decoration-color: inherit;
+			}
+		}
 	}
 
 	img {

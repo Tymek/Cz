@@ -1,19 +1,20 @@
 import config from '../../src/lib/spotify/config'
 import { getToken } from '../../src/lib/spotify/utils'
-import { updateIntegration } from '../../src/lib/db'
+import { getConfig, updateIntegration } from '../../src/lib/db'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
-const { authUrl, scope, client_id, redirect_uri, showDialog } = config
-
-export const authorizationUrl = `${authUrl}/authorize?${new URLSearchParams({
-	response_type: 'code',
-	scope,
-	client_id,
-	redirect_uri,
-	showDialog
-}).toString()}`
+const { authUrl, scope, redirect_uri, showDialog } = config
 
 export default async (request: VercelRequest, response: VercelResponse) => {
+	const { SPOTIFY_CLIENT_ID } = await getConfig()
+	const authorizationUrl = `${authUrl}/authorize?${new URLSearchParams({
+		response_type: 'code',
+		scope,
+		client_id: `${SPOTIFY_CLIENT_ID}`,
+		redirect_uri,
+		showDialog
+	}).toString()}`
+
 	if (
 		!request.cookies.admin_token ||
 		decodeURIComponent(request.cookies.admin_token) !== process.env.ADMIN_TOKEN

@@ -24,19 +24,23 @@
 	let nowPlaying: Partial<SongType> = {}
 
 	onMount(async () => {
-		const response = await fetch('/api/spotify')
-		const { now_playing, recently_played, devices, is_playing } = await response.json()
+		try {
+			const response = await fetch('/api/spotify')
+			const { now_playing, recently_played, devices, is_playing } = (await response.json()) || {}
 
-		songs = recently_played
+			songs = recently_played
 
-		if (is_playing && now_playing) {
-			nowPlaying = {
-				...now_playing,
-				url: now_playing['spotify']
+			if (is_playing && now_playing) {
+				nowPlaying = {
+					...now_playing,
+					url: now_playing['spotify']
+				}
 			}
-		}
 
-		activeDevice = devices && devices.length && devices.find(({ is_active }) => is_active)
+			activeDevice = devices && devices.length && devices.find(({ is_active }) => is_active)
+		} catch (error) {
+			console.error(error)
+		}
 	})
 </script>
 

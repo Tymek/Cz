@@ -24,8 +24,6 @@ const scopes = [
 export const apiUrl = 'https://api.spotify.com/v1'
 export const authUrl = 'https://accounts.spotify.com'
 export const scope = scopes.join(' ')
-export const client_id = process.env.SPOTIFY_CLIENT_ID
-export const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 export const redirect_uri =
 	process.env.SPOTIFY_REDIRECT_URI || `${config.rootUrl}/api/spotify/login`
 export const showDialog =
@@ -38,8 +36,6 @@ export default {
 	apiUrl,
 	authUrl,
 	scope,
-	client_id,
-	client_secret,
 	redirect_uri,
 	showDialog,
 	recentlyPlayedLimit

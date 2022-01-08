@@ -3,7 +3,7 @@
 	import { locale, translations, _ } from 'svelte-intl'
 	import { format, formatDistance, parseISO } from 'date-fns'
 	import Block from '../../block.svelte'
-	import { pl } from 'date-fns/locale'
+	import pl from 'date-fns/locale/pl'
 
 	const texts = {
 		lastBuild: 'Last build: {time}',

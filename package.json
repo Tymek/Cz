@@ -16,6 +16,7 @@
 		"cy:open": "cypress open"
 	},
 	"dependencies": {
+		"@primer/octicons": "^16.2.0",
 		"@vercel/node": "1.12.1",
 		"date-fns": "^2.28.0",
 		"format-message": "6.2.3",
@@ -33,6 +34,7 @@
 		"@testing-library/jest-dom": "^5.16.1",
 		"@testing-library/svelte": "^3.0.3",
 		"@types/isomorphic-fetch": "^0.0.35",
+		"@types/primer__octicons": "^16.1.0",
 		"@typescript-eslint/eslint-plugin": "5.9.0",
 		"@typescript-eslint/parser": "5.9.0",
 		"babel-jest": "^27.4.6",
