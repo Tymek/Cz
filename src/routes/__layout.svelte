@@ -67,4 +67,18 @@
 		/* background-color: #f4f4f4; */
 		line-height: 1.65em;
 	}
+
+	:global(a) {
+		color: inherit;
+	}
+
+	::-moz-selection {
+		color: #fff;
+		background: #000;
+	}
+
+	::selection {
+		color: #fff;
+		background: #000;
+	}
 </style>

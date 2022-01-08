@@ -1459,17 +1459,17 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sveltejs/adapter-vercel@1.0.0-next.35":
-  version "1.0.0-next.35"
-  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.35.tgz#b82dc7625365541b0e1a9015d45c63d194e01a52"
-  integrity sha512-juh74OesfWUo2EFThOIXX4I/9MJBGpDK3+reYc/R6slPxLLEVIZDV7TcAc2yldSGgMDCUbQg7nmXjF098IT1NQ==
+"@sveltejs/adapter-vercel@^1.0.0-next.36":
+  version "1.0.0-next.36"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.36.tgz#4163314461293aa29af1419883d0170a88dd61d5"
+  integrity sha512-IpvxBb5n9k5l6nikwq8mCeBg0VtSqAt7AY/PSujwjGs5KqYx3CrVu/Cyj4b0dyCO2Yyt2dr2QjS/R2R42PRBeA==
   dependencies:
     esbuild "^0.13.15"
 
-"@sveltejs/kit@1.0.0-next.216":
-  version "1.0.0-next.216"
-  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.216.tgz#3324f3e47b2eb04ba42d386d2e09a448c276f650"
-  integrity sha512-FKg7PPlymsZ2aU8DteY1BH217M2dIAgfWzm8OVqazQn2uLbw25WbVqSJ5KdgW83mLYoxSWUNPrJX3TJNEG6jVg==
+"@sveltejs/kit@^1.0.0-next.218":
+  version "1.0.0-next.218"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.218.tgz#64fbca511a332dbd3b91bd25fe048ab665528ec6"
+  integrity sha512-reimVgWaFq0qIvxkKnWE4nq35JFd6yQ6Lkge+o3WkX3hV8CAtrLbSAzFaEIUu5Ph09gJkl2PnqQa32WVDaeBZg==
   dependencies:
     "@sveltejs/vite-plugin-svelte" "^1.0.0-next.32"
     sade "^1.7.4"
@@ -2782,6 +2782,11 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+date-fns@^2.28.0:
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
+  integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
 dayjs@^1.10.4:
   version "1.10.7"

@@ -1,5 +1,4 @@
 <script>
-	// import Typewritter from './typewritter.svelte';
 	import { translations, _ } from 'svelte-intl'
 	import LinkIcon from './link.svg'
 	import BuildIcon from './build.svg'
@@ -44,23 +43,20 @@
 				<p>{@html $_(texts.description).replace(/\n/g, '<br />')}</p>
 			</div>
 			<div class="buttons">
-				<!-- <a href="#contact" class="button contact">
-				<span class="icon" aria-hidden="true">{@html EnvelopeIcon}</span>
-				<span class="label">{$_(texts.contact)}</span>
-			</a> -->
-				<!-- <a href="#stack" class="button stack">
+				<a href="#stack" class="button stack">
 					<span class="icon" aria-hidden="true"><BuildIcon /></span>
 					<span class="label">{$_(texts.stack)}</span>
 				</a>
 				<a href="#links" class="button links">
 					<span class="icon" aria-hidden="true"><LinkIcon /></span>
 					<span class="label">{$_(texts.links)}</span>
-				</a> -->
+				</a>
+				<a href="#contact" class="button contact">
+					<span class="icon" aria-hidden="true"><EnvelopeIcon /></span>
+					<span class="label">{$_(texts.contact)}</span>
+				</a>
 			</div>
 		</div>
-		<!-- <figure>
-		<img src="/photo.jpg" alt="Tymek" />
-	</figure> -->
 	</div>
 </section>
 
@@ -95,7 +91,6 @@
 	.title {
 		font-size: 4.188036796rem;
 		line-height: 1.2em;
-		/* text-transform: uppercase; */
 		font-weight: 700;
 		color: #253854;
 		margin: 0 0 2rem;
@@ -117,7 +112,6 @@
 		position: relative;
 		display: flex;
 		justify-content: center;
-		/* flex-direction: row-reverse; */
 
 		@media (orientation: landscape) {
 			height: 50vh;
@@ -125,24 +119,8 @@
 
 		:global(svg) {
 			height: 100%;
-			/* width: 100%; */
 		}
 	}
-
-	/* figure {
-    max-width: 30vw;
-    position: absolute;
-		right: 5vw;
-		bottom: 0;
-    padding: 1px;
-		margin: 0;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-  }
-
-  figure img {
-    width: 100%;
-    display: block;
-	} */
 
 	.buttons {
 		padding-bottom: 1rem;
@@ -150,12 +128,10 @@
 
 	.button {
 		display: inline-flex;
-		/* border: 1px solid rgba(0, 0, 0, 0.3); */
 		border: 1px solid transparent;
 		box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 		font-size: 1rem;
 		line-height: 1.6em;
-		/* font-weight: bold; */
 		margin: 0 8px 0 0;
 		padding: 0.25em 1em;
 		border-radius: math.div(4, 14) * 1em;
@@ -174,10 +150,10 @@
 		color: #ffffff;
 	}
 
-	// .contact.button {
-	// 	background: #3C8458;
-	// 	color: #ffffff;
-	// }
+	.contact.button {
+		background: #3c8458;
+		color: #ffffff;
+	}
 
 	.button .icon {
 		height: 1em;

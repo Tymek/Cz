@@ -1,13 +1,23 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import spotifyDashboard from '$lib/spotify/dashboard'
+	import githubDashboard from '$lib/github/dashbaord'
+	import stackoverflowDashboard from '$lib/stackoverflow/dashboard'
+	import gitlabDashboard from '$lib/gitlab/dashboard'
+	import instagramDashboard from '$lib/instagram/dashboard'
 
-	const dashboardItems = [spotifyDashboard]
+	const dashboardItems = [
+		spotifyDashboard,
+		githubDashboard,
+		stackoverflowDashboard,
+		gitlabDashboard,
+		instagramDashboard
+	]
 
 	let message = null
-	page.subscribe(({ query }) => {
-		if (query.has('message')) {
-			message = query.get('message')
+	page.subscribe(({ url }) => {
+		if (url?.searchParams?.has('message')) {
+			message = url?.searchParams?.get('message')
 		}
 	})
 
@@ -26,7 +36,7 @@
 			expires = ''
 		}
 
-		document.cookie = `${name}=${value}${expires}; SameSite=Strict; path=/`
+		document.cookie = `${name}=${encodeURIComponent(value)}${expires}; SameSite=Strict; path=/`
 	}
 
 	const setAdminToken = (event: KeyboardEvent) => {

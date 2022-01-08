@@ -14,7 +14,10 @@ export const authorizationUrl = `${authUrl}/authorize?${new URLSearchParams({
 }).toString()}`
 
 export default async (request: VercelRequest, response: VercelResponse) => {
-	if (!request.cookies.admin_token || process.env.ADMIN_TOKEN !== request.cookies.admin_token) {
+	if (
+		!request.cookies.admin_token ||
+		decodeURIComponent(request.cookies.admin_token) !== process.env.ADMIN_TOKEN
+	) {
 		return response.redirect(`/dashboard?message=${encodeURI('Invalid admin token.')}`)
 	}
 

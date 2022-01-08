@@ -54,22 +54,20 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 		const player = await query('/me/player')
 		const recentlyPlayed = await query('/me/player/recently-played')
 
-		const isPrivate = player?.device?.is_private_session
-
-		let data = {
+		const data = {
 			name: me?.display_name,
 			url: me?.external_urls.spotify,
 			image: me?.images[0]?.url,
 			is_playing: player?.is_playing,
 			now_playing: getTrackInfo(player?.item),
-			isPrivate,
+			is_private: player?.device?.is_private_session,
 			device: {
 				volume: player?.device?.volume_percent,
 				type: player?.device?.type,
 				id: player?.device?.id
 			},
-			recentlyPlayed: recentlyPlayed?.items
-				?.filter((item, index) => index < recentlyPlayedLimit)
+			recently_played: recentlyPlayed?.items
+				?.filter((_item, index) => index < recentlyPlayedLimit)
 				.map((item) => ({
 					playedAt: item?.played_at,
 					...getTrackInfo(item?.track)

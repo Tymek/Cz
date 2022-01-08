@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 import preprocess from 'svelte-preprocess'
 import vercel from '@sveltejs/adapter-vercel'
 import svg from '@poppanator/sveltekit-svg'
@@ -6,13 +7,21 @@ import svg from '@poppanator/sveltekit-svg'
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
-	preprocess: preprocess(),
+	preprocess: preprocess({
+		replace: [['__BUILD_TIMESTAMP__', JSON.stringify(new Date().toISOString())]]
+	}),
 
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
 		adapter: vercel(),
 		vite: {
+			resolve: {
+				alias: {
+					$components: resolve('./src/components'),
+					$lib: resolve('./src/lib')
+				}
+			},
 			plugins: [
 				svg({
 					type: 'component',
