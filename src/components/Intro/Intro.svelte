@@ -2,7 +2,7 @@
 	import { translations, _ } from 'svelte-intl'
 	import LinkIcon from './link.svg'
 	import BuildIcon from './build.svg'
-	import EnvelopeIcon from './envelope.svg'
+	// import EnvelopeIcon from './envelope.svg'
 	import PortraitDrawing from './portrait-drawing.svg'
 
 	const texts = {
@@ -51,10 +51,10 @@
 					<span class="icon" aria-hidden="true"><LinkIcon /></span>
 					<span class="label">{$_(texts.links)}</span>
 				</a>
-				<a href="#contact" class="button contact">
+				<!-- <a href="#contact" class="button contact">
 					<span class="icon" aria-hidden="true"><EnvelopeIcon /></span>
 					<span class="label">{$_(texts.contact)}</span>
-				</a>
+				</a> -->
 			</div>
 		</div>
 	</div>
@@ -138,10 +138,10 @@
 				color: #ffffff;
 			}
 
-			&.contact {
-				background: #3c8458;
-				color: #ffffff;
-			}
+			// &.contact {
+			// 	background: #3c8458;
+			// 	color: #ffffff;
+			// }
 
 			.icon {
 				height: 1em;

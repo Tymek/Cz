@@ -288,5 +288,6 @@
 
 	:global(.scene-tooltip) {
 		position: absolute;
+		pointer-events: none;
 	}
 </style>

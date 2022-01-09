@@ -27,7 +27,8 @@
 			"$lib/*": ["src/lib/*"],
 			"$components": ["src/components"],
 			"$components/*": ["src/components/*"]
-		}
+		},
+		"types": ["cypress"]
 	},
 	"include": [
 		"src/**/*.d.ts",
@@ -36,6 +37,7 @@
 		"src/**/*.svelte",
 		"tsconfig.json",
 		"api/**/*.d.ts",
-		"api/**/*.ts"
+		"api/**/*.ts",
+		"cypress/**/*.ts"
 	]
 }

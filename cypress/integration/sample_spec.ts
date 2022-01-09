@@ -1,5 +1,11 @@
-describe('My First Test', () => {
-	it('Does not do much!', () => {
-		expect(true).to.equal(true)
+describe('Basic test', () => {
+	beforeEach(() => {
+		cy.visit('/')
+	})
+
+	it('has the correct <h1>', () => {
+		cy.contains('h1', 'Tymoteusz Czech')
 	})
 })
+
+export {}
