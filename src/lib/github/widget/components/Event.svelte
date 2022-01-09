@@ -103,8 +103,10 @@
 </li>
 
 <style type="text/scss" lang="scss">
+	@use 'sass:math';
+
 	:global(.event-octicon) {
-		margin-right: (2rem / 16);
+		margin-right: math.div(2rem, 16);
 	}
 	:global(.event-octicon path) {
 		fill: currentColor;

@@ -9,3 +9,4 @@ node_modules
 # static/fonts
 
 .vercel
+.vercel_build_output

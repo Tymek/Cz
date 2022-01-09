@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte'
 	import { locale, translations, _ } from 'svelte-intl'
 	import { format, parseISO } from 'date-fns'
-	import pl from 'date-fns/locale/pl/index'
+	import pl from 'date-fns/locale/pl/index.js'
 	import TimeSince from '$components/TimeSince.svelte'
 	import Block from '$components/Block.svelte'
 
