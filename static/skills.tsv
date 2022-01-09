@@ -54,9 +54,14 @@ year	tech	color	group	origin	pro
 2017	Material-UI	#007ACD	Styles	CSS, React
 2019	Fusion 360	#faa21b	Design
 2019	Hasura	#102852	Coding	GraphQL, PostgreSQL
-2019	oAuth2	#000000	Coding
+2019	oAuth2	#000000	System
 2020	AWS	#FF9900	DevOps
+2020 	React Hook Form	#EC5990	Coding	React, Formik	TRUE
+2020	NextJS	#000000	Coding	TypeScript, React, PWA, webpack	TRUE
 2020	TypeScript	#007ACC	Coding	JavaScript, React, NodeJS
+2021	Svelte	#FF3E00	Coding	JavaScript, NodeJS
+2021	Tailwind	#06b6d4	Styles	CSS
+2021	Mac OS	#000000	System	Linux
 	Coding			Design, DevOps, Databases, System
 	DevOps			Databases, System
 	Design

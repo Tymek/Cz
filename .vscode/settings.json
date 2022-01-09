@@ -1,0 +1,20 @@
+{
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"editor.rulers": [80, 120],
+	// "javascript.suggestionActions.enabled": false,
+	"workbench.colorCustomizations": {
+		"statusBar.background": "#4B3445",
+		"statusBar.noFolderBackground": "#212121",
+		"statusBar.debuggingBackground": "#263238",
+		"statusBar.foreground": "#eee",
+		"statusBar.border": "#4B3445",
+		"editorRuler.foreground": "#adadad11"
+	},
+	"svg.preview.background": "transparent",
+	"editor.tabSize": 2,
+	"editor.detectIndentation": false,
+	"workbench.panel.defaultLocation": "right"
+}

@@ -1,21 +1,19 @@
-module.exports = {
-  transform: {
-    '^.+\\.svelte$': 'jest-transform-svelte',
-    '^.+\\.js$': 'babel-jest',
-  },
-  moduleFileExtensions: ['js', 'svelte'],
-  testPathIgnorePatterns: ['node_modules'],
-  bail: false,
-  verbose: true,
-  transformIgnorePatterns: ['node_modules'],
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  collectCoverage: true,
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.{js,svelte}',
-    '!**/.*',
-    '!**/.*/**',
-    '!*.config.js',
-    '!**/config.*',
-    '!**/*.config.*',
-  ],
+/** @type {import('@jest/types').Config.InitialOptions} */
+const config = {
+	transform: {
+		'^.+\\.svelte$': [
+			'svelte-jester',
+			{
+				preprocess: true
+			}
+		],
+		'^.+\\.js$': 'babel-jest',
+		'^.+\\.ts$': 'ts-jest'
+	},
+	moduleFileExtensions: ['js', 'svelte'],
+	setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+	testPathIgnorePatterns: ['<rootDir>/legacy'],
+	collectCoverageFrom: ['src/**/*.{js,ts,svelte}']
 }
+
+export default config

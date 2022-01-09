@@ -1,4 +1,3 @@
-
 /**
  * @see https://github.com/mrdoob/three.js/blob/1646da3dac9d61b4c79852692559b536c1bd6ba5/examples/jsm/controls/TrackballControls.js
  * @author Eberhard Graether / http://egraether.com/
@@ -7,22 +6,19 @@
  * @author Luca Antiga 	/ http://lantiga.github.io
  */
 
-import {
-	EventDispatcher,
-	MOUSE,
-	Quaternion,
-	Vector2,
-	Vector3,
-} from 'three'
+import { EventDispatcher, MOUSE, Quaternion, Vector2, Vector3 } from 'three'
 
-var CustomTrackballControls = function ( object, domElement ) {
-
-	if ( domElement === undefined ) console.warn( '.CustomTrackballControls: The second parameter "domElement" is now mandatory.' )
+var CustomTrackballControls = function (object, domElement) {
+	if (domElement === undefined)
+		console.warn('.CustomTrackballControls: The second parameter "domElement" is now mandatory.')
 	// @ts-ignore
-	if ( domElement === document ) console.error( '.CustomTrackballControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.' )
+	if (domElement === document)
+		console.error(
+			'.CustomTrackballControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.'
+		)
 
 	var _this = this
-	var STATE = { NONE: - 1, ROTATE: 0, ZOOM: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_ZOOM_PAN: 4 }
+	var STATE = { NONE: -1, ROTATE: 0, ZOOM: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_ZOOM_PAN: 4 }
 
 	this.object = object
 	this.domElement = domElement
@@ -42,7 +38,7 @@ var CustomTrackballControls = function ( object, domElement ) {
 	this.minDistance = 0
 	this.maxDistance = Infinity
 	// rotate, zoom, pan
-	this.keys = [ 65 /*A*/, 17 /*ctrl*/, 68 /*D*/ ]
+	this.keys = [65 /*A*/, 17 /*ctrl*/, 68 /*D*/]
 	// @ts-ignore
 	this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.ZOOM, RIGHT: MOUSE.PAN }
 
@@ -89,33 +85,33 @@ var CustomTrackballControls = function ( object, domElement ) {
 		this.screen.height = box.height
 	}
 
-	var getMouseOnScreen = ( function () {
+	var getMouseOnScreen = (function () {
 		var vector = new Vector2()
 
-		return function getMouseOnScreen( pageX, pageY ) {
+		return function getMouseOnScreen(pageX, pageY) {
 			vector.set(
-				( pageX - _this.screen.left ) / _this.screen.width,
-				( pageY - _this.screen.top ) / _this.screen.height,
+				(pageX - _this.screen.left) / _this.screen.width,
+				(pageY - _this.screen.top) / _this.screen.height
 			)
 
 			return vector
 		}
-	}() )
+	})()
 
-	var getMouseOnCircle = ( function () {
+	var getMouseOnCircle = (function () {
 		var vector = new Vector2()
 
-		return function getMouseOnCircle( pageX, pageY ) {
+		return function getMouseOnCircle(pageX, pageY) {
 			vector.set(
-				( ( pageX - _this.screen.width * 0.5 - _this.screen.left ) / ( _this.screen.width * 0.5 ) ),
-				( ( _this.screen.height + 2 * ( _this.screen.top - pageY ) ) / _this.screen.width ), // screen.width intentional
+				(pageX - _this.screen.width * 0.5 - _this.screen.left) / (_this.screen.width * 0.5),
+				(_this.screen.height + 2 * (_this.screen.top - pageY)) / _this.screen.width // screen.width intentional
 			)
 
 			return vector
 		}
-	}() )
+	})()
 
-	this.rotateCamera = ( function () {
+	this.rotateCamera = (function () {
 		var axis = new Vector3(),
 			quaternion = new Quaternion(),
 			eyeDirection = new Vector3(),
@@ -125,177 +121,180 @@ var CustomTrackballControls = function ( object, domElement ) {
 			angle
 
 		return function rotateCamera() {
-			moveDirection.set( _moveCurr.x - _movePrev.x, _moveCurr.y - _movePrev.y, 0 )
+			moveDirection.set(_moveCurr.x - _movePrev.x, _moveCurr.y - _movePrev.y, 0)
 			angle = moveDirection.length()
 
-			if ( angle ) {
-				_eye.copy( _this.object.position ).sub( _this.target )
-				eyeDirection.copy( _eye ).normalize()
-				objectUpDirection.copy( _this.object.up ).normalize()
-				objectSidewaysDirection.crossVectors( objectUpDirection, eyeDirection ).normalize()
-				objectUpDirection.setLength( _moveCurr.y - _movePrev.y )
-				objectSidewaysDirection.setLength( _moveCurr.x - _movePrev.x )
-				moveDirection.copy( objectUpDirection.add( objectSidewaysDirection ) )
-				axis.crossVectors( moveDirection, _eye ).normalize()
+			if (angle) {
+				_eye.copy(_this.object.position).sub(_this.target)
+				eyeDirection.copy(_eye).normalize()
+				objectUpDirection.copy(_this.object.up).normalize()
+				objectSidewaysDirection.crossVectors(objectUpDirection, eyeDirection).normalize()
+				objectUpDirection.setLength(_moveCurr.y - _movePrev.y)
+				objectSidewaysDirection.setLength(_moveCurr.x - _movePrev.x)
+				moveDirection.copy(objectUpDirection.add(objectSidewaysDirection))
+				axis.crossVectors(moveDirection, _eye).normalize()
 				angle *= _this.rotateSpeed
-				quaternion.setFromAxisAngle( axis, angle )
-				_eye.applyQuaternion( quaternion )
-				_this.object.up.applyQuaternion( quaternion )
-				_lastAxis.copy( axis )
+				quaternion.setFromAxisAngle(axis, angle)
+				_eye.applyQuaternion(quaternion)
+				_this.object.up.applyQuaternion(quaternion)
+				_lastAxis.copy(axis)
 				_lastAngle = angle
-			} else if ( ! _this.staticMoving && _lastAngle ) {
-				_lastAngle *= Math.sqrt( 1.0 - _this.dynamicDampingFactor )
-				_eye.copy( _this.object.position ).sub( _this.target )
-				quaternion.setFromAxisAngle( _lastAxis, _lastAngle )
-				_eye.applyQuaternion( quaternion )
-				_this.object.up.applyQuaternion( quaternion )
+			} else if (!_this.staticMoving && _lastAngle) {
+				_lastAngle *= Math.sqrt(1.0 - _this.dynamicDampingFactor)
+				_eye.copy(_this.object.position).sub(_this.target)
+				quaternion.setFromAxisAngle(_lastAxis, _lastAngle)
+				_eye.applyQuaternion(quaternion)
+				_this.object.up.applyQuaternion(quaternion)
 			}
 
-			_movePrev.copy( _moveCurr )
+			_movePrev.copy(_moveCurr)
 		}
-	}() )
-
+	})()
 
 	this.zoomCamera = function () {
 		var factor
 
-		if ( _state === STATE.TOUCH_ZOOM_PAN ) {
+		if (_state === STATE.TOUCH_ZOOM_PAN) {
 			factor = _touchZoomDistanceStart / _touchZoomDistanceEnd
 			_touchZoomDistanceStart = _touchZoomDistanceEnd
 
-			if ( _this.object.isPerspectiveCamera ) {
-				_eye.multiplyScalar( factor )
-			} else if ( _this.object.isOrthographicCamera ) {
+			if (_this.object.isPerspectiveCamera) {
+				_eye.multiplyScalar(factor)
+			} else if (_this.object.isOrthographicCamera) {
 				_this.object.zoom *= factor
 				_this.object.updateProjectionMatrix()
 			} else {
-				console.warn( '.CustomTrackballControls: Unsupported camera type' )
+				console.warn('.CustomTrackballControls: Unsupported camera type')
 			}
-
 		} else {
-			factor = 1.0 + ( _zoomEnd.y - _zoomStart.y ) * _this.zoomSpeed
+			factor = 1.0 + (_zoomEnd.y - _zoomStart.y) * _this.zoomSpeed
 
-			if ( factor !== 1.0 && factor > 0.0 ) {
-				if ( _this.object.isPerspectiveCamera ) {
-					_eye.multiplyScalar( factor )
-				} else if ( _this.object.isOrthographicCamera ) {
+			if (factor !== 1.0 && factor > 0.0) {
+				if (_this.object.isPerspectiveCamera) {
+					_eye.multiplyScalar(factor)
+				} else if (_this.object.isOrthographicCamera) {
 					_this.object.zoom /= factor
 					_this.object.updateProjectionMatrix()
 				} else {
-					console.warn( '.CustomTrackballControls: Unsupported camera type' )
+					console.warn('.CustomTrackballControls: Unsupported camera type')
 				}
 			}
 
-			if ( _this.staticMoving ) {
-				_zoomStart.copy( _zoomEnd )
+			if (_this.staticMoving) {
+				_zoomStart.copy(_zoomEnd)
 			} else {
-				_zoomStart.y += ( _zoomEnd.y - _zoomStart.y ) * this.dynamicDampingFactor
+				_zoomStart.y += (_zoomEnd.y - _zoomStart.y) * this.dynamicDampingFactor
 			}
 		}
 	}
 
-	this.panCamera = ( function () {
+	this.panCamera = (function () {
 		var mouseChange = new Vector2(),
 			objectUp = new Vector3(),
 			pan = new Vector3()
 
 		return function panCamera() {
-			mouseChange.copy( _panEnd ).sub( _panStart )
+			mouseChange.copy(_panEnd).sub(_panStart)
 
-			if ( mouseChange.lengthSq() ) {
-				if ( _this.object.isOrthographicCamera ) {
-					var scale_x = ( _this.object.right - _this.object.left ) / _this.object.zoom / _this.domElement.clientWidth
-					var scale_y = ( _this.object.top - _this.object.bottom ) / _this.object.zoom / _this.domElement.clientWidth
+			if (mouseChange.lengthSq()) {
+				if (_this.object.isOrthographicCamera) {
+					var scale_x =
+						(_this.object.right - _this.object.left) /
+						_this.object.zoom /
+						_this.domElement.clientWidth
+					var scale_y =
+						(_this.object.top - _this.object.bottom) /
+						_this.object.zoom /
+						_this.domElement.clientWidth
 					mouseChange.x *= scale_x
 					mouseChange.y *= scale_y
 				}
 
-				mouseChange.multiplyScalar( _eye.length() * _this.panSpeed )
-				pan.copy( _eye ).cross( _this.object.up ).setLength( mouseChange.x )
-				pan.add( objectUp.copy( _this.object.up ).setLength( mouseChange.y ) )
-				_this.object.position.add( pan )
-				_this.target.add( pan )
+				mouseChange.multiplyScalar(_eye.length() * _this.panSpeed)
+				pan.copy(_eye).cross(_this.object.up).setLength(mouseChange.x)
+				pan.add(objectUp.copy(_this.object.up).setLength(mouseChange.y))
+				_this.object.position.add(pan)
+				_this.target.add(pan)
 
-				if ( _this.staticMoving ) {
-					_panStart.copy( _panEnd )
+				if (_this.staticMoving) {
+					_panStart.copy(_panEnd)
 				} else {
-					_panStart.add( mouseChange.subVectors( _panEnd, _panStart ).multiplyScalar( _this.dynamicDampingFactor ) )
+					_panStart.add(
+						mouseChange.subVectors(_panEnd, _panStart).multiplyScalar(_this.dynamicDampingFactor)
+					)
 				}
 			}
 		}
-	}() )
+	})()
 
 	this.checkDistances = function () {
-		if ( ! _this.noZoom || ! _this.noPan ) {
-			if ( _eye.lengthSq() > _this.maxDistance * _this.maxDistance ) {
-				_this.object.position.addVectors( _this.target, _eye.setLength( _this.maxDistance ) )
-				_zoomStart.copy( _zoomEnd )
+		if (!_this.noZoom || !_this.noPan) {
+			if (_eye.lengthSq() > _this.maxDistance * _this.maxDistance) {
+				_this.object.position.addVectors(_this.target, _eye.setLength(_this.maxDistance))
+				_zoomStart.copy(_zoomEnd)
 			}
 
-			if ( _eye.lengthSq() < _this.minDistance * _this.minDistance ) {
-				_this.object.position.addVectors( _this.target, _eye.setLength( _this.minDistance ) )
-				_zoomStart.copy( _zoomEnd )
+			if (_eye.lengthSq() < _this.minDistance * _this.minDistance) {
+				_this.object.position.addVectors(_this.target, _eye.setLength(_this.minDistance))
+				_zoomStart.copy(_zoomEnd)
 			}
 		}
 	}
 
 	this.update = function () {
-		_eye.subVectors( _this.object.position, _this.target )
+		_eye.subVectors(_this.object.position, _this.target)
 
-		if ( ! _this.noRotate ) {
+		if (!_this.noRotate) {
 			_this.rotateCamera()
 		}
 
-		if ( ! _this.noZoom ) {
+		if (!_this.noZoom) {
 			_this.zoomCamera()
 		}
 
-		if ( ! _this.noPan ) {
+		if (!_this.noPan) {
 			_this.panCamera()
 		}
 
-		_this.object.position.addVectors( _this.target, _eye )
+		_this.object.position.addVectors(_this.target, _eye)
 
-		if ( _this.object.isPerspectiveCamera ) {
+		if (_this.object.isPerspectiveCamera) {
 			_this.checkDistances()
-			_this.object.lookAt( _this.target )
+			_this.object.lookAt(_this.target)
 
-			if ( lastPosition.distanceToSquared( _this.object.position ) > EPS ) {
-				_this.dispatchEvent( changeEvent )
-				lastPosition.copy( _this.object.position )
+			if (lastPosition.distanceToSquared(_this.object.position) > EPS) {
+				_this.dispatchEvent(changeEvent)
+				lastPosition.copy(_this.object.position)
 			}
+		} else if (_this.object.isOrthographicCamera) {
+			_this.object.lookAt(_this.target)
 
-		} else if ( _this.object.isOrthographicCamera ) {
-			_this.object.lookAt( _this.target )
-
-			if ( lastPosition.distanceToSquared( _this.object.position ) > EPS || lastZoom !== _this.object.zoom ) {
-				_this.dispatchEvent( changeEvent )
-				lastPosition.copy( _this.object.position )
+			if (
+				lastPosition.distanceToSquared(_this.object.position) > EPS ||
+				lastZoom !== _this.object.zoom
+			) {
+				_this.dispatchEvent(changeEvent)
+				lastPosition.copy(_this.object.position)
 				lastZoom = _this.object.zoom
 			}
-
 		} else {
-
-			console.warn( '.CustomTrackballControls: Unsupported camera type' )
-
+			console.warn('.CustomTrackballControls: Unsupported camera type')
 		}
-
 	}
 
 	this.reset = function () {
-
 		_state = STATE.NONE
 		_keyState = STATE.NONE
 
-		_this.target.copy( _this.target0 )
-		_this.object.position.copy( _this.position0 )
-		_this.object.up.copy( _this.up0 )
+		_this.target.copy(_this.target0)
+		_this.object.position.copy(_this.position0)
+		_this.object.up.copy(_this.up0)
 		_this.object.zoom = _this.zoom0
 		_this.object.updateProjectionMatrix()
-		_eye.subVectors( _this.object.position, _this.target )
-		_this.object.lookAt( _this.target )
-		_this.dispatchEvent( changeEvent )
-		lastPosition.copy( _this.object.position )
+		_eye.subVectors(_this.object.position, _this.target)
+		_this.object.lookAt(_this.target)
+		_this.dispatchEvent(changeEvent)
+		lastPosition.copy(_this.object.position)
 		lastZoom = _this.object.zoom
 	}
 
@@ -328,15 +327,14 @@ var CustomTrackballControls = function ( object, domElement ) {
 	}
 	*/
 
-	function mousedown( event ) {
-
-		if ( _this.enabled === false ) return
+	function mousedown(event) {
+		if (_this.enabled === false) return
 
 		event.preventDefault()
 		event.stopPropagation()
 
-		if ( _state === STATE.NONE ) {
-			switch ( event.button ) {
+		if (_state === STATE.NONE) {
+			switch (event.button) {
 				case _this.mouseButtons.LEFT:
 					_state = STATE.ROTATE
 					break
@@ -351,50 +349,47 @@ var CustomTrackballControls = function ( object, domElement ) {
 			}
 		}
 
-		var state = ( _keyState !== STATE.NONE ) ? _keyState : _state
+		var state = _keyState !== STATE.NONE ? _keyState : _state
 
-		if ( state === STATE.ROTATE && ! _this.noRotate ) {
-			_moveCurr.copy( getMouseOnCircle( event.pageX, event.pageY ) )
-			_movePrev.copy( _moveCurr )
-		} else if ( state === STATE.ZOOM && ! _this.noZoom ) {
-			_zoomStart.copy( getMouseOnScreen( event.pageX, event.pageY ) )
-			_zoomEnd.copy( _zoomStart )
-		} else if ( state === STATE.PAN && ! _this.noPan ) {
-			_panStart.copy( getMouseOnScreen( event.pageX, event.pageY ) )
-			_panEnd.copy( _panStart )
+		if (state === STATE.ROTATE && !_this.noRotate) {
+			_moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY))
+			_movePrev.copy(_moveCurr)
+		} else if (state === STATE.ZOOM && !_this.noZoom) {
+			_zoomStart.copy(getMouseOnScreen(event.pageX, event.pageY))
+			_zoomEnd.copy(_zoomStart)
+		} else if (state === STATE.PAN && !_this.noPan) {
+			_panStart.copy(getMouseOnScreen(event.pageX, event.pageY))
+			_panEnd.copy(_panStart)
 		}
 
 		// @ts-ignore
-		document.addEventListener( 'mousemove', mousemove, false )
+		document.addEventListener('mousemove', mousemove, false)
 		// @ts-ignore
-		document.addEventListener( 'mouseup', mouseup, false )
+		document.addEventListener('mouseup', mouseup, false)
 
-		_this.dispatchEvent( startEvent )
-
+		_this.dispatchEvent(startEvent)
 	}
 
-	function mousemove( event ) {
-
-		if ( _this.enabled === false ) return
+	function mousemove(event) {
+		if (_this.enabled === false) return
 
 		event.preventDefault()
 		event.stopPropagation()
 
-		var state = ( _keyState !== STATE.NONE ) ? _keyState : _state
+		var state = _keyState !== STATE.NONE ? _keyState : _state
 
-		if ( state === STATE.ROTATE && ! _this.noRotate ) {
-			_movePrev.copy( _moveCurr )
-			_moveCurr.copy( getMouseOnCircle( event.pageX, event.pageY ) )
-		} else if ( state === STATE.ZOOM && ! _this.noZoom ) {
-			_zoomEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) )
-		} else if ( state === STATE.PAN && ! _this.noPan ) {
-			_panEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) )
+		if (state === STATE.ROTATE && !_this.noRotate) {
+			_movePrev.copy(_moveCurr)
+			_moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY))
+		} else if (state === STATE.ZOOM && !_this.noZoom) {
+			_zoomEnd.copy(getMouseOnScreen(event.pageX, event.pageY))
+		} else if (state === STATE.PAN && !_this.noPan) {
+			_panEnd.copy(getMouseOnScreen(event.pageX, event.pageY))
 		}
 	}
 
-	function mouseup( event ) {
-
-		if ( _this.enabled === false ) return
+	function mouseup(event) {
+		if (_this.enabled === false) return
 
 		event.preventDefault()
 		event.stopPropagation()
@@ -402,16 +397,16 @@ var CustomTrackballControls = function ( object, domElement ) {
 		_state = STATE.NONE
 
 		// @ts-ignore
-		document.removeEventListener( 'mousemove', mousemove )
+		document.removeEventListener('mousemove', mousemove)
 		// @ts-ignore
-		document.removeEventListener( 'mouseup', mouseup )
-		_this.dispatchEvent( endEvent )
+		document.removeEventListener('mouseup', mouseup)
+		_this.dispatchEvent(endEvent)
 	}
 
 	// @ts-ignore
-	function mousewheel( event ) {
-		if ( _this.enabled === false ) return
-		if ( _this.noZoom === true ) return
+	function mousewheel(event) {
+		if (_this.enabled === false) return
+		if (_this.noZoom === true) return
 		if (event.ctrlKey) {
 			event.preventDefault()
 			event.stopPropagation()
@@ -419,7 +414,7 @@ var CustomTrackballControls = function ( object, domElement ) {
 			return
 		}
 
-		switch ( event.deltaMode ) {
+		switch (event.deltaMode) {
 			case 2:
 				// Zoom in pages
 				_zoomStart.y -= event.deltaY * 0.025
@@ -434,117 +429,113 @@ var CustomTrackballControls = function ( object, domElement ) {
 				break
 		}
 
-		_this.dispatchEvent( startEvent )
-		_this.dispatchEvent( endEvent )
+		_this.dispatchEvent(startEvent)
+		_this.dispatchEvent(endEvent)
 	}
 
-	function touchstart( event ) {
-
-		if ( _this.enabled === false ) return
+	function touchstart(event) {
+		if (_this.enabled === false) return
 
 		// event.preventDefault();
 
-		switch ( event.touches.length ) {
+		switch (event.touches.length) {
 			case 1:
 				_state = STATE.TOUCH_ROTATE
-				_moveCurr.copy( getMouseOnCircle( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY ) )
-				_movePrev.copy( _moveCurr )
+				_moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY))
+				_movePrev.copy(_moveCurr)
 				break
-			default: // 2 or more
+			default:
+				// 2 or more
 				event.preventDefault()
 
 				_state = STATE.TOUCH_ZOOM_PAN
-				var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX
-				var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY
-				_touchZoomDistanceEnd = _touchZoomDistanceStart = Math.sqrt( dx * dx + dy * dy )
+				var dx = event.touches[0].pageX - event.touches[1].pageX
+				var dy = event.touches[0].pageY - event.touches[1].pageY
+				_touchZoomDistanceEnd = _touchZoomDistanceStart = Math.sqrt(dx * dx + dy * dy)
 
-				var x = ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX ) / 2
-				var y = ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY ) / 2
-				_panStart.copy( getMouseOnScreen( x, y ) )
-				_panEnd.copy( _panStart )
+				var x = (event.touches[0].pageX + event.touches[1].pageX) / 2
+				var y = (event.touches[0].pageY + event.touches[1].pageY) / 2
+				_panStart.copy(getMouseOnScreen(x, y))
+				_panEnd.copy(_panStart)
 				break
 		}
 
-		_this.dispatchEvent( startEvent )
+		_this.dispatchEvent(startEvent)
 	}
 
-	function touchmove( event ) {
-
-		if ( _this.enabled === false ) return
+	function touchmove(event) {
+		if (_this.enabled === false) return
 
 		// event.preventDefault();
 		// event.stopPropagation();
 
-		switch ( event.touches.length ) {
-
+		switch (event.touches.length) {
 			case 1:
-				_movePrev.copy( _moveCurr )
-				_moveCurr.copy( getMouseOnCircle( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY ) )
+				_movePrev.copy(_moveCurr)
+				_moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY))
 				break
 
-			default: // 2 or more
-				var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX
-				var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY
-				_touchZoomDistanceEnd = Math.sqrt( dx * dx + dy * dy )
+			default:
+				// 2 or more
+				var dx = event.touches[0].pageX - event.touches[1].pageX
+				var dy = event.touches[0].pageY - event.touches[1].pageY
+				_touchZoomDistanceEnd = Math.sqrt(dx * dx + dy * dy)
 
-				var x = ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX ) / 2
-				var y = ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY ) / 2
-				_panEnd.copy( getMouseOnScreen( x, y ) )
+				var x = (event.touches[0].pageX + event.touches[1].pageX) / 2
+				var y = (event.touches[0].pageY + event.touches[1].pageY) / 2
+				_panEnd.copy(getMouseOnScreen(x, y))
 				break
 		}
 	}
 
-	function touchend( event ) {
+	function touchend(event) {
+		if (_this.enabled === false) return
 
-		if ( _this.enabled === false ) return
-
-		switch ( event.touches.length ) {
+		switch (event.touches.length) {
 			case 0:
 				_state = STATE.NONE
 				break
 			case 1:
 				_state = STATE.TOUCH_ROTATE
-				_moveCurr.copy( getMouseOnCircle( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY ) )
-				_movePrev.copy( _moveCurr )
+				_moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY))
+				_movePrev.copy(_moveCurr)
 				break
 		}
 
-		_this.dispatchEvent( endEvent )
+		_this.dispatchEvent(endEvent)
 	}
 
-	function contextmenu( event ) {
-		if ( _this.enabled === false ) return
+	function contextmenu(event) {
+		if (_this.enabled === false) return
 
 		event.preventDefault()
 	}
 
 	this.dispose = function () {
+		this.domElement.removeEventListener('contextmenu', contextmenu, false)
+		this.domElement.removeEventListener('mousedown', mousedown, false)
+		this.domElement.removeEventListener('wheel', mousewheel, false)
 
-		this.domElement.removeEventListener( 'contextmenu', contextmenu, false )
-		this.domElement.removeEventListener( 'mousedown', mousedown, false )
-		this.domElement.removeEventListener( 'wheel', mousewheel, false )
-
-		this.domElement.removeEventListener( 'touchstart', touchstart, false )
-		this.domElement.removeEventListener( 'touchend', touchend, false )
-		this.domElement.removeEventListener( 'touchmove', touchmove, false )
+		this.domElement.removeEventListener('touchstart', touchstart, false)
+		this.domElement.removeEventListener('touchend', touchend, false)
+		this.domElement.removeEventListener('touchmove', touchmove, false)
 
 		// @ts-ignore
-		document.removeEventListener( 'mousemove', mousemove, false )
+		document.removeEventListener('mousemove', mousemove, false)
 		// @ts-ignore
-		document.removeEventListener( 'mouseup', mouseup, false )
+		document.removeEventListener('mouseup', mouseup, false)
 
 		// window.removeEventListener( 'keydown', keydown, false );
 		// window.removeEventListener( 'keyup', keyup, false );
-
 	}
 
-	this.domElement.addEventListener( 'contextmenu', contextmenu, false )
-	this.domElement.addEventListener( 'mousedown', mousedown, false )
-	this.domElement.addEventListener( 'wheel', mousewheel, false )
+	this.domElement.addEventListener('contextmenu', contextmenu, false)
+	this.domElement.addEventListener('mousedown', mousedown, false)
+	this.domElement.addEventListener('wheel', mousewheel, false)
 
-	this.domElement.addEventListener( 'touchstart', touchstart, false )
-	this.domElement.addEventListener( 'touchend', touchend, false )
-	this.domElement.addEventListener( 'touchmove', touchmove, false )
+	this.domElement.addEventListener('touchstart', touchstart, false)
+	this.domElement.addEventListener('touchend', touchend, false)
+	this.domElement.addEventListener('touchmove', touchmove, false)
 
 	// window.addEventListener( 'keydown', keydown, false );
 	// window.addEventListener( 'keyup', keyup, false );
@@ -553,10 +544,9 @@ var CustomTrackballControls = function ( object, domElement ) {
 
 	// force an update at start
 	this.update()
-
 }
 
-CustomTrackballControls.prototype = Object.create( EventDispatcher.prototype )
+CustomTrackballControls.prototype = Object.create(EventDispatcher.prototype)
 CustomTrackballControls.prototype.constructor = CustomTrackballControls
 
 export { CustomTrackballControls }
