@@ -15,7 +15,6 @@
 
 		data = await response.json()
 		max = Math.max.apply(Math, Object.values(data))
-		console.log({ data })
 	})
 </script>
 

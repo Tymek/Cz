@@ -4,7 +4,7 @@
 	import Intro from '../components/Intro/Intro.svelte'
 	import Integrations from '../components/Integrations/Integrations.svelte'
 	// import APIs from '../components/APIs/apis.svelte'
-	// import Graph from '../components/Graph/graph.svelte'
+	import Graph from '../components/Graph/Graph.svelte'
 	// import Contact from '../components/Contact/contact.svelte'
 </script>
 
@@ -14,6 +14,5 @@
 
 <Intro />
 <Integrations />
-<!-- <APIs />
-    <Graph /> -->
+<Graph />
 <!-- <Contact /> -->

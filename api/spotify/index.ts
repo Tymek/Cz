@@ -60,7 +60,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 			url: me?.external_urls.spotify,
 			image: me?.images[0]?.url,
 			is_playing: player?.is_playing,
-			now_playing: getTrackInfo(player?.item),
+			now_playing: player?.is_playing && player?.item ? getTrackInfo(player?.item) : undefined,
 			is_private: player?.device?.is_private_session,
 			followers: me?.followers?.total,
 			device: {

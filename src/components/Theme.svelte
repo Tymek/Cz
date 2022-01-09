@@ -31,6 +31,16 @@
 		--color-black: #000;
 		--color-light: #fcfcfc;
 		--color-dark: #333333;
+
+		--light-background: var(--color-light);
+		--dark-background: var(--color-catalina-blue);
+		--text: var(--color-dark);
+		--background: var(--light-background);
+
+		@media (prefers-color-scheme: dark) {
+			--background: var(--dark-background);
+			--text: var(--color-white);
+		}
 	}
 
 	:global(:root, html, body) {
@@ -45,12 +55,14 @@
 
 	:global {
 		body {
-			background-color: var(--color-light);
-			color: var(--color-dark);
+			margin: 0;
+			background-color: var(--background);
+			color: var(--text);
+			transition: all 1s ease-in-out;
 
 			@media (prefers-color-scheme: dark) {
-				background-color: var(--color-catalina-blue);
-				color: var(--color-white);
+				background-color: var(--background);
+				color: var(--text);
 			}
 		}
 

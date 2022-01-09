@@ -58,17 +58,19 @@
 {/if}
 
 <style type="text/scss" lang="scss">
+	@use 'sass:math';
+
 	.medal {
 		&::before {
 			content: ' ';
-			width: (9rem / 16);
-			height: (9rem / 16);
+			width: math.div(9rem, 16);
+			height: math.div(9rem, 16);
 			position: relative;
 			display: inline-block;
 			background: white;
-			border-radius: (9rem / 16);
+			border-radius: math.div(9rem, 16);
 			border: 0.0625rem solid rgba(0, 0, 0, 0.33);
-			margin: 0 (3rem / 16) (1rem / 16) (4rem / 16);
+			margin: 0 math.div(3rem, 16) math.div(1rem, 16) math.div(4rem, 16);
 		}
 
 		&.gold::before {

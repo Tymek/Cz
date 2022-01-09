@@ -1,0 +1,72 @@
+year	tech	color	group	origin	pro
+2007	HTML	#E34F26	
+2009	CSS	#002561	Styles
+2012	JavaScript	#F7DF1E	Coding		TRUE
+2011	PHP	#8892BE	Coding	HTML
+2011	httpd	#D7242A	DevOps
+2013	Nginx	#0B6237	DevOps
+2018	Traefik	#00BDD2	DevOps	Docker
+2020	Caddy	#18b125	DevOps			TRUE
+2013	Linux	#34be5b	System
+2006	Windows	#0078d7	System
+2017	Docker	#0db7ed	System	Linux	TRUE
+2013	Photoshop	#8BC3FC	Design
+2015	Illustrator	#FF7C25	Design
+2013	Bash	#2A3539	DevOps	Linux
+2016	DNS	#144070	DevOps
+2017	Jira	#0052cc	Tools
+2019	Prometheus	#E6522C	DevOps	Linux
+2019	Grafana	#F7CF3D	DevOps	Prometheus
+2017	NPM	#CB3837	Coding	JavaScript
+2018	yarn	#1690B8	Coding	JavaScript
+2017	React	#00d8ff	Coding	JavaScript, HTML	TRUE
+2017	Styled Components	#db7093	Styles	CSS, React
+2015	SASS	#D46798	Styles	CSS
+2015	less	#43759e	Styles	CSS
+2014	Bootstrap	#7952b3	Styles	CSS
+2014	Foundation	#074E68	Styles	CSS
+2019	Ant Design	#1890FF	Styles	CSS, React
+2016	gulp	#D54749	Coding	JavaScript
+2016	Grunt	#E9853F	Coding	JavaScript
+2017	ESLint	#4B32C3	Testing	JavaScript
+2018	stylelint	#253238	Testing	CSS
+2018	webpack	#1a6bac	Coding	JavaScript, NodeJS
+2018	Redux	#764abc	Coding	React
+2018	React Router	#d0021b	Coding	React
+2018	Formik	#0059C7	Coding	React
+2017	NodeJS	#026e00	Coding	JavaScript
+2018	VueJS	#29B687	Coding	JavaScript, HTML, CSS
+2017	Jest	#10910e	Testing	JavaScript
+2019	Puppeteer	#01D6A6	Testing	JavaScript
+2018	PWA	#5D2CC2	Coding	HTML, JavaScript
+2020	WorkBox	#EE7024	Coding	PWA
+2012	Git	#FC4E2F	Coding
+2012	GitHub	#24292E	Tools	Git
+2017	GitLab	#fa7035	Tools	Git
+2018	GitLab CI	#fa7035	DevOps	GitLab, Docker
+2014	Composer	#8C5431	Coding	PHP
+2013	WebSockets	#FF6520	Coding	JavaScript
+2018	WebRTC	#008BC8	Coding	JavaScript, WebSockets
+2019	GraphQL	#E71E93	Databases
+2019	PostgreSQL	#336791	Databases
+2012	MySQL	#e97b00	Databases
+2018	MongoDB	#13aa52	Databases
+2017	Material-UI	#007ACD	Styles	CSS, React
+2019	Fusion 360	#faa21b	Design
+2019	Hasura	#102852	Coding	GraphQL, PostgreSQL
+2019	oAuth2	#000000	System
+2020	AWS	#FF9900	DevOps
+2020 	React Hook Form	#EC5990	Coding	React, Formik	TRUE
+2020	NextJS	#000000	Coding	TypeScript, React, PWA, webpack	TRUE
+2020	TypeScript	#007ACC	Coding	JavaScript, React, NodeJS
+2021	Svelte	#FF3E00	Coding	JavaScript, NodeJS
+2021	Tailwind	#06b6d4	Styles	CSS
+2021	Mac OS	#000000	System	Linux
+	Coding			Design, DevOps, Databases, System
+	DevOps			Databases, System
+	Design
+	Testing			Design
+	Styles			Coding
+	Databases
+	System
+	Tools			Coding
