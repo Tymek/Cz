@@ -87,15 +87,23 @@
 			icon = octicons['dot'].toSVG({ class: 'event-octicon' })
 		}
 	}
+
+	const title = event?.type
+		.replace('Event', '')
+		.replace(/([A-Z]+)/g, ' $1')
+		.replace(/^ /, '')
+		.toLocaleLowerCase()
 </script>
 
 <li>
 	{#if !!icon}
-		{@html icon}
+		<figure title={`${title}${event?.action ? `, ${event.action}` : ''}`} lang="en">
+			{@html icon}
+		</figure>
 	{/if}
 	<!-- {moment(event.created_at).fromNow()} -->
 	<!-- {$_(texts.at)} -->
-	<a href="//github.com/{event.repo}">
+	<a href="//github.com/{event.repo}" lang="en">
 		{event.repo}
 	</a>
 
@@ -117,6 +125,13 @@
 		overflow-x: hidden;
 		overflow-y: visible;
 		text-overflow: ellipsis;
+	}
+
+	figure {
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+		cursor: help;
 	}
 
 	a {

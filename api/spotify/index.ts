@@ -61,10 +61,10 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 			is_playing: player?.is_playing,
 			now_playing: getTrackInfo(player?.item),
 			is_private: player?.device?.is_private_session,
+			followers: me?.followers?.total,
 			device: {
 				volume: player?.device?.volume_percent,
-				type: player?.device?.type,
-				id: player?.device?.id
+				type: player?.device?.type
 			},
 			recently_played: recentlyPlayed?.items
 				?.filter((_item, index) => index < recentlyPlayedLimit)

@@ -46,7 +46,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 		activity = activity.reduce(
 			([acc, count], event) => {
 				if (event.type === 'WatchEvent') {
-					return count < 3 ? [[...acc, event], count + 1] : [acc, count]
+					return count < 4 ? [[...acc, event], count + 1] : [acc, count]
 				}
 				return [[...acc, event], count]
 			},
@@ -55,13 +55,13 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 		activity = activity.reduce(
 			([acc, count], event) => {
 				if (event.type === 'PushEvent') {
-					return count < 3 ? [[...acc, event], count + 1] : [acc, count]
+					return count < 4 ? [[...acc, event], count + 1] : [acc, count]
 				}
 				return [[...acc, event], count]
 			},
 			[[], 0] as [Event[], number]
 		)[0] as Event[]
-		activity = activity.slice(0, 9)
+		activity = activity.slice(0, 10)
 
 		const data = { profile, activity }
 

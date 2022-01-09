@@ -1,11 +1,8 @@
 <script>
 	import { translations, _ } from 'svelte-intl'
 	import GitHub from '$lib/github/widget/Github.svelte'
-	// import GitHub from './components/github/github.svelte'
-	// import GitLab from './components/gitlab.svelte'
 	import Spotify from '$lib/spotify/widget/Spotify.svelte'
-	// import StackOverflow from './components/stackoverflow.svelte'
-	// import Instagram from './components/instagram.svelte'
+	import GitLab from '$lib/gitlab/widget/Gitlab.svelte'
 	import Info from './components/Info.svelte'
 </script>
 
@@ -13,9 +10,9 @@
 	<div class="contents">
 		<Spotify />
 		<GitHub />
+		<GitLab />
 		<!--
 	<StackOverflow />
-	<GitLab />
 	<Instagram />
 	-->
 		<Info />
