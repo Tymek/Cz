@@ -43,4 +43,6 @@
 		date={buildTimestamp}
 		addSuffix
 	/>)
+	<h3>Stack</h3>
+	<p>SvelteKit, SCSS, Vercel</p>
 </Block>

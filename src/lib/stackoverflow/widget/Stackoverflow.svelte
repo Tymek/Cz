@@ -1,11 +1,8 @@
 <script>
 	import { onMount } from 'svelte'
 	import { translations, _ } from 'svelte-intl'
-	import axios from 'axios'
-	import moment from 'moment'
-	import { isEmpty } from 'ramda'
-	import Block from '../../Block.svelte'
-	import Flair from '../../Flair.svelte'
+	import Block from '../../../components/Block.svelte'
+	import Flair from '../../../components/Flair.svelte'
 
 	const texts = {
 		recentlyPlayed: 'Recently played:',
@@ -25,16 +22,14 @@
 
 	let data = {}
 
-	const loadData = async () => {
-		const response = await axios.get('/api/stackexchange')
+	onMount(async () => {
+		const response = await fetch('/api/stackoverflow')
 
-		data = response.data
-	}
-
-	onMount(loadData)
+		data = await response.json()
+	})
 </script>
 
-{#if !isEmpty(data)}
+{#if !!data && Object.keys(data).length > 0}
 	<Block
 		background="#ffcf10"
 		color="black"
@@ -50,7 +45,7 @@
 
 		<p>
 			{$_(texts.memberSince)}
-			{moment(data.creation_date * 1000).format('MMMM YYYY')}
+			<!-- {moment(data.creation_date * 1000).format('MMMM YYYY')} -->
 		</p>
 		<p>
 			{$_(texts.reputation)} <strong>{data.reputation}</strong><br />

@@ -38,12 +38,13 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 	let auth = await getIntegration('spotify')
 
 	try {
-		const query = queryApi.bind(null, auth.access_token as string)
+		let query = queryApi.bind(null, auth.access_token as string)
 
 		let me = await query('/me')
 
 		if (me?.error) {
 			auth = await reAuthorize(auth?.refresh_token)
+			query = queryApi.bind(null, auth.access_token as string)
 			me = await query('/me')
 
 			if (me?.error) {

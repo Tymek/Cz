@@ -67,6 +67,7 @@
 			<label for="token">Admin token</label>
 			<input type="password" id="token" on:keyup={setAdminToken} placeholder="••••••••" />
 		</div>
+		<a href="/api/config" target="_blank">Show config</a>
 	</div>
 	<div class="grid">
 		{#each dashboardItems as item}

@@ -1,6 +1,7 @@
 import { getConfig } from '../src/lib/db'
-import type { VercelRequest, VercelResponse } from '@vercel/node'
 import fetch from 'isomorphic-fetch'
+import { pick } from '../src/lib/utils'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 type Event = { type: string; repo: string; created_at: string; action?: string }
 
@@ -8,9 +9,6 @@ const queryApi = async (token: string, endpoint: string) =>
 	fetch(`https://api.github.com${endpoint}`, {
 		headers: { Authorization: `Bearer ${token}` }
 	}).then((response) => response.json())
-
-const pick = <T extends object, K extends keyof T>(obj: T, keys: K[]) =>
-	keys.reduce((acc, key) => ({ ...acc, [key]: obj[key] }), {})
 
 export default async (request: VercelRequest, response: VercelResponse) => {
 	const { GITHUB_USER, GITHUB_TOKEN } = await getConfig()
@@ -65,7 +63,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 
 		const data = { profile, activity }
 
-		response.setHeader('Cache-Control', 'max-age=300, stale-while-revalidate=300')
+		response.setHeader('Cache-Control', 'max-age=900, stale-while-revalidate=300')
 		return response.json(data)
 	} catch (error) {
 		return response.status(500).json({ message: error.message })
