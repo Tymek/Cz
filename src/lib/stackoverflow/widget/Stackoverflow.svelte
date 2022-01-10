@@ -1,8 +1,9 @@
 <script>
 	import { onMount } from 'svelte'
 	import { translations, _ } from 'svelte-intl'
-	import Block from '../../../components/Block.svelte'
-	import Flair from '../../../components/Flair.svelte'
+	import Time from '$components/Time.svelte'
+	import Block from '$components/Block.svelte'
+	import Flair from '$components/Flair.svelte'
 
 	const texts = {
 		recentlyPlayed: 'Recently played:',
@@ -45,7 +46,7 @@
 
 		<p>
 			{$_(texts.memberSince)}
-			<!-- {moment(data.creation_date * 1000).format('MMMM YYYY')} -->
+			<Time date={new Date(data.creation_date * 1000)} format="PPP" />
 		</p>
 		<p>
 			{$_(texts.reputation)} <strong>{data.reputation}</strong><br />

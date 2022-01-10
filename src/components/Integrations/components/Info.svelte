@@ -5,6 +5,7 @@
 	import pl from 'date-fns/locale/pl/index.js'
 	import TimeSince from '$components/TimeSince.svelte'
 	import Block from '$components/Block.svelte'
+	import Time from '$components/Time.svelte'
 
 	const texts = {
 		lastBuild: 'Last build:',
@@ -39,10 +40,7 @@
 
 <Block background={'#e8e8e8'} color="#4B3445" height={1} title={$_(texts.moreToCome)}>
 	{$_(texts.lastBuild)}
-	{format(timestamp, 'PPPP, pppp', { locale: currentLocale })} (<TimeSince
-		date={buildTimestamp}
-		addSuffix
-	/>)
+	<Time date={timestamp} /> (<TimeSince date={buildTimestamp} addSuffix />)
 	<h3>Stack</h3>
 	<p>SvelteKit, SCSS, Vercel, Three.js</p>
 </Block>
