@@ -19,7 +19,13 @@ export const getToken = async (requestBodyParameters: Record<string, string>) =>
 	return fetch(`${authUrl}/api/token`, opt)
 }
 
-export const queryApi = async (accessToken: string, endpoint: string) =>
-	fetch(`${apiUrl}${endpoint}`, {
-		headers: { Authorization: `Bearer ${accessToken}` }
-	}).then((response) => response.json())
+export const queryApi = async (accessToken: string, endpoint: string) => {
+	try {
+		const data = await fetch(`${apiUrl}${endpoint}`, {
+			headers: { Authorization: `Bearer ${accessToken}` }
+		}).then((response) => response.json())
+		return data
+	} catch (e) {
+		return {}
+	}
+}
