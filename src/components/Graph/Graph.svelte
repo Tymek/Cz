@@ -251,6 +251,7 @@
 		position: relative;
 		width: 100%;
 		height: 95vh;
+		min-height: 30rem;
 		/* background-color: #eee; */
 		margin: 0;
 		box-sizing: border-box;

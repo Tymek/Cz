@@ -56,12 +56,11 @@
 	:global {
 		body {
 			margin: 0;
-			background-color: var(--background);
+			background-color: var(--background) !important;
 			color: var(--text);
-			transition: all 1s ease-in-out;
 
 			@media (prefers-color-scheme: dark) {
-				background-color: var(--background);
+				background-color: var(--background) !important;
 				color: var(--text);
 			}
 		}

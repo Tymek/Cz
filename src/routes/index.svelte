@@ -1,11 +1,9 @@
-<!-- <h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p> -->
 <script>
-	import Intro from '../components/Intro/Intro.svelte'
-	import Integrations from '../components/Integrations/Integrations.svelte'
-	// import APIs from '../components/APIs/apis.svelte'
-	import Graph from '../components/Graph/Graph.svelte'
-	// import Contact from '../components/Contact/contact.svelte'
+	import Intro from '$components/Intro/Intro.svelte'
+	import Integrations from '$components/Integrations/Integrations.svelte'
+	import Graph from '$components/Graph/Graph.svelte'
+	import Contact from '$components/Contact.svelte'
+	import Footer from '$components/Footer.svelte'
 </script>
 
 <svelte:head>
@@ -15,4 +13,5 @@
 <Intro />
 <Integrations />
 <Graph />
-<!-- <Contact /> -->
+<Contact />
+<Footer />

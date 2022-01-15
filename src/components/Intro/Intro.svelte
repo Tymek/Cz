@@ -1,8 +1,9 @@
 <script>
 	import { translations, _ } from 'svelte-intl'
+	import Container from '$components/Container.svelte'
 	import LinkIcon from './link.svg'
 	import BuildIcon from './build.svg'
-	// import EnvelopeIcon from './envelope.svg'
+	import EnvelopeIcon from './envelope.svg'
 	import PortraitDrawing from './portrait-drawing.svg'
 
 	const texts = {
@@ -31,33 +32,35 @@
 </script>
 
 <section class="wrapper">
-	<div class="container">
-		<figure class="photo">
-			<PortraitDrawing />
-		</figure>
-		<div class="block">
-			<h1 class="title">
-				Tymoteusz <br />Czech
-			</h1>
-			<div class="description">
-				<p>{@html $_(texts.description).replace(/\n/g, '<br />')}</p>
-			</div>
-			<div class="buttons">
-				<a href="#stack" class="button stack">
-					<span class="icon" aria-hidden="true"><BuildIcon /></span>
-					<span class="label">{$_(texts.stack)}</span>
-				</a>
-				<a href="#links" class="button links">
-					<span class="icon" aria-hidden="true"><LinkIcon /></span>
-					<span class="label">{$_(texts.links)}</span>
-				</a>
-				<!-- <a href="#contact" class="button contact">
-					<span class="icon" aria-hidden="true"><EnvelopeIcon /></span>
-					<span class="label">{$_(texts.contact)}</span>
-				</a> -->
+	<Container>
+		<div class="container">
+			<figure class="photo">
+				<PortraitDrawing />
+			</figure>
+			<div class="block">
+				<h1 class="title">
+					Tymoteusz <br />Czech
+				</h1>
+				<div class="description">
+					<p>{@html $_(texts.description).replace(/\n/g, '<br />')}</p>
+				</div>
+				<div class="buttons">
+					<a href="#stack" class="button stack">
+						<span class="icon" aria-hidden="true"><BuildIcon /></span>
+						<span class="label">{$_(texts.stack)}</span>
+					</a>
+					<a href="#links" class="button links">
+						<span class="icon" aria-hidden="true"><LinkIcon /></span>
+						<span class="label">{$_(texts.links)}</span>
+					</a>
+					<a href="#contact" class="button contact">
+						<span class="icon" aria-hidden="true"><EnvelopeIcon /></span>
+						<span class="label">{$_(texts.contact)}</span>
+					</a>
+				</div>
 			</div>
 		</div>
-	</div>
+	</Container>
 </section>
 
 <style type="text/scss" lang="scss">
@@ -66,7 +69,7 @@
 	.wrapper {
 		display: flex;
 		align-items: center;
-		min-height: 80vh;
+		min-height: 85vh;
 		width: 100%;
 
 		.container {
@@ -75,11 +78,9 @@
 			position: relative;
 			display: flex;
 			flex-direction: column;
-			padding: 2rem 2rem;
 			justify-content: space-evenly;
 
 			@media (orientation: landscape) {
-				padding: 2rem 10vw;
 				flex-direction: row-reverse;
 				justify-content: space-between;
 				align-items: center;
@@ -138,10 +139,10 @@
 				color: #ffffff;
 			}
 
-			// &.contact {
-			// 	background: #3c8458;
-			// 	color: #ffffff;
-			// }
+			&.contact {
+				background: #3c8458;
+				color: #ffffff;
+			}
 
 			.icon {
 				height: 1em;
