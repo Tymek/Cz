@@ -1,11 +1,12 @@
 <script>
 	import { onMount } from 'svelte'
 	import { translations, _ } from 'svelte-intl'
+	import features from '$lib/features'
+	import Block from '$components/Block.svelte'
+	import Flair from '$components/Flair.svelte'
+	import TimeSince from '$components/TimeSince.svelte'
 	import Event from './components/Event.svelte'
 	import Button from './components/Button.svelte'
-	import Block from '../../../components/Block.svelte'
-	import Flair from '../../../components/Flair.svelte'
-	import TimeSince from '$components/TimeSince.svelte'
 
 	let data = {}
 
@@ -29,16 +30,20 @@
 		const response = await fetch('/api/github')
 		data = await response.json()
 	})
+
+	$: loading = !data || Object.keys(data).length == 0 || features.loader
 </script>
 
-{#if data && Object.keys(data).length > 0}
-	<Block
-		background={'#24292E'}
-		color="white"
-		height={2}
-		title="GitHub"
-		link={`https://github.com/${data?.profile?.login || ''}`}
-	>
+<Block
+	background={'#24292E'}
+	color="white"
+	height={2}
+	title="GitHub"
+	link={`https://github.com/${data?.profile?.login || ''}`}
+	{loading}
+	darkLoader
+>
+	{#if !loading}
 		<Flair image={data.profile.avatar_url} name={data.profile.login}>
 			{data.profile.bio}
 		</Flair>
@@ -56,8 +61,8 @@
 		{#if data?.profile?.login && typeof data?.profile?.login === 'string'}
 			<Button login={data?.profile?.login} />
 		{/if}
-	</Block>
-{/if}
+	{/if}
+</Block>
 
 <style type="text/scss" lang="scss">
 	@use 'sass:math';

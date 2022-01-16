@@ -1,7 +1,8 @@
 <script>
-	import Block from '../../../components/Block.svelte'
-	import { sub, format } from 'date-fns'
 	import { onMount } from 'svelte'
+	import { sub, format } from 'date-fns'
+	import features from '$lib/features'
+	import Block from '$components/Block.svelte'
 
 	let data = {}
 	let max = 1
@@ -16,17 +17,26 @@
 		data = await response.json()
 		max = Math.max.apply(Math, Object.values(data))
 	})
+
+	$: loading = !data || Object.keys(data).length == 0 || features.loader
 </script>
 
-{#if data && Object.keys(data).length > 0}
-	<Block background={'#3f3177'} color="white" title="GitLab" link="https://gitlab.com/Tymek">
+<Block
+	background={'#3f3177'}
+	color="white"
+	title="GitLab"
+	link="https://gitlab.com/Tymek"
+	{loading}
+	darkLoader
+>
+	{#if !loading}
 		<div class="calendar">
 			{#each days as day}
 				<figure class="day" title={day} style={`opacity: ${data[day] / max || 0}`} />
 			{/each}
 		</div>
-	</Block>
-{/if}
+	{/if}
+</Block>
 
 <style type="text/scss" lang="scss">
 	.calendar {

@@ -4,6 +4,7 @@
 	import Time from '$components/Time.svelte'
 	import Block from '$components/Block.svelte'
 	import Flair from '$components/Flair.svelte'
+	import features from '$lib/features'
 
 	const texts = {
 		recentlyPlayed: 'Recently played:',
@@ -28,16 +29,19 @@
 
 		data = await response.json()
 	})
+
+	$: loading = !data || Object.keys(data).length == 0 || features.loader
 </script>
 
-{#if !!data && Object.keys(data).length > 0}
-	<Block
-		background="#ffcf10"
-		color="black"
-		title="StackOverflow"
-		height={1}
-		link="https://stackoverflow.com/users/1729641/tymek"
-	>
+<Block
+	background="#ffcf10"
+	color="black"
+	title="StackOverflow"
+	height={1}
+	link="https://stackoverflow.com/users/1729641/tymek"
+	{loading}
+>
+	{#if !loading}
 		<Flair image={data.profile_image} name={data.display_name}>
 			<span class="gold medal">{data.badge_counts.gold}</span>
 			<span class="silver medal">{data.badge_counts.silver}</span>
@@ -55,8 +59,8 @@
 				{$_(texts.thisYear)}
 			{/if}
 		</p>
-	</Block>
-{/if}
+	{/if}
+</Block>
 
 <style type="text/scss" lang="scss">
 	@use 'sass:math';

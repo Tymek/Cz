@@ -5,9 +5,11 @@
 	import Stackoverflow from '$lib/stackoverflow/widget/Stackoverflow.svelte'
 	import Instagram from '$lib/instagram/widget/Instagram.svelte'
 	import Info from './components/Info.svelte'
+	import Braid from '$components/Braid.svelte'
 </script>
 
 <section id="links" class="wrapper">
+	<Braid defs />
 	<div class="contents">
 		<Spotify />
 		<Stackoverflow />

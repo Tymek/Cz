@@ -1,4 +1,5 @@
 <script>
+	import features from '$lib/features'
 	import Intro from '$components/Intro/Intro.svelte'
 	import Integrations from '$components/Integrations/Integrations.svelte'
 	import Graph from '$components/Graph/Graph.svelte'
@@ -13,7 +14,7 @@
 <Intro />
 <Integrations />
 <Graph />
-{#if import.meta.env.VITE_PUBLIC_FEATURE_CONTACT}
+{#if features.contact}
 	<Contact />
 {/if}
 <Footer />

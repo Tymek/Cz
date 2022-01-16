@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import Block from '../../../components/Block.svelte'
+	import features from '$lib/features'
+	import Block from '$components/Block.svelte'
 
 	type Data = Partial<{
 		id: string
@@ -17,16 +18,20 @@
 
 		data = await response.json()
 	})
+
+	$: loading = !data || Object.keys(data).length == 0 || features.loader
 </script>
 
-{#if !!data && Object.keys(data).length > 0}
-	<Block
-		background={'#00b9ff'}
-		color="white"
-		height={1}
-		link="https://www.instagram.com/tymek.cz/"
-		title="Instagram"
-	>
+<Block
+	background={'#00b9ff'}
+	color="white"
+	height={1}
+	link="https://www.instagram.com/tymek.cz/"
+	title="Instagram"
+	{loading}
+	darkLoader
+>
+	{#if !loading}
 		{#if data.media_type === 'VIDEO'}
 			<video
 				width="100%"
@@ -40,8 +45,8 @@
 		{:else}
 			<img src={data.media_url} alt={data.caption} />
 		{/if}
-	</Block>
-{/if}
+	{/if}
+</Block>
 
 <style type="text/scss" lang="scss">
 	img,

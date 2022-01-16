@@ -4,6 +4,7 @@
 	import Block from '$components/Block.svelte'
 	import Song from './components/song.svelte'
 	import type { Song as SongType } from './types'
+	import features from '$lib/features'
 
 	const texts = {
 		recentlyPlayed: 'Recently played:',
@@ -61,10 +62,12 @@
 			console.error(error)
 		}
 	})
+
+	$: loading = !songs || songs.length == 0 || features.loader
 </script>
 
-{#if songs && songs.length != 0}
-	<Block background="#2ebd59" color="white" title="Spotify" height={2} {link}>
+<Block background="#2ebd59" color="white" title="Spotify" height={2} {link} {loading} darkLoader>
+	{#if !loading}
 		{#if nowPlaying && Object.keys(nowPlaying).length != 0}
 			<div class="now_playing">
 				<h4>{$_(texts.nowPlaying)}</h4>
@@ -103,8 +106,8 @@
 				</small>
 			</div>
 		</div>
-	</Block>
-{/if}
+	{/if}
+</Block>
 
 <style type="text/scss" lang="scss">
 	h4 {
