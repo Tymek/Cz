@@ -58,11 +58,6 @@
 			margin: 0;
 			background-color: var(--background) !important;
 			color: var(--text);
-
-			@media (prefers-color-scheme: dark) {
-				background-color: var(--background) !important;
-				color: var(--text);
-			}
 		}
 
 		a {
@@ -94,8 +89,4 @@
 			}
 		}
 	}
-
-	// @media (prefers-color-scheme: light) {
-	// 	/* Light theme styles go here */
-	// }
 </style>

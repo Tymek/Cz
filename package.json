@@ -37,7 +37,7 @@
 		"@poppanator/sveltekit-svg": "0.2.2",
 		"@shelf/jest-mongodb": "^2.2.0",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.36",
-		"@sveltejs/kit": "^1.0.0-next.218",
+		"@sveltejs/kit": "^1.0.0-next.230",
 		"@testing-library/jest-dom": "^5.16.1",
 		"@testing-library/svelte": "^3.0.3",
 		"@types/isomorphic-fetch": "^0.0.35",

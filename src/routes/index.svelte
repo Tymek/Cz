@@ -13,5 +13,7 @@
 <Intro />
 <Integrations />
 <Graph />
-<Contact />
+{#if import.meta.env.VITE_PUBLIC_FEATURE_CONTACT}
+	<Contact />
+{/if}
 <Footer />

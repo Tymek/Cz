@@ -53,10 +53,12 @@
 						<span class="icon" aria-hidden="true"><LinkIcon /></span>
 						<span class="label">{$_(texts.links)}</span>
 					</a>
-					<a href="#contact" class="button contact">
-						<span class="icon" aria-hidden="true"><EnvelopeIcon /></span>
-						<span class="label">{$_(texts.contact)}</span>
-					</a>
+					{#if import.meta.env.VITE_PUBLIC_FEATURE_CONTACT}
+						<a href="#contact" class="button contact">
+							<span class="icon" aria-hidden="true"><EnvelopeIcon /></span>
+							<span class="label">{$_(texts.contact)}</span>
+						</a>
+					{/if}
 				</div>
 			</div>
 		</div>
