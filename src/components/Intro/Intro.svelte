@@ -101,6 +101,9 @@
 		@media (prefers-color-scheme: dark) {
 			color: var(--color-bright);
 		}
+		@media (prefers-color-scheme: light) {
+			text-shadow: var(--color-white) 0 1px 0;
+		}
 	}
 
 	.block {
@@ -169,6 +172,10 @@
 		display: flex;
 		justify-content: center;
 		padding-bottom: 5vh;
+
+		@media (prefers-color-scheme: light) {
+			--portrait-background: transparent;
+		}
 
 		@media (orientation: landscape) {
 			height: 50vh;

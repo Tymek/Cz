@@ -9,8 +9,9 @@
 	</Container>
 </section>
 
-<style>
+<style lang="scss">
 	section {
 		text-align: center;
+		color: #919191;
 	}
 </style>

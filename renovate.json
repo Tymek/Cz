@@ -1,0 +1,7 @@
+{
+	"extends": ["config:base"],
+	"bumpVersion": "patch",
+	"groupName": "all",
+	"timezone": "Europe/Warsaw",
+	"schedule": ["before 9am on Saturday"]
+}

@@ -26,13 +26,14 @@
 		--color-carmine: #d0021b;
 		--color-crayola-yellow: #f1cd5f;
 		--color-goblin: #3c8458;
+		--color-whisper: #e8e8e8;
 
 		--color-white: #fff;
 		--color-black: #000;
 		--color-light: #fcfcfc;
 		--color-dark: #333333;
 
-		--light-background: var(--color-light);
+		--light-background: var(--color-whisper);
 		--dark-background: var(--color-catalina-blue);
 		--text: var(--color-dark);
 		--background: var(--light-background);

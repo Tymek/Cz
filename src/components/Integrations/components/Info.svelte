@@ -1,8 +1,6 @@
 <script>
-	import { onDestroy } from 'svelte'
-	import { locale, translations, _ } from 'svelte-intl'
-	import { format, parseISO } from 'date-fns'
-	import pl from 'date-fns/locale/pl/index.js'
+	import { translations, _ } from 'svelte-intl'
+	import { parseISO } from 'date-fns'
 	import TimeSince from '$components/TimeSince.svelte'
 	import Block from '$components/Block.svelte'
 	import Time from '$components/Time.svelte'
@@ -23,22 +21,11 @@
 		}
 	})
 
-	let currentLocale = undefined
-	const unsubscribe = locale.subscribe((newLocale) => {
-		if (newLocale === 'pl') {
-			currentLocale = pl
-		} else {
-			currentLocale = undefined
-		}
-	})
-
-	onDestroy(unsubscribe)
-
 	const buildTimestamp = JSON.parse('__BUILD_TIMESTAMP__')
 	const timestamp = parseISO(buildTimestamp)
 </script>
 
-<Block background={'#e8e8e8'} color="#4B3445" height={1} title={$_(texts.moreToCome)}>
+<Block background={'var(--color-light)'} color="#4B3445" height={1} title={$_(texts.moreToCome)}>
 	{$_(texts.lastBuild)}
 	<Time date={timestamp} /> (<TimeSince date={buildTimestamp} addSuffix />)
 	<h3>Stack</h3>

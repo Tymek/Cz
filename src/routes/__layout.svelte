@@ -36,5 +36,6 @@
 		position: relative;
 		box-sizing: border-box;
 		line-height: 1.65em;
+		z-index: 1;
 	}
 </style>

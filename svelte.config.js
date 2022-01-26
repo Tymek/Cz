@@ -47,7 +47,7 @@ const config = {
 							// 'removeViewBox',
 							'cleanupEnableBackground',
 							'minifyStyles',
-							'convertColors',
+							// 'convertColors',
 							'convertPathData',
 							'convertTransform',
 							'removeUnknownsAndDefaults',
