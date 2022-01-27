@@ -64,6 +64,13 @@ https://css.glass/
 
 https://www.joshwcomeau.com/css/make-beautiful-gradients/
 
+I had troubles with aliasing on elements with `overflow: hidden`.
+[Null transform hack](https://aerotwist.com/blog/on-translate3d-and-layer-creation-hacks/) patched the issue.
+
+```css
+transform: translate3d(0, 0, 0);
+```
+
 ## Smoooth corners
 
 There is an artifact near rounded corners when rendering our element... (screenshot)
@@ -81,5 +88,5 @@ TODO: SVG solution
 
 ## Summary
 
-This is gorgous! &hellip;but it took a while.
+This is gorgous! Splendid! &hellip;but it took a while.
 And the lesson for all the managers, decision makers, designers and developers is: it takes time to create something applealing.

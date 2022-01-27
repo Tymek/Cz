@@ -22,46 +22,78 @@
 	onMount(() => {
 		load()
 	})
+
+	const getId = (() => {
+		let id = 0
+
+		return () => `message${id++}`
+	})()
+
+	const messages = [
+		['r', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed labore et dolore.'],
+		['r', 'Nunc non blandit massa enim nec.'],
+		['q', 'Eros donec ac odio tempor orci.'],
+		['r', 'Scelerisque felis imperdiet proin fermentum leo vel.'],
+		['q', 'Viverra ipsum nunc aliquet bibendum enim facilisis gravida neque.'],
+		['q', 'Pellentesque elit eget gravida cum sociis.'],
+		['q', 'Nunc faucibus a pellentesque sit amet.'],
+		['r', 'Mauris pharetra et ultrices neque ornare aenean euismod.'],
+		['q', 'Platea dictumst quisque sagittis purus.'],
+		['r', 'Sit amet purus gravida quis.'],
+		['r', 'Vitae tortor condimentum lacinia quis vel eros donec ac.'],
+		['q', 'Justo laoreet sit amet cursus sit amet dictum sit.'],
+		['r', 'Sed id semper risus in hendrerit.'],
+		['q', 'Enim praesent elementum facilisis leo vel fringilla est.'],
+		['r', 'Viverra vitae congue eu consequat ac felis donec et.'],
+		['q', 'Id velit ut tortor pretium viverra suspendisse potenti nullam.'],
+		['q', 'Faucibus interdum posuere lorem ipsum dolor sit amet consectetur.'],
+		['r', 'Fames ac turpis egestas sed tempus urna et pharetra.'],
+		['q', 'Pretium aenean pharetra magna ac.'],
+		['r', 'Sit amet volutpat consequat mauris nunc congue.'],
+		['r', 'Pharetra diam sit amet nisl suscipit adipiscing bibendum est.'],
+		['r', 'Non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus.'],
+		['q', 'Leo vel fringilla est ullamcorper eget nulla facilisi etiam.']
+		// ['r', 'Eu non diam phasellus vestibulum lorem sed risus.']
+	]
+
+	const lastRIndex = messages.map(([side]) => side).lastIndexOf('q')
+	const tail = messages.slice(lastRIndex, messages.length)
+	console.log(tail, tail.length)
 </script>
 
 <section id="contact" class="contact">
 	<Container>
 		<h2>{$_(texts.contact)}</h2>
 		<div class="form">
-			<div class="avatarContainer">
-				{#if avatar}
-					{#await avatar then { default: Avatar }}
-						<Avatar />
-					{/await}
-				{/if}
+			<div class="sidebar">
+				<div class="avatarContainer">
+					{#if avatar}
+						{#await avatar then { default: Avatar }}
+							<Avatar />
+						{/await}
+					{/if}
+				</div>
+				<div class="tail">
+					<div>
+						{#each tail as [_, message]}
+							<Message id={getId()} response>
+								{message}
+							</Message>
+						{/each}
+					</div>
+				</div>
 			</div>
 			<div class="content">
-				<Message response start>O, Hello there! 👋</Message>
-				<Message response end>Would you be interested in working with me?</Message>
-				<Message start end>Maybe?</Message>
-				<Message response end>What can I help you with?</Message>
-				<Message start end>
-					Yes! I'm looking for [a technical co-founder | software architect | a consultant/auditor]
-				</Message>
-				<Message response end>Do you offer compensation competitive in European market?</Message>
-				<Message start>
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius voluptatum perferendis
-					officia maiores ipsum eaque laboriosam aliquid nobis quibusdam laborum inventore quasi,
-					est delectus numquam fugit?
-				</Message>
-				<Message end>Consequatur fugit iusto veniam?</Message>
-				<Message response start>
-					Nam lacinia, ex vitae efficitur rhoncus, massa massa ullamcorper purus, ac imperdiet erat
-					orci et lacus.
-				</Message>
-				<Message response end>
-					Donec faucibus venenatis neque ut interdum. Sed vitae laoreet orci, eget condimentum est.
-				</Message>
-				<Message start end>Integer vulputate erat in nulla venenatis imperdiet.</Message>
-
-				<Message response end
-					>Massa massa ullamcorper purus, ac imperdiet erat orci et lacus.</Message
-				>
+				{#each messages as [side, message], i}
+					<Message
+						id={getId()}
+						response={side === 'r'}
+						start={messages[i + 1]?.[0] === side}
+						end={messages[i - 1]?.[0] === side}
+					>
+						{message}
+					</Message>
+				{/each}
 			</div>
 		</div>
 	</Container>
@@ -69,8 +101,19 @@
 
 <style lang="scss">
 	.contact {
-		--element-shadow: 0 0.1em 0.3em 0 rgba(0, 0, 0, 0.2);
+		--element-shadow: 0 0.1875rem 0.25rem rgba(0, 0, 0, 0.25);
+		--filter-shadow: drop-shadow(0 0.1875rem 0.25rem rgba(0, 0, 0, 0.25));
 		min-height: 80vh;
+	}
+
+	.tail {
+		width: 1px;
+		overflow: hidden;
+
+		div {
+			width: 100vw;
+			visibility: hidden;
+		}
 	}
 
 	.form {
@@ -80,11 +123,18 @@
 		flex-direction: row;
 	}
 
+	.sidebar {
+		display: flex;
+		flex-direction: column;
+	}
+
 	.avatarContainer {
+		flex-grow: 1;
 		display: flex;
 		align-items: flex-end;
 		position: relative;
 		padding-right: 1rem;
+		padding-bottom: 0.5rem;
 	}
 
 	.content {
