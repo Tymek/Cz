@@ -1,5 +1,5 @@
 const features = {
-	contact: true,
+	contact: false,
 	loader: false
 }
 
