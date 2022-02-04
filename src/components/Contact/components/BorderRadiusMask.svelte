@@ -5,6 +5,8 @@
 	export let rightBottom = false
 	export let id: string
 	export let response = false
+	export let shadow = true
+	export let border = true
 
 	let w: number, h: number
 
@@ -174,12 +176,16 @@
 			</clipPath>
 		</defs>
 	</svg>
-	<svg viewBox="0 0 {w} {h}" class="shadow" preserveAspectRatio="none">
-		<path {d} />
-	</svg>
-	<svg viewBox="0 0 {w} {h}" class="outline" class:response>
-		<use href={`#${id}-path`} stroke="white" stroke-width="2" clip-path={`url(#${id})`} />
-	</svg>
+	{#if shadow}
+		<svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" class="shadow" class:response>
+			<path {d} />
+		</svg>
+	{/if}
+	{#if border}
+		<svg viewBox="0 0 {w} {h}" class="outline" class:response>
+			<use href={`#${id}-path`} stroke="white" stroke-width="2" clip-path={`url(#${id})`} />
+		</svg>
+	{/if}
 {/if}
 <div
 	bind:clientHeight={h}
@@ -206,9 +212,17 @@
 		position: absolute;
 		height: 100%;
 		width: calc(100% - var(--margin) * 2);
-		filter: var(--filter-shadow);
 		left: var(--margin);
 		right: var(--margin);
+		filter: var(--filter-shadow);
+
+		@media (prefers-color-scheme: light) {
+			filter: var(--filter-shadow-dark);
+		}
+
+		&.response {
+			filter: var(--filter-shadow);
+		}
 	}
 
 	.outline {
@@ -218,7 +232,8 @@
 		opacity: 0.1;
 
 		&.response {
-			opacity: 0.7;
+			opacity: 1;
+			mix-blend-mode: normal;
 		}
 	}
 
@@ -230,6 +245,7 @@
 		position: relative;
 		overflow: hidden;
 		box-shadow: var(--element-shadow);
+		display: flex;
 	}
 
 	.leftTop {

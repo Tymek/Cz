@@ -1,8 +1,11 @@
-<script>
-	import Container from '$components/Container.svelte'
+<script lang="ts">
 	import { onMount } from 'svelte'
 	import { translations, _ } from 'svelte-intl'
+	import { messageFormatter, escape } from '$lib/utils'
+	import Container from '$components/Container.svelte'
+	import Input from './components/Input.svelte'
 	import Message from './components/Message.svelte'
+
 	let avatar
 
 	function load() {
@@ -30,89 +33,121 @@
 	})()
 
 	const messages = [
-		['r', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed labore et dolore.'],
-		['r', 'Nunc non blandit massa enim nec.'],
-		['q', 'Eros donec ac odio tempor orci.'],
-		['r', 'Scelerisque felis imperdiet proin fermentum leo vel.'],
-		['q', 'Viverra ipsum nunc aliquet bibendum enim facilisis gravida neque.'],
-		['q', 'Pellentesque elit eget gravida cum sociis.'],
-		['q', 'Nunc faucibus a pellentesque sit amet.'],
-		['r', 'Mauris pharetra et ultrices neque ornare aenean euismod.'],
-		['q', 'Platea dictumst quisque sagittis purus.'],
-		['r', 'Sit amet purus gravida quis.'],
-		['r', 'Vitae tortor condimentum lacinia quis vel eros donec ac.'],
-		['q', 'Justo laoreet sit amet cursus sit amet dictum sit.'],
-		['r', 'Sed id semper risus in hendrerit.'],
-		['q', 'Enim praesent elementum facilisis leo vel fringilla est.'],
-		['r', 'Viverra vitae congue eu consequat ac felis donec et.'],
-		['q', 'Id velit ut tortor pretium viverra suspendisse potenti nullam.'],
-		['q', 'Faucibus interdum posuere lorem ipsum dolor sit amet consectetur.'],
-		['r', 'Fames ac turpis egestas sed tempus urna et pharetra.'],
-		['q', 'Pretium aenean pharetra magna ac.'],
-		['r', 'Sit amet volutpat consequat mauris nunc congue.'],
-		['r', 'Pharetra diam sit amet nisl suscipit adipiscing bibendum est.'],
-		['r', 'Non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus.'],
-		['q', 'Leo vel fringilla est ullamcorper eget nulla facilisi etiam.']
-		// ['r', 'Eu non diam phasellus vestibulum lorem sed risus.']
+		['1>', 'Hi! 👋🏻'],
+		['1>', 'I made it really simple for you to start a conversation.'],
+		// ['--', '= TODO: insert date =========='],
+		['2>', "Hello! I'm Wiretap 🤖, pre-trained chatbot"],
+		[
+			'2>',
+			'Tymek is busy or <abbr title="away from keyboard">AFK</abbr> right now, but I\'m here to help you.'
+		],
+		[
+			'2>',
+			'I am smart, but not perfect, and might provide false and misleading information. ' +
+				'Our conversation is powered by ' +
+				'<a href="https://openai.com/about/" rel="nofollow noopener noreferrer">OpenAI</a> ' +
+				'and sent to <a href="https://slack.com/" rel="nofollow noopener noreferrer">Slack</a>. ' +
+				'Are you OK with that?'
+		]
 	]
 
-	const lastRIndex = messages.map(([side]) => side).lastIndexOf('q')
-	const tail = messages.slice(lastRIndex, messages.length)
-	console.log(tail, tail.length)
+	$: messageGroups = messages.reduce(
+		(acc: Array<{ type: string; messages: string[] }>, [type, text]) => {
+			const lastIndex = acc.length - 1
+			const lastGroup = acc[acc.length - 1]
+			if (lastGroup?.type === type) {
+				acc[lastIndex].messages.push(text)
+			} else {
+				acc.push({ type, messages: [text] })
+			}
+
+			return acc
+		},
+		[]
+	)
 </script>
 
 <section id="contact" class="contact">
 	<Container>
 		<h2>{$_(texts.contact)}</h2>
-		<div class="form">
-			<div class="sidebar">
-				<div class="avatarContainer">
-					{#if avatar}
-						{#await avatar then { default: Avatar }}
-							<Avatar />
-						{/await}
-					{/if}
-				</div>
-				<div class="tail">
-					<div>
-						{#each tail as [_, message]}
-							<Message id={getId()} response>
-								{message}
-							</Message>
-						{/each}
-					</div>
-				</div>
-			</div>
-			<div class="content">
-				{#each messages as [side, message], i}
-					<Message
-						id={getId()}
-						response={side === 'r'}
-						start={messages[i + 1]?.[0] === side}
-						end={messages[i - 1]?.[0] === side}
-					>
-						{message}
-					</Message>
+		<div class="form" lang="en">
+			<div class="wrapper">
+				{#each messageGroups as messageGroup}
+					<blockquote class="message-group" class:inverted-selection={messageGroup.type !== '<<'}>
+						<div class="sidebar">
+							{#if avatar && messageGroup.type !== '<<'}
+								{#await avatar then { default: Avatar }}
+									<Avatar ai={messageGroup.type !== '1>'} />
+								{/await}
+							{/if}
+						</div>
+						<div class="content">
+							{#each messageGroup.messages as message, index}
+								<Message
+									id={getId()}
+									end={messageGroup.messages.length !== 1 && index !== 0}
+									start={messageGroup.messages.length !== 1 &&
+										index !== messageGroup.messages.length - 1}
+									response={messageGroup.type !== '<<'}
+								>
+									{#if messageGroup.type === '<<'}
+										{@html messageFormatter(message)}
+										<!-- FIXME: escape on send -->
+									{:else}
+										{@html messageFormatter(message)}
+									{/if}
+								</Message>
+							{/each}
+						</div>
+					</blockquote>
 				{/each}
 			</div>
+			<Input />
 		</div>
 	</Container>
 </section>
 
 <style lang="scss">
 	.contact {
-		--element-shadow: 0 0.1875rem 0.25rem rgba(0, 0, 0, 0.25);
-		--filter-shadow: drop-shadow(0 0.1875rem 0.25rem rgba(0, 0, 0, 0.25));
-		min-height: 80vh;
+		--element-shadow: 0 calc(3rem / 14) calc(4rem / 14) rgba(0, 0, 0, 0.25);
+		--filter-shadow: drop-shadow(0 calc(3rem / 14) calc(4rem / 14) rgba(0, 0, 0, 0.25));
+		--filter-shadow-dark: drop-shadow(0 calc(4rem / 14) calc(3rem / 14) rgba(0, 0, 0, 0.3))
+			drop-shadow(0 calc(1rem / 14) calc(1rem / 14) rgba(0, 0, 0, 0.1));
+		min-height: 90vh;
+		margin-top: 20vh;
+		font-size: 1rem;
+
+		@media (min-width: 45rem) {
+			font-size: 1.1428571429rem;
+		}
 	}
 
-	.tail {
-		width: 1px;
-		overflow: hidden;
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
 
-		div {
-			width: 100vw;
-			visibility: hidden;
+	.message-group {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		margin: 0;
+
+		.sidebar {
+			display: flex;
+			flex-direction: column;
+			padding-right: calc(18rem / 14);
+			align-items: flex-end;
+			justify-content: flex-end;
+			margin: calc(10rem / 14) 0 calc(11rem / 14);
+		}
+
+		.content {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			align-self: center;
 		}
 	}
 
@@ -120,27 +155,6 @@
 		max-width: 720px;
 		margin: 0 auto;
 		display: flex;
-		flex-direction: row;
-	}
-
-	.sidebar {
-		display: flex;
 		flex-direction: column;
-	}
-
-	.avatarContainer {
-		flex-grow: 1;
-		display: flex;
-		align-items: flex-end;
-		position: relative;
-		padding-right: 1rem;
-		padding-bottom: 0.5rem;
-	}
-
-	.content {
-		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
-		padding-bottom: 2rem;
 	}
 </style>

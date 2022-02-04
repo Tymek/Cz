@@ -20,6 +20,7 @@ const config = {
 			resolve: {
 				alias: {
 					$components: resolve('./src/components'),
+					$vendor: resolve('./src/vendor'),
 					$lib: resolve('./src/lib')
 				}
 			},

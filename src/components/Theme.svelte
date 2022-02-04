@@ -64,11 +64,6 @@
 		a {
 			color: inherit;
 		}
-
-		::-moz-selection {
-			color: #fff;
-			background: #000;
-		}
 	}
 
 	// Selection color
@@ -79,14 +74,16 @@
 		}
 
 		@media (prefers-color-scheme: dark) {
-			::-moz-selection {
+			::selection {
 				color: #000;
 				background: #fff;
 			}
 
-			::selection {
-				color: #000;
-				background: #fff;
+			.inverted-selection {
+				::selection {
+					color: #fff;
+					background: var(--color-matterhorn);
+				}
 			}
 		}
 	}

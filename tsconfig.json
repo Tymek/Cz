@@ -27,7 +27,9 @@
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
 			"$components": ["src/components"],
-			"$components/*": ["src/components/*"]
+			"$components/*": ["src/components/*"],
+			"$vendor": ["src/vendor"],
+			"$vendor/*": ["src/vendor/*"]
 		},
 		"types": ["cypress"]
 	},

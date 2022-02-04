@@ -28,18 +28,22 @@
 
 <style lang="scss">
 	.message {
+		--lg-spacing: 0.8571428571rem;
+		--sm-spacing: 0.2857142857rem;
+
 		position: relative;
 		font-weight: 500;
 		align-self: flex-end;
 		max-width: 25em;
-		margin: 0.8571428571rem 0 0.8571428571rem 1rem;
+		margin: var(--lg-spacing) 0 var(--lg-spacing) 1rem;
 		// TODO: vary max-width based on text length
 
 		&.start {
-			margin-bottom: 0.2857142857rem;
+			margin-bottom: var(--sm-spacing);
 		}
+
 		&.end {
-			margin-top: 0.2857142857rem;
+			margin-top: var(--sm-spacing);
 		}
 
 		&.response {
@@ -52,17 +56,12 @@
 			position: relative;
 			z-index: 3;
 			font-weight: 400;
-			font-size: 1rem;
 			line-height: 1.5em;
 
-			// TODO: select color (+blend mode?)
+			// TODO: selection color (+blend mode?)
 
 			&.response {
 				font-weight: 450;
-			}
-
-			@media (min-width: 45rem) {
-				font-size: 1.1428571429rem;
 			}
 		}
 	}
