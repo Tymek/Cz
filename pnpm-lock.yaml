@@ -25,7 +25,7 @@ specifiers:
   date-fns: 2.28.0
   eslint: 8.7.0
   eslint-config-prettier: 8.3.0
-  eslint-plugin-jest: 25.7.0
+  eslint-plugin-jest: 26.1.0
   eslint-plugin-svelte3: 3.4.0
   format-message: 6.2.3
   isomorphic-fetch: 3.0.0
@@ -88,7 +88,7 @@ devDependencies:
   babel-jest: 27.4.6_@babel+core@7.16.12
   eslint: 8.7.0
   eslint-config-prettier: 8.3.0_eslint@8.7.0
-  eslint-plugin-jest: 25.7.0_044a69ce56423e5a462f0eb0c643b7d7
+  eslint-plugin-jest: 26.1.0_044a69ce56423e5a462f0eb0c643b7d7
   eslint-plugin-svelte3: 3.4.0_eslint@8.7.0+svelte@3.46.2
   jest: 27.4.7_ts-node@10.4.0
   prettier: 2.5.1
@@ -1899,19 +1899,6 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/experimental-utils/5.10.2_eslint@8.7.0+typescript@4.5.4:
-    resolution: {integrity: sha512-stRnIlxDduzxtaVLtEohESoXI1k7J6jvJHGyIkOT2pvXbg5whPM6f9tzJ51bJJxaJTdmvwgVFDNCopFRb2F5Gw==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-    dependencies:
-      '@typescript-eslint/utils': 5.10.2_eslint@8.7.0+typescript@4.5.4
-      eslint: 8.7.0
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-    dev: true
-
   /@typescript-eslint/parser/5.10.0_eslint@8.7.0+typescript@4.5.4:
     resolution: {integrity: sha512-pJB2CCeHWtwOAeIxv8CHVGJhI5FNyJAIpx5Pt72YkK3QfEzt6qAlXZuyaBmyfOdM62qU0rbxJzNToPTVeJGrQw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -3451,11 +3438,11 @@ packages:
       eslint: 8.7.0
     dev: true
 
-  /eslint-plugin-jest/25.7.0_044a69ce56423e5a462f0eb0c643b7d7:
-    resolution: {integrity: sha512-PWLUEXeeF7C9QGKqvdSbzLOiLTx+bno7/HC9eefePfEb257QFHg7ye3dh80AZVkaa/RQsBB1Q/ORQvg2X7F0NQ==}
+  /eslint-plugin-jest/26.1.0_044a69ce56423e5a462f0eb0c643b7d7:
+    resolution: {integrity: sha512-vjF6RvcKm4xZSJgCmXb9fXmhzTva+I9jtj9Qv5JeZQTRocU7WT1g3Kx0cZ+00SekPe2DtSWDawHtSj4RaxFhXQ==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
     peerDependencies:
-      '@typescript-eslint/eslint-plugin': ^4.0.0 || ^5.0.0
+      '@typescript-eslint/eslint-plugin': ^5.0.0
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
       jest: '*'
     peerDependenciesMeta:
@@ -3465,7 +3452,7 @@ packages:
         optional: true
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.10.0_3b6b276e93ead7cf6063f183a5e18d1f
-      '@typescript-eslint/experimental-utils': 5.10.2_eslint@8.7.0+typescript@4.5.4
+      '@typescript-eslint/utils': 5.10.2_eslint@8.7.0+typescript@4.5.4
       eslint: 8.7.0
       jest: 27.4.7_ts-node@10.4.0
     transitivePeerDependencies:
@@ -4994,7 +4981,7 @@ packages:
       '@types/tmp': 0.2.3
       async-mutex: 0.3.2
       camelcase: 6.3.0
-      debug: 4.3.2
+      debug: 4.3.3
       find-cache-dir: 3.3.2
       get-port: 5.1.1
       https-proxy-agent: 5.0.0
