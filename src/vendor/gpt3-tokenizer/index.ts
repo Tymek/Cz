@@ -146,6 +146,7 @@ export default class GPT3Tokenizer {
 			return token
 		}
 
+		// eslint-disable-next-line no-constant-condition
 		while (true) {
 			const minPairs: { [key: number]: [string, string] } = {}
 			for (const pair of Array.from(pairs)) {

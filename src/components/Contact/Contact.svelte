@@ -35,30 +35,20 @@
 	const messages = [
 		['1>', 'Hi! 👋🏻'],
 		['1>', 'I made it really simple for you to start a conversation.'],
+		[
+			'1>',
+			"It's powered by " +
+				'<a href="https://openai.com/about/" rel="nofollow noopener noreferrer">OpenAI</a> ' +
+				'and with a copy delivered to <a href="https://slack.com/" rel="nofollow noopener noreferrer">Slack</a>. ' +
+				'Are you OK with that?'
+		],
 		// ['--', '= TODO: insert date =========='],
 		['2>', "Hello! I'm Wiretap 🤖, pre-trained chatbot"],
 		[
 			'2>',
 			'Tymek is busy or <abbr title="away from keyboard">AFK</abbr> right now, but I\'m here to help you.'
 		],
-		[
-			'2>',
-			'I am smart, but not perfect, and might provide false and misleading information. ' +
-				'Our conversation is powered by ' +
-				'<a href="https://openai.com/about/" rel="nofollow noopener noreferrer">OpenAI</a> ' +
-				'and sent to <a href="https://slack.com/" rel="nofollow noopener noreferrer">Slack</a>. ' +
-				'Are you OK with that?'
-		],
-		['<<', 'Lorem ipsum'],
-		[
-			'<<',
-			'I am smart, but not perfect, and might provide false and misleading information. ' +
-				'Our conversation is powered by ' +
-				'<a href="https://openai.com/about/" rel="nofollow noopener noreferrer">OpenAI</a> ' +
-				'and sent to <a href="https://slack.com/" rel="nofollow noopener noreferrer">Slack</a>. ' +
-				'Are you OK with that?'
-		],
-		['<<', 'Lorem Ipsum']
+		['2>', 'I am smart, but not perfect, and might provide false and misleading information. ']
 	]
 
 	$: messageGroups = messages.reduce(

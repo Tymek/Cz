@@ -92,9 +92,10 @@ export const debounce = (func, timeout = 300) => {
 }
 
 export const throttle = (callback, limit) => {
-	var waiting = false
+	let waiting = false
 	return function () {
 		if (!waiting) {
+			// eslint-disable-next-line prefer-rest-params
 			callback.apply(this, arguments)
 			waiting = true
 			setTimeout(function () {

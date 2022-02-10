@@ -76,7 +76,7 @@
 
 	let icon = ''
 
-	if (!!eventIcons[event.type]) {
+	if (eventIcons[event.type]) {
 		const action = event.action || 'any'
 
 		if (eventIcons[event.type][action]) {

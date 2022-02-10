@@ -79,7 +79,7 @@
 			let [clothoidOffsetY, clothoidOffsetX] = bestPair(criticalPt)
 
 			// Walk from zero curvature up to the critical point at 45deg
-			for (var t = 0; t <= criticalPt; t += criticalPt / count) {
+			for (let t = 0; t <= criticalPt; t += criticalPt / count) {
 				const vals = bestPair(t)
 				x = vals[1] * radius
 				y = vals[0] * radius
@@ -89,7 +89,7 @@
 				prevy = y
 
 			// Walk backwards from the critical point down to zero curvature
-			for (var t = criticalPt; t >= 0; t -= criticalPt / count) {
+			for (let t = criticalPt; t >= 0; t -= criticalPt / count) {
 				const vals = bestPair(t)
 				x = prevx + (clothoidOffsetY - vals[0]) * radius
 				y = prevy + (clothoidOffsetX - vals[1]) * radius

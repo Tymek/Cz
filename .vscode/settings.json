@@ -3,6 +3,7 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
+	"eslint.validate": ["javascript", "typescript", "svelte"],
 	"editor.rulers": [80, 120],
 	// "javascript.suggestionActions.enabled": false,
 	"workbench.colorCustomizations": {

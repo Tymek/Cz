@@ -5,7 +5,7 @@
 	import pl from 'date-fns/locale/pl/index.js'
 
 	export let date: string
-	export let addSuffix: boolean = false
+	export let addSuffix = false
 
 	let currentLocale = undefined
 	const unsubscribe = locale.subscribe((newLocale) => {

@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.tmp
+pnpm-lock.yaml
+/legacy
+
+.vercel
+.vercel_build_output

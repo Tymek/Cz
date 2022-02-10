@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /**
  * @see https://github.com/mrdoob/three.js/blob/1646da3dac9d61b4c79852692559b536c1bd6ba5/examples/jsm/controls/TrackballControls.js
  * @author Eberhard Graether / http://egraether.com/
@@ -6,6 +7,7 @@
  * @author Luca Antiga 	/ http://lantiga.github.io
  */
 
+// @ts-ignore
 import { EventDispatcher, MOUSE, Quaternion, Vector2, Vector3 } from 'three'
 
 var CustomTrackballControls = function (object, domElement) {
@@ -17,6 +19,7 @@ var CustomTrackballControls = function (object, domElement) {
 			'.CustomTrackballControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.'
 		)
 
+	// eslint-disable-next-line @typescript-eslint/no-this-alias
 	var _this = this
 	var STATE = { NONE: -1, ROTATE: 0, ZOOM: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_ZOOM_PAN: 4 }
 
@@ -263,6 +266,7 @@ var CustomTrackballControls = function (object, domElement) {
 			_this.object.lookAt(_this.target)
 
 			if (lastPosition.distanceToSquared(_this.object.position) > EPS) {
+				// @ts-ignore
 				_this.dispatchEvent(changeEvent)
 				lastPosition.copy(_this.object.position)
 			}
@@ -273,6 +277,7 @@ var CustomTrackballControls = function (object, domElement) {
 				lastPosition.distanceToSquared(_this.object.position) > EPS ||
 				lastZoom !== _this.object.zoom
 			) {
+				// @ts-ignore
 				_this.dispatchEvent(changeEvent)
 				lastPosition.copy(_this.object.position)
 				lastZoom = _this.object.zoom
@@ -293,6 +298,7 @@ var CustomTrackballControls = function (object, domElement) {
 		_this.object.updateProjectionMatrix()
 		_eye.subVectors(_this.object.position, _this.target)
 		_this.object.lookAt(_this.target)
+		// @ts-ignore
 		_this.dispatchEvent(changeEvent)
 		lastPosition.copy(_this.object.position)
 		lastZoom = _this.object.zoom
@@ -367,6 +373,7 @@ var CustomTrackballControls = function (object, domElement) {
 		// @ts-ignore
 		document.addEventListener('mouseup', mouseup, false)
 
+		// @ts-ignore
 		_this.dispatchEvent(startEvent)
 	}
 
@@ -400,6 +407,7 @@ var CustomTrackballControls = function (object, domElement) {
 		document.removeEventListener('mousemove', mousemove)
 		// @ts-ignore
 		document.removeEventListener('mouseup', mouseup)
+		// @ts-ignore
 		_this.dispatchEvent(endEvent)
 	}
 
@@ -429,7 +437,9 @@ var CustomTrackballControls = function (object, domElement) {
 				break
 		}
 
+		// @ts-ignore
 		_this.dispatchEvent(startEvent)
+		// @ts-ignore
 		_this.dispatchEvent(endEvent)
 	}
 
@@ -460,6 +470,7 @@ var CustomTrackballControls = function (object, domElement) {
 				break
 		}
 
+		// @ts-ignore
 		_this.dispatchEvent(startEvent)
 	}
 
@@ -502,6 +513,7 @@ var CustomTrackballControls = function (object, domElement) {
 				break
 		}
 
+		// @ts-ignore
 		_this.dispatchEvent(endEvent)
 	}
 

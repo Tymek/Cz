@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { Camera, EventDispatcher, Plane, Raycaster, Vector2, Vector3 } from 'three'
 
 /*
@@ -27,6 +29,7 @@ function DragControls(_objects, _camera, _domElement) {
 
 	//
 
+	// eslint-disable-next-line @typescript-eslint/no-this-alias
 	var scope = this
 
 	function activate() {

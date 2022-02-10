@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-/* eslint-disable security/detect-object-injection */
 import { AmbientLight, DirectionalLight, Vector3 } from 'three'
 
 const three = window.THREE

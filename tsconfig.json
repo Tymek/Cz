@@ -30,8 +30,7 @@
 			"$components/*": ["src/components/*"],
 			"$vendor": ["src/vendor"],
 			"$vendor/*": ["src/vendor/*"]
-		},
-		"types": ["cypress"]
+		}
 	},
 	"include": [
 		"src/**/*.d.ts",
@@ -40,7 +39,6 @@
 		"src/**/*.svelte",
 		"tsconfig.json",
 		"api/**/*.d.ts",
-		"api/**/*.ts",
-		"cypress/**/*.ts"
+		"api/**/*.ts"
 	]
 }

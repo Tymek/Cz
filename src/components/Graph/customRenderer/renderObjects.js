@@ -1,4 +1,6 @@
-/* eslint-disable no-prototype-builtins, security/detect-object-injection */
+/* eslint-disable @typescript-eslint/no-empty-function, no-prototype-builtins */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 /**
  * @see https://github.com/vasturiano/three-render-objects/blob/2efc0a145945a05d283db9e705d42c5baa7b1f81/src/three-render-objects.js
  */
