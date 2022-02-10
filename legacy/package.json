@@ -1,7 +1,7 @@
 {
   "name": "cz",
   "description": "www.tymek.cz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "__sapper__/build/index.js",
   "scripts": {
     "dev": "sapper dev",
@@ -65,7 +65,7 @@
     "mockdate": "3.0.2",
     "moxios": "0.4.0",
     "nock": "13.0.4",
-    "node-sass": "4.14.1",
+    "node-sass": "7.0.0",
     "npm-run-all": "4.1.5",
     "papaparse": "5.3.0",
     "rollup": "2.26.8",
