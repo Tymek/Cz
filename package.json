@@ -1,6 +1,6 @@
 {
 	"name": "tymek-cz",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"license": "GPL-3.0-only",
 	"scripts": {
@@ -40,7 +40,7 @@
 		"@poppanator/sveltekit-svg": "0.2.3",
 		"@shelf/jest-mongodb": "2.2.0",
 		"@sveltejs/adapter-vercel": "1.0.0-next.43",
-		"@sveltejs/kit": "1.0.0-next.265",
+		"@sveltejs/kit": "1.15.2",
 		"@testing-library/jest-dom": "5.16.2",
 		"@testing-library/svelte": "3.0.3",
 		"@types/isomorphic-fetch": "0.0.35",
