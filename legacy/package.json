@@ -1,7 +1,7 @@
 {
   "name": "cz",
   "description": "www.tymek.cz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "__sapper__/build/index.js",
   "scripts": {
     "dev": "sapper dev",
@@ -76,7 +76,7 @@
     "sapper": "0.28.2",
     "start-server-and-test": "1.11.3",
     "supertest": "4.0.2",
-    "svelte": "3.24.1",
+    "svelte": "3.49.0",
     "svelte-intl": "1.1.2",
     "svelte-preprocess": "4.2.0",
     "three": "0.137.0",
