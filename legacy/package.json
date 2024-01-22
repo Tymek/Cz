@@ -1,7 +1,7 @@
 {
   "name": "cz",
   "description": "www.tymek.cz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "__sapper__/build/index.js",
   "scripts": {
     "dev": "sapper dev",
@@ -52,7 +52,7 @@
     "@storybook/addon-knobs": "5.3.21",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/svelte": "3.0.0",
-    "babel-jest": "26.3.0",
+    "babel-jest": "29.7.0",
     "cypress": "4.12.1",
     "d3": "5.16.0",
     "eslint": "7.7.0",
@@ -60,7 +60,7 @@
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-security": "1.4.0",
     "format-message": "6.2.3",
-    "jest": "26.4.2",
+    "jest": "29.7.0",
     "jest-transform-svelte": "2.1.1",
     "mockdate": "3.0.2",
     "moxios": "0.4.0",
