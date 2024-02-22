@@ -1,7 +1,7 @@
 {
   "name": "cz",
   "description": "www.tymek.cz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "__sapper__/build/index.js",
   "scripts": {
     "dev": "sapper dev",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@primer/octicons": "10.1.0",
-    "axios": "^0.21.1",
+    "axios": "^0.28.0",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
