@@ -1,7 +1,7 @@
 {
   "name": "cz",
   "description": "www.tymek.cz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "__sapper__/build/index.js",
   "scripts": {
     "dev": "sapper dev",
@@ -40,11 +40,11 @@
   },
   "devDependencies": {
     "3d-force-graph": "1.66.6",
-    "@babel/core": "7.11.4",
+    "@babel/core": "7.24.3",
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
-    "@babel/plugin-transform-runtime": "7.11.0",
-    "@babel/preset-env": "7.11.0",
-    "@babel/runtime": "7.11.2",
+    "@babel/plugin-transform-runtime": "7.24.3",
+    "@babel/preset-env": "7.24.3",
+    "@babel/runtime": "7.24.1",
     "@rollup/plugin-commonjs": "14.0.0",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "8.4.0",
