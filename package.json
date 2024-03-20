@@ -1,6 +1,6 @@
 {
 	"name": "tymek-cz",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"license": "GPL-3.0-only",
 	"scripts": {
@@ -34,8 +34,8 @@
 		"three-forcegraph": "1.39.4"
 	},
 	"devDependencies": {
-		"@babel/core": "7.16.12",
-		"@babel/preset-env": "7.16.11",
+		"@babel/core": "7.24.3",
+		"@babel/preset-env": "7.24.3",
 		"@now/build-utils": "2.7.0",
 		"@poppanator/sveltekit-svg": "0.2.3",
 		"@shelf/jest-mongodb": "2.2.0",
