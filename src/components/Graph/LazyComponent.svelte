@@ -5,12 +5,21 @@
 	import getData from './getData'
 
 	const showAxies = false
+	const autoRotateDelay = 5000
+	const autoRotateSpeed = (2 * Math.PI) / 24000
 	// import { CustomTrackballControls } from './customControls'
 
 	let container
 	let graph
 	let width, height
 	let observer = null
+	let isVisible = false
+	let autoRotateReady = false
+	let autoRotateEnabled = true
+	let autoRotateFrame = null
+	let autoRotateTimeout = null
+	let lastAutoRotateTimestamp = 0
+	let controlsStartHandler = null
 
 	const getGroups = pipe(
 		map(prop('group')),
@@ -141,6 +150,100 @@
 		}, 300)
 	}
 
+	const stopAutoRotate = () => {
+		autoRotateEnabled = false
+		lastAutoRotateTimestamp = 0
+
+		if (autoRotateTimeout) {
+			clearTimeout(autoRotateTimeout)
+			autoRotateTimeout = null
+		}
+
+		if (autoRotateFrame) {
+			cancelAnimationFrame(autoRotateFrame)
+			autoRotateFrame = null
+		}
+	}
+
+	const stopAutoRotateLoop = () => {
+		lastAutoRotateTimestamp = 0
+
+		if (autoRotateFrame) {
+			cancelAnimationFrame(autoRotateFrame)
+			autoRotateFrame = null
+		}
+	}
+
+	const rotateCamera = (timestamp) => {
+		if (!autoRotateEnabled || !autoRotateReady || !isVisible || !graph) {
+			stopAutoRotateLoop()
+			return
+		}
+
+		const camera = graph.camera?.()
+		const controls = graph.controls?.()
+
+		if (!camera || !controls?.target) {
+			stopAutoRotateLoop()
+			return
+		}
+
+		if (!lastAutoRotateTimestamp) {
+			lastAutoRotateTimestamp = timestamp
+		}
+
+		const delta = timestamp - lastAutoRotateTimestamp
+		lastAutoRotateTimestamp = timestamp
+
+		const target = controls.target
+		const offsetX = camera.position.x - target.x
+		const offsetZ = camera.position.z - target.z
+		const angle = delta * autoRotateSpeed
+		const cos = Math.cos(angle)
+		const sin = Math.sin(angle)
+
+		camera.position.x = target.x + offsetX * cos - offsetZ * sin
+		camera.position.z = target.z + offsetX * sin + offsetZ * cos
+		camera.lookAt(target)
+
+		autoRotateFrame = requestAnimationFrame(rotateCamera)
+	}
+
+	const startAutoRotate = () => {
+		if (!autoRotateEnabled || !autoRotateReady || !isVisible || !graph || autoRotateFrame) {
+			return
+		}
+
+		lastAutoRotateTimestamp = 0
+		autoRotateFrame = requestAnimationFrame(rotateCamera)
+	}
+
+	const scheduleAutoRotate = () => {
+		if (!autoRotateEnabled || autoRotateReady || autoRotateTimeout) {
+			return
+		}
+
+		autoRotateTimeout = setTimeout(() => {
+			autoRotateReady = true
+			autoRotateTimeout = null
+			startAutoRotate()
+		}, autoRotateDelay)
+	}
+
+	const attachControlsListeners = () => {
+		const controls = graph?.controls?.()
+
+		if (!controls || controlsStartHandler) {
+			return
+		}
+
+		controlsStartHandler = () => {
+			stopAutoRotate()
+		}
+
+		controls.addEventListener('start', controlsStartHandler)
+	}
+
 	const initialize = once(async (groups) => {
 		setTimeout(() => {
 			graph.resumeAnimation()
@@ -155,6 +258,7 @@
 				3000
 			)
 		}, 1500)
+		scheduleAutoRotate()
 		// setInterval(() => { // Debug camera position when adding new items
 		// 	console.log(graph.camera().position)
 		// }, 1000)
@@ -175,16 +279,20 @@
 		observer = IntersectionObserver
 			? new IntersectionObserver((entries) => {
 					entries.forEach((entry) => {
+						isVisible = entry.isIntersecting
+
 						if (entry.isIntersecting) {
 							initialize(groups)
 							graph.linkColor(({ source }) => (groups.has(source) ? '#ffffff00' : '#000000'))
 							graph.resumeAnimation()
 							graph.d3ReheatSimulation()
+							startAutoRotate()
 						} else {
 							graph.pauseAnimation()
+							stopAutoRotateLoop()
 						}
 					})
-			  })
+				})
 			: null
 
 		const groupLinks = getGroupLinks(nodes)
@@ -195,18 +303,27 @@
 		}
 
 		await create3dGraph(data, groups)
+		attachControlsListeners()
 
 		if (observer) {
 			observer.observe(container)
 		} else {
+			isVisible = true
 			initialize(groups)
+			startAutoRotate()
 		}
 	})
 
 	onDestroy(() => {
 		if (browser) {
+			stopAutoRotate()
+
 			if (window !== undefined) {
 				window.removeEventListener('orientationchange', onOrientationChange)
+			}
+
+			if (controlsStartHandler) {
+				graph?.controls?.()?.removeEventListener('start', controlsStartHandler)
 			}
 
 			if (observer) {
