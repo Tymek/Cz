@@ -19,7 +19,7 @@
 </script>
 
 <a target="_blank" rel="noopener noreferrer" href={url}>
-	<img class="cover" src={images?.[0]?.url} {srcSet} alt={album} title={album} />
+	<img class="cover" src={images?.[0]?.url} srcset={srcSet} alt={album} title={album} />
 	<span>{title}</span>
 </a>
 

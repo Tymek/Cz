@@ -32,7 +32,7 @@
 	{#if !loading}
 		<div class="calendar">
 			{#each days as day}
-				<figure class="day" title={day} style={`opacity: ${data[day] / max || 0}`} />
+				<figure class="day" title={day} style={`opacity: ${data[day] / max || 0}`}></figure>
 			{/each}
 		</div>
 	{/if}

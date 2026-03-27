@@ -37,11 +37,10 @@
 				width="100%"
 				height="auto"
 				src={data.media_url}
-				type="video/mp4"
 				controls
 				playsinline
 				muted
-			/>
+			></video>
 		{:else}
 			<img src={data.media_url} alt={data.caption} />
 		{/if}

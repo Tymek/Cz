@@ -21,7 +21,7 @@
 		}
 	})
 
-	const buildTimestamp = JSON.parse('__BUILD_TIMESTAMP__')
+	const buildTimestamp = __BUILD_TIMESTAMP__
 	const timestamp = parseISO(buildTimestamp)
 </script>
 

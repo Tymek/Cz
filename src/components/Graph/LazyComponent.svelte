@@ -1,5 +1,5 @@
 <script>
-	import { browser } from '$app/env'
+	import { browser } from '$app/environment'
 	import { onMount, onDestroy } from 'svelte'
 	import { filter, map, once, pipe, prop, uniq } from 'ramda'
 	import getData from './getData'
@@ -60,6 +60,7 @@
 			Mesh,
 			MeshBasicMaterial,
 			SpriteMaterial,
+			SRGBColorSpace,
 			TextureLoader,
 			Sprite,
 			AxesHelper
@@ -107,6 +108,7 @@
 
 			// add img sprite as child
 			const imgTexture = new TextureLoader().load(img)
+			imgTexture.colorSpace = SRGBColorSpace
 			const material = new SpriteMaterial({ map: imgTexture })
 			const sprite = new Sprite(material)
 			sprite.scale.set(size, size)
@@ -215,7 +217,7 @@
 </script>
 
 <!-- TODO: aria-label="list of my skills" -->
-<figure bind:this={container} bind:clientWidth={width} bind:clientHeight={height} />
+<figure bind:this={container} bind:clientWidth={width} bind:clientHeight={height}></figure>
 
 <style type="text/scss" lang="scss">
 	figure {

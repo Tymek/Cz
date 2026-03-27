@@ -1,71 +1,17 @@
-import { resolve } from 'path'
-import preprocess from 'svelte-preprocess'
+import { resolve } from 'node:path'
 import vercel from '@sveltejs/adapter-vercel'
-import svg from '@poppanator/sveltekit-svg'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: preprocess({
-		replace: [['__BUILD_TIMESTAMP__', JSON.stringify(new Date().toISOString())]]
-	}),
+	preprocess: vitePreprocess(),
 
 	kit: {
-		floc: false,
 		adapter: vercel(),
-		vite: {
-			resolve: {
-				alias: {
-					$components: resolve('./src/components'),
-					$vendor: resolve('./src/vendor'),
-					$lib: resolve('./src/lib')
-				}
-			},
-			plugins: [
-				svg({
-					type: 'component',
-					/** @type {import('svgo').OptimizeOptions} */
-					svgoOptions: {
-						plugins: [
-							'cleanupAttrs',
-							'mergeStyles',
-							'inlineStyles',
-							'removeDoctype',
-							'removeXMLProcInst',
-							'removeComments',
-							'removeMetadata',
-							// 'removeTitle',
-							// 'removeDesc',
-							'removeUselessDefs',
-							'removeEditorsNSData',
-							'removeEmptyAttrs',
-							'removeHiddenElems',
-							'removeEmptyText',
-							'removeEmptyContainers',
-							// 'removeViewBox',
-							'cleanupEnableBackground',
-							'minifyStyles',
-							// 'convertColors',
-							'convertPathData',
-							'convertTransform',
-							'removeUnknownsAndDefaults',
-							'removeNonInheritableGroupAttrs',
-							'removeUselessStrokeAndFill',
-							'removeUnusedNS',
-							'cleanupIDs',
-							'cleanupNumericValues',
-							'moveElemsAttrsToGroup',
-							'moveGroupAttrsToElems',
-							'collapseGroups',
-							'mergePaths',
-							'convertShapeToPath',
-							'convertEllipseToCircle',
-							'sortDefsChildren'
-						]
-					}
-				})
-			]
+		alias: {
+			$components: resolve('./src/components'),
+			$vendor: resolve('./src/vendor'),
+			$lib: resolve('./src/lib')
 		}
 	}
 }

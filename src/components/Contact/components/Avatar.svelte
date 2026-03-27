@@ -8,7 +8,7 @@
 	{#if ai}
 		<img class="image" src={chatbotImage} alt="Chatbot named Wiretap" />
 	{:else}
-		<div class="image tim" />
+		<div class="image tim"></div>
 	{/if}
 </div>
 

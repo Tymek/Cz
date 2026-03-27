@@ -3,6 +3,7 @@ export {
 	Mesh,
 	MeshBasicMaterial,
 	SpriteMaterial,
+	SRGBColorSpace,
 	TextureLoader,
 	Sprite,
 	AxesHelper

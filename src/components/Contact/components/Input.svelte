@@ -43,17 +43,16 @@
 	<div class="container inverted-selection">
 		<textarea
 			placeholder="Type a message&hellip;"
-			type="text"
 			use:focusAction
 			bind:value={message}
 			on:input={handleInput}
-		/>
+		></textarea>
 		<GradientCover>
 			<hr class:isFocused />
 		</GradientCover>
 	</div>
 	<button>
-		<div class="border" />
+		<div class="border"></div>
 		<div class="content">
 			<GradientCover>
 				<div class="icon">

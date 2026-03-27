@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { browser } from '$app/environment'
 	import spotifyDashboard from '$lib/spotify/dashboard'
 	import githubDashboard from '$lib/github/dashbaord'
 	import stackoverflowDashboard from '$lib/stackoverflow/dashboard'
@@ -14,12 +14,7 @@
 		instagramDashboard
 	]
 
-	let message = null
-	page.subscribe(({ url }) => {
-		if (url?.searchParams?.has('message')) {
-			message = url?.searchParams?.get('message')
-		}
-	})
+	let message = browser ? new URL(window.location.href).searchParams.get('message') : null
 
 	const closeMessage = () => {
 		location.href = '/dashboard'

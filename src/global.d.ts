@@ -1,4 +1,9 @@
-/// <reference types="@sveltejs/kit" />
+declare const __BUILD_TIMESTAMP__: string
+
+declare module '*.svg' {
+	const content: any
+	export default content
+}
 
 declare module '*.svg?src' {
 	const content: string
@@ -6,7 +11,7 @@ declare module '*.svg?src' {
 }
 
 declare module '*.svg?component' {
-	const content: string
+	const content: any
 	export default content
 }
 

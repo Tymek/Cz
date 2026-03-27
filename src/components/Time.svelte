@@ -1,8 +1,8 @@
-<script lang="ts">
+	<script lang="ts">
 	import { onDestroy } from 'svelte'
 	import { locale } from '$lib/i18n'
 	import { format as formatDate } from 'date-fns'
-	import pl from 'date-fns/locale/pl/index.js'
+	import { pl } from 'date-fns/locale'
 
 	export let date: Date
 	export let format = 'PPPP, pppp'

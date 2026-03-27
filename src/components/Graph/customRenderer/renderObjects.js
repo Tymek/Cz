@@ -48,7 +48,7 @@ const three = window.THREE
 			Quaternion,
 			Spherical,
 			Clock
-	  }
+		}
 
 import { CustomTrackballControls } from './customControls'
 // import ThreeTrackballControls from 'three-trackballcontrols';

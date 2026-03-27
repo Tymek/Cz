@@ -1,9 +1,6 @@
 <script>
-	import features from '$lib/features'
 	import Intro from '$components/Intro/Intro.svelte'
-	import Integrations from '$components/Integrations/Integrations.svelte'
 	import Graph from '$components/Graph/Graph.svelte'
-	import Contact from '$components/Contact/Contact.svelte'
 	import Footer from '$components/Footer.svelte'
 	import Braid from '$components/Braid.svelte'
 </script>
@@ -12,7 +9,7 @@
 	<title>Tymoteusz Czech &ndash; www.tymek.cz</title>
 </svelte:head>
 
-<div class="gradient-bg" />
+<div class="gradient-bg"></div>
 <Intro />
 <!-- <Integrations /> -->
 <Braid defs />

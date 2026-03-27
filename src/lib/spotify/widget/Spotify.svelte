@@ -25,11 +25,11 @@
 	})
 
 	let songs: SongType[] = []
-	let activeDevice: Record<string, string | number> = {}
+	let activeDevice: { type?: string; volume?: number } = {}
 	let nowPlaying: Partial<SongType> = {}
 	let link = ''
 	let image = ''
-	let followers: number = null
+	let followers: number | null = null
 
 	onMount(async () => {
 		try {
@@ -53,7 +53,7 @@
 				}
 			}
 
-			activeDevice = device
+			activeDevice = device || {}
 
 			link = url
 			image = profile_image

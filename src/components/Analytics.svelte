@@ -1,10 +1,11 @@
 <script>
-	import { browser, dev } from '$app/env'
-	import { page } from '$app/stores'
+	import { browser, dev } from '$app/environment'
 	import { onMount } from 'svelte'
 
 	onMount(() => {
-		if (browser && $page?.url?.searchParams?.get('ref') !== 'uptime' && !dev) {
+		const currentUrl = browser ? new URL(window.location.href) : null
+
+		if (browser && currentUrl?.searchParams?.get('ref') !== 'uptime' && !dev) {
 			;(function (f, a, t, h, o, m) {
 				a[h] =
 					a[h] ||
