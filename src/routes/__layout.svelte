@@ -3,20 +3,16 @@
 	import Theme from '../components/Theme.svelte'
 
 	import { onMount } from 'svelte'
-	import { locale, translations, getBrowserLocale } from 'svelte-intl'
+	import { locale, getPreferredLocale, setupI18n } from '$lib/i18n'
 	// import moment from 'moment'
 	// import 'moment/locale/pl'
 
-	translations.update({
-		en: {},
-		pl: {}
-	})
-
+	setupI18n()
 	locale.set('en')
 	// moment.locale('en')
 
 	onMount(() => {
-		const browserLocale = getBrowserLocale('en')
+		const browserLocale = getPreferredLocale()
 
 		locale.set(browserLocale)
 		// moment.locale(browserLocale)

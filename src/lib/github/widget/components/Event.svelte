@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import octicons from '@primer/octicons'
 	import TimeSince from '$components/TimeSince.svelte'
 
@@ -14,7 +14,7 @@
 		at: 'at'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.at]: 'w'
 		}

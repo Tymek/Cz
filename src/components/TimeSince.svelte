@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte'
-	import { locale } from 'svelte-intl'
+	import { locale } from '$lib/i18n'
 	import { formatDistance, parseISO } from 'date-fns'
 	import pl from 'date-fns/locale/pl/index.js'
 

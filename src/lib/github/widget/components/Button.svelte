@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 
 	export let login: string
 	const link = `https://github.com/${login}`
@@ -9,7 +9,7 @@
 		followText: 'Follow @Tymek'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.followLabel]: "Obserwuj @Tymek na GitHub'ie",
 			[texts.followText]: 'Obserwuj @Tymek'

@@ -1,5 +1,5 @@
 <script>
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import features from '$lib/features'
 	import Container from '$components/Container.svelte'
 	import LinkIcon from './link.svg'
@@ -18,7 +18,7 @@
 		contact: 'Contact'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.description]: [
 				'Hej! Jestem Tymek.',
@@ -45,7 +45,7 @@
 				<div class="description">
 					<p>{@html $_(texts.description).replace(/\n/g, '<br />')}</p>
 				</div>
-				<div class="buttons">
+				<!-- <div class="buttons">
 					<a href="#stack" class="button stack">
 						<span class="icon" aria-hidden="true"><BuildIcon /></span>
 						<span class="label">{$_(texts.stack)}</span>
@@ -60,7 +60,7 @@
 							<span class="label">{$_(texts.contact)}</span>
 						</a>
 					{/if}
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</Container>

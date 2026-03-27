@@ -1,5 +1,5 @@
 <script>
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import Braid from '$components/Braid.svelte'
 
 	export let height = 1
@@ -14,7 +14,7 @@
 		loading: 'Loading from API…'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.loading]: 'Wczytywanie z API…'
 		}

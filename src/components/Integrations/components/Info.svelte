@@ -1,5 +1,5 @@
 <script>
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import { parseISO } from 'date-fns'
 	import TimeSince from '$components/TimeSince.svelte'
 	import Block from '$components/Block.svelte'
@@ -12,7 +12,7 @@
 		location: 'My location'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.lastBuild]: 'Ostatnia aktualizacja:',
 			[texts.moreToCome]: 'Będzie więcej',

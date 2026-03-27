@@ -5,6 +5,7 @@
 	import Graph from '$components/Graph/Graph.svelte'
 	import Contact from '$components/Contact/Contact.svelte'
 	import Footer from '$components/Footer.svelte'
+	import Braid from '$components/Braid.svelte'
 </script>
 
 <svelte:head>
@@ -13,11 +14,14 @@
 
 <div class="gradient-bg" />
 <Intro />
-<Integrations />
+<!-- <Integrations /> -->
+<Braid defs />
+<Braid />
 <Graph />
-{#if features.contact}
+
+<!-- {#if features.contact}
 	<Contact />
-{/if}
+{/if} -->
 <Footer />
 
 <style lang="scss">

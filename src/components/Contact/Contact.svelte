@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import { messageFormatter, escape } from '$lib/utils'
 	import Container from '$components/Container.svelte'
 	import Input from './components/Input.svelte'
@@ -16,7 +16,7 @@
 		contact: 'Contact'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.contact]: 'Kontakt'
 		}

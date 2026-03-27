@@ -1,14 +1,14 @@
 <script>
 	import { onMount } from 'svelte'
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 
 	const texts = {
-		stackHeadline: 'Welcome to my universe'
+		stackHeadline: "Code is cheap now, let's build something interesting"
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
-			[texts.stackHeadline]: 'Witaj w moim świecie'
+			[texts.stackHeadline]: 'Programowanie potaniało, więc zbudujmy coś ciekawego'
 		}
 	})
 
@@ -24,7 +24,7 @@
 </script>
 
 <section class="graph-container">
-	<h2 id="stack" class="heading">{$_(texts.stackHeadline)}</h2>
+	<!-- <h2 id="stack" class="heading">{$_(texts.stackHeadline)}</h2> -->
 
 	{#if graph}
 		{#await graph then { default: Graph }}

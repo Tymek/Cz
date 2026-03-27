@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte'
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import Time from '$components/Time.svelte'
 	import Block from '$components/Block.svelte'
 	import Flair from '$components/Flair.svelte'
@@ -13,7 +13,7 @@
 		thisYear: 'this year'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.recentlyPlayed]: 'Ostatnio odtwarzane:',
 			[texts.memberSince]: 'Konto od:',

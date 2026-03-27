@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import Block from '$components/Block.svelte'
 	import Song from './components/song.svelte'
 	import type { Song as SongType } from './types'
@@ -14,7 +14,7 @@
 		volume: 'Volume:'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.recentlyPlayed]: 'Ostatnio odtwarzane:',
 			[texts.nowPlaying]: 'Aktualnie gra:',

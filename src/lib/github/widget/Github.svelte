@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte'
-	import { translations, _ } from 'svelte-intl'
+	import { registerTranslations, _ } from '$lib/i18n'
 	import features from '$lib/features'
 	import Block from '$components/Block.svelte'
 	import Flair from '$components/Flair.svelte'
@@ -17,7 +17,7 @@
 		activity: 'Activity'
 	}
 
-	translations.update({
+	registerTranslations(texts, {
 		pl: {
 			[texts.accountSince]: 'Konto utworzone',
 			[texts.followLabel]: "Obserwuj @Tymek na GitHub'ie",

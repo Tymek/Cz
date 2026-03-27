@@ -1,8 +1,8 @@
 {
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
-	},
+    "source.fixAll.eslint": "explicit"
+  },
 	"eslint.validate": ["javascript", "typescript", "svelte"],
 	"editor.rulers": [80, 120],
 	// "javascript.suggestionActions.enabled": false,
