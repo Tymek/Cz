@@ -5,7 +5,6 @@
 	import getData from './getData'
 
 	const showAxies = false
-	const autoRotateDelay = 5000
 	const autoRotateSpeed = (2 * Math.PI) / 24000
 	// import { CustomTrackballControls } from './customControls'
 
@@ -17,7 +16,6 @@
 	let autoRotateReady = false
 	let autoRotateEnabled = true
 	let autoRotateFrame = null
-	let autoRotateTimeout = null
 	let lastAutoRotateTimestamp = 0
 	let controlsStartHandler = null
 
@@ -154,11 +152,6 @@
 		autoRotateEnabled = false
 		lastAutoRotateTimestamp = 0
 
-		if (autoRotateTimeout) {
-			clearTimeout(autoRotateTimeout)
-			autoRotateTimeout = null
-		}
-
 		if (autoRotateFrame) {
 			cancelAnimationFrame(autoRotateFrame)
 			autoRotateFrame = null
@@ -218,16 +211,15 @@
 		autoRotateFrame = requestAnimationFrame(rotateCamera)
 	}
 
-	const scheduleAutoRotate = () => {
-		if (!autoRotateEnabled || autoRotateReady || autoRotateTimeout) {
+	const startGraphMotion = () => {
+		if (!graph) {
 			return
 		}
 
-		autoRotateTimeout = setTimeout(() => {
-			autoRotateReady = true
-			autoRotateTimeout = null
-			startAutoRotate()
-		}, autoRotateDelay)
+		autoRotateReady = true
+		graph.resumeAnimation()
+		graph.d3ReheatSimulation()
+		startAutoRotate()
 	}
 
 	const attachControlsListeners = () => {
@@ -246,8 +238,7 @@
 
 	const initialize = once(async (groups) => {
 		setTimeout(() => {
-			graph.resumeAnimation()
-			graph.d3ReheatSimulation()
+			startGraphMotion()
 			graph.cameraPosition(
 				{
 					x: 146.0595753216009,
@@ -258,7 +249,6 @@
 				3000
 			)
 		}, 1500)
-		scheduleAutoRotate()
 		// setInterval(() => { // Debug camera position when adding new items
 		// 	console.log(graph.camera().position)
 		// }, 1000)
@@ -284,9 +274,10 @@
 						if (entry.isIntersecting) {
 							initialize(groups)
 							graph.linkColor(({ source }) => (groups.has(source) ? '#ffffff00' : '#000000'))
-							graph.resumeAnimation()
-							graph.d3ReheatSimulation()
-							startAutoRotate()
+
+							if (autoRotateReady) {
+								startGraphMotion()
+							}
 						} else {
 							graph.pauseAnimation()
 							stopAutoRotateLoop()
@@ -310,7 +301,10 @@
 		} else {
 			isVisible = true
 			initialize(groups)
-			startAutoRotate()
+
+			if (autoRotateReady) {
+				startGraphMotion()
+			}
 		}
 	})
 
