@@ -13,6 +13,11 @@ const originsToArray = (item) => ({
 	links: item.origin ? item.origin.split(/, /) : []
 })
 
+const normalizeRow = (item) =>
+	Object.fromEntries(
+		Object.entries(item).map(([key, value]) => [key, typeof value === 'string' ? value.trim() : value])
+	)
+
 const addLinkCount = (data) => (item) => ({
 	...item,
 	inboundLinksCount: data.filter(({ links }) => links?.includes(item.tech)).length
@@ -23,10 +28,14 @@ const getData = async (input) => {
 
 	return new Promise((resolve) =>
 		Papa.parse(input, {
-			worker: true,
+			delimiter: '\t',
 			header: true,
+			skipEmptyLines: true,
 			complete: function (results) {
-				const output = results.data
+				const rows = Array.isArray(results.data) ? results.data : []
+				const output = rows
+					.filter((item) => item && typeof item === 'object')
+					.map(normalizeRow)
 					.map((item) => ({ ...item, id: item.tech }))
 					.filter(({ id }) => !!id)
 					.map(originsToArray)
