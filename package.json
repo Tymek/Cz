@@ -39,7 +39,7 @@
 		"@poppanator/sveltekit-svg": "6.0.1",
 		"@shelf/jest-mongodb": "6.0.2",
 		"@sveltejs/adapter-vercel": "6.3.3",
-		"@sveltejs/kit": "2.60.1",
+		"@sveltejs/kit": "2.69.1",
 		"@sveltejs/vite-plugin-svelte": "7.0.0",
 		"@testing-library/jest-dom": "5.16.2",
 		"@testing-library/svelte": "5.3.1",
