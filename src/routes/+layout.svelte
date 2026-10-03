@@ -4,21 +4,15 @@
 
 	import { onMount } from 'svelte'
 	import { locale, getPreferredLocale, setupI18n } from '$lib/i18n'
-	// import moment from 'moment'
-	// import 'moment/locale/pl'
 
 	setupI18n()
 	locale.set('en')
-	// moment.locale('en')
 
 	onMount(() => {
 		const browserLocale = getPreferredLocale()
 
 		locale.set(browserLocale)
-		// moment.locale(browserLocale)
 	})
-
-	// export let segment
 </script>
 
 <main>

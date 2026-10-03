@@ -7,10 +7,10 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: vercel(),
+		adapter: vercel({ runtime: 'nodejs24.x' }),
 		alias: {
 			$components: resolve('./src/components'),
-			$vendor: resolve('./src/vendor'),
+
 			$lib: resolve('./src/lib')
 		}
 	}
