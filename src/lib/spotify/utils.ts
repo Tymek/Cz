@@ -25,7 +25,7 @@ export const queryApi = async (accessToken: string, endpoint: string) => {
 			headers: { Authorization: `Bearer ${accessToken}` }
 		}).then((response) => response.json())
 		return data
-	} catch (e) {
+	} catch {
 		return {}
 	}
 }

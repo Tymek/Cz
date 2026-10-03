@@ -1,5 +1,5 @@
 year	tech	color	group	origin	pro
-2007	HTML	#E34F26	
+2007	HTML	#E34F26
 2009	CSS	#002561	Styles
 2012	JavaScript	#F7DF1E	Coding		TRUE
 2011	PHP	#8892BE	Coding	HTML
@@ -69,6 +69,7 @@ year	tech	color	group	origin	pro
 2026	LiteLLM	#2563EB	Tools	OpenAI
 2026	LangFuse	#6C5CE7	Tools	OpenAI
 2026	Zed	#084CCF	Tools
+2026	OpenRouter	#C8FF00	Tools
 	Coding			Design, DevOps, Databases, System
 	DevOps			Databases, System
 	Design

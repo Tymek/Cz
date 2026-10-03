@@ -1,10 +1,6 @@
 const addImage = (item) => ({
 	...item,
-	// img: (() => {
-	//   const img = new Image()
-	//   img.src = `./svg/${item.id.toLowerCase().replace(' ', '-')}.svg`
-	//   return img
-	// })(),
+
 	img3d: item.color ? `/logos/png/${item.id.toLowerCase().replace(/\s/g, '-')}.png` : null
 })
 
@@ -15,7 +11,10 @@ const originsToArray = (item) => ({
 
 const normalizeRow = (item) =>
 	Object.fromEntries(
-		Object.entries(item).map(([key, value]) => [key, typeof value === 'string' ? value.trim() : value])
+		Object.entries(item).map(([key, value]) => [
+			key,
+			typeof value === 'string' ? value.trim() : value
+		])
 	)
 
 const addLinkCount = (data) => (item) => ({

@@ -14,7 +14,7 @@ const gitignorePath = path.resolve(dirname, '.gitignore')
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
 	{
-		ignores: ['legacy/**', '.vercel/**', '.vercel_build_output/**'],
+		ignores: ['.vercel/**', '.vercel_build_output/**'],
 		linterOptions: {
 			reportUnusedDisableDirectives: 'off'
 		}

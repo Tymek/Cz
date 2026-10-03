@@ -4,9 +4,7 @@
 	import { filter, map, once, pipe, prop, uniq } from 'ramda'
 	import getData from './getData'
 
-	const showAxies = false
 	const autoRotateSpeed = (2 * Math.PI) / 24000
-	// import { CustomTrackballControls } from './customControls'
 
 	let container
 	let graph
@@ -18,6 +16,11 @@
 	let autoRotateFrame = null
 	let lastAutoRotateTimestamp = 0
 	let controlsStartHandler = null
+	let pulseTimer = null
+	let pulseLinks = []
+	let burstLink = null
+	let motionPreference = null
+	let destroyed = false
 
 	const getGroups = pipe(
 		map(prop('group')),
@@ -59,8 +62,7 @@
 	}
 
 	const create3dGraph = async (data, groups) => {
-		// IMPORTANT NOTE: Implementation of 'github.com/vasturiano/3d-force-graph' was blocking scroll, hence I scaveged it into './customRenderer'
-		// const ForceGraph3D = (await import('3d-force-graph')).default
+		// Custom renderer keeps graph controls from blocking page scroll.
 		const ForceGraph3D = (await import('./customRenderer/forceGraph')).default
 		const {
 			SphereGeometry,
@@ -69,9 +71,9 @@
 			SpriteMaterial,
 			SRGBColorSpace,
 			TextureLoader,
-			Sprite,
-			AxesHelper
-		} = await import('./customRenderer/three.js')
+			Sprite
+		} = await import('three')
+		if (destroyed) return
 
 		graph = ForceGraph3D()
 		graph.backgroundColor('rgba(0,0,0,0)')
@@ -79,6 +81,25 @@
 		graph.linkOpacity(0.033)
 		graph.linkVisibility(({ source }) => !groups.has(source.id))
 		graph.linkColor(() => '#000000')
+		// Single-hop packets: quiet edges punctuated by cool, asynchronous signals.
+		graph.linkDirectionalParticles(0)
+		graph.linkDirectionalParticleSpeed(0.008)
+		graph.linkDirectionalParticleThreeObject(() => {
+			const color = Math.random() < 0.5 ? '#20b8db' : '#548cff'
+			const packet = new Mesh(
+				new SphereGeometry(0.8, 8, 8),
+				new MeshBasicMaterial({ color, transparent: true, opacity: 0.95, depthWrite: false })
+			)
+			// A soft halo keeps packets luminous without bloom or holiday-style colors.
+			packet.add(
+				new Mesh(
+					new SphereGeometry(2.2, 8, 8),
+					new MeshBasicMaterial({ color, transparent: true, opacity: 0.12, depthWrite: false })
+				)
+			)
+			return packet
+		})
+		pulseLinks = data.links.filter(({ source }) => !groups.has(source.id ?? source))
 		graph.showNavInfo(false)
 		graph.width(width)
 		graph.height(height)
@@ -125,10 +146,6 @@
 		})
 
 		graph(container).graphData(data)
-
-		if (showAxies) {
-			graph.scene().add(new AxesHelper(20))
-		}
 
 		graph.cameraPosition({
 			x: 481.2647453222629,
@@ -211,8 +228,46 @@
 		autoRotateFrame = requestAnimationFrame(rotateCamera)
 	}
 
+	const stopPulses = () => {
+		clearTimeout(pulseTimer)
+		pulseTimer = null
+		burstLink = null
+	}
+
+	const startPulses = () => {
+		if (
+			destroyed ||
+			!graph ||
+			!autoRotateReady ||
+			!isVisible ||
+			document.hidden ||
+			motionPreference?.matches ||
+			!pulseLinks.length ||
+			pulseTimer !== null
+		) {
+			return
+		}
+
+		const emitPulse = () => {
+			const link = burstLink ?? pulseLinks[Math.floor(Math.random() * pulseLinks.length)]
+			graph.emitParticle(link)
+
+			// Occasionally send a closely spaced second packet down the same edge.
+			const followUp = !burstLink && Math.random() < 0.45
+			burstLink = followUp ? link : null
+			pulseTimer = setTimeout(emitPulse, followUp ? 30 : 60 + Math.random() * 173)
+		}
+
+		pulseTimer = setTimeout(emitPulse, 40 + Math.random() * 133)
+	}
+
+	const updatePulses = () => {
+		stopPulses()
+		startPulses()
+	}
+
 	const startGraphMotion = () => {
-		if (!graph) {
+		if (destroyed || !graph || !isVisible) {
 			return
 		}
 
@@ -220,6 +275,7 @@
 		graph.resumeAnimation()
 		graph.d3ReheatSimulation()
 		startAutoRotate()
+		startPulses()
 	}
 
 	const attachControlsListeners = () => {
@@ -236,8 +292,9 @@
 		controls.addEventListener('start', controlsStartHandler)
 	}
 
-	const initialize = once(async (groups) => {
+	const initialize = once(async () => {
 		setTimeout(() => {
+			if (destroyed) return
 			startGraphMotion()
 			graph.cameraPosition(
 				{
@@ -249,21 +306,20 @@
 				3000
 			)
 		}, 1500)
-		// setInterval(() => { // Debug camera position when adding new items
-		// 	console.log(graph.camera().position)
-		// }, 1000)
 
 		window.addEventListener('orientationchange', onOrientationChange, { passive: true })
 	})
 
 	onMount(async () => {
+		motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
+		motionPreference.addEventListener('change', updatePulses)
+		document.addEventListener('visibilitychange', updatePulses)
+
 		const skills = await fetch('/skills.tsv')
 		const text = await skills.text()
 		const nodes = await getData(text)
-		const links = getLinks(nodes).map((link) => {
-			// link.distance = size * 2
-			return link
-		})
+		if (destroyed) return
+		const links = getLinks(nodes)
 		const groups = new Set(getGroups(nodes).map(prop('id')))
 
 		observer = IntersectionObserver
@@ -272,7 +328,7 @@
 						isVisible = entry.isIntersecting
 
 						if (entry.isIntersecting) {
-							initialize(groups)
+							initialize()
 							graph.linkColor(({ source }) => (groups.has(source) ? '#ffffff00' : '#000000'))
 
 							if (autoRotateReady) {
@@ -281,6 +337,7 @@
 						} else {
 							graph.pauseAnimation()
 							stopAutoRotateLoop()
+							stopPulses()
 						}
 					})
 				})
@@ -289,18 +346,19 @@
 		const groupLinks = getGroupLinks(nodes)
 
 		const data = {
-			nodes: [...nodes /*, ...groupNodes*/],
+			nodes: [...nodes],
 			links: [...links, ...groupLinks]
 		}
 
 		await create3dGraph(data, groups)
+		if (destroyed) return
 		attachControlsListeners()
 
 		if (observer) {
 			observer.observe(container)
 		} else {
 			isVisible = true
-			initialize(groups)
+			initialize()
 
 			if (autoRotateReady) {
 				startGraphMotion()
@@ -309,8 +367,13 @@
 	})
 
 	onDestroy(() => {
+		destroyed = true
 		if (browser) {
 			stopAutoRotate()
+			stopPulses()
+			graph?.pauseAnimation()
+			motionPreference?.removeEventListener('change', updatePulses)
+			document.removeEventListener('visibilitychange', updatePulses)
 
 			if (window !== undefined) {
 				window.removeEventListener('orientationchange', onOrientationChange)
@@ -336,14 +399,10 @@
 		width: 100%;
 		height: 95vh;
 		min-height: 30rem;
-		/* background-color: #eee; */
 		margin: 0;
 		box-sizing: border-box;
 		overflow: hidden;
-		// background-image: url('/noisy-texture.png'),
-		//   radial-gradient(circle farthest-corner,#f8f8f8 0, #bbbbbb 80%);
-		// background-repeat: repeat;
-		// background-attachment: fixed, scroll;
+
 		cursor: grab;
 	}
 
