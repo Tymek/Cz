@@ -63,7 +63,12 @@ year	tech	color	group	origin	pro
 2023	Unleash	#1a4049	Tools	GitLab
 2023	OpenAI	#333333	Tools
 2024	Kubernetes	#326CE5	DevOps	Docker, Linux
+2025	Azure	#0078D4	DevOps
+2025	k9s	#326CE5	DevOps	Kubernetes
 2026	JSONNet	#000000	Coding	Kubernetes
+2026	LiteLLM	#2563EB	Tools	OpenAI
+2026	LangFuse	#6C5CE7	Tools	OpenAI
+2026	Zed	#084CCF	Tools
 	Coding			Design, DevOps, Databases, System
 	DevOps			Databases, System
 	Design
