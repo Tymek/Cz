@@ -1,8 +1,8 @@
 import { json, redirect } from '@sveltejs/kit'
-import config from '$lib/spotify/config'
-import { getToken } from '$lib/spotify/utils'
-import { getConfig, updateIntegration } from '$lib/db'
-import { ensureAdmin, getErrorMessage, redirectToDashboard } from '$lib/server/dashboard'
+import config from '#lib/spotify/config.ts'
+import { getToken } from '#lib/spotify/utils.ts'
+import { getConfig, updateIntegration } from '#lib/db.ts'
+import { ensureAdmin, getErrorMessage, redirectToDashboard } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 const { authUrl, scope, redirect_uri, showDialog } = config

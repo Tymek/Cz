@@ -1,8 +1,8 @@
 import { json } from '@sveltejs/kit'
-import fetch from 'isomorphic-fetch'
-import { getConfig } from '$lib/db'
-import { pick } from '$lib/utils'
-import { getErrorMessage } from '$lib/server/dashboard'
+
+import { getConfig } from '#lib/db.ts'
+import { pick } from '#lib/utils.ts'
+import { getErrorMessage } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 export const GET: RequestHandler = async () => {

@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit'
-import fetch from 'isomorphic-fetch'
-import { getConfig } from '$lib/db'
-import { getErrorMessage } from '$lib/server/dashboard'
+
+import { getConfig } from '#lib/db.ts'
+import { getErrorMessage } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 const query = async (endpoint: string) =>

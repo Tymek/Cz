@@ -1,6 +1,6 @@
 <script>
-	import { registerTranslations, _ } from '$lib/i18n'
-	import Container from '$components/Container.svelte'
+	import { registerTranslations, _ } from '#lib/i18n.ts'
+	import Container from '#components/Container.svelte'
 	import PortraitDrawing from './portrait-drawing.svg'
 
 	const texts = {

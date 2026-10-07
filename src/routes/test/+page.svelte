@@ -1,5 +1,5 @@
 <script>
-	import Braid from '$components/Braid.svelte'
+	import Braid from '#components/Braid.svelte'
 </script>
 
 <div>

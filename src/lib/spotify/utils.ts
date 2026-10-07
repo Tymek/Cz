@@ -1,5 +1,5 @@
 import { getConfig } from '../db'
-import fetch from 'isomorphic-fetch'
+
 import config from './config'
 
 const { authUrl, apiUrl } = config

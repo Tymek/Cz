@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit'
-import fetch from 'isomorphic-fetch'
-import { getIntegration, updateIntegration } from '$lib/db'
-import { getErrorMessage } from '$lib/server/dashboard'
+
+import { getIntegration, updateIntegration } from '#lib/db.ts'
+import { getErrorMessage } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 const fields = ['id', 'media_url', 'thumbnail_url', 'timestamp', 'caption', 'media_type'].join(',')

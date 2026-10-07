@@ -1,5 +1,5 @@
 <script>
-	import { browser } from '$app/environment'
+	import { browser } from '$app/env'
 	import { onMount, onDestroy } from 'svelte'
 	import { filter, map, once, pipe, prop, uniq } from 'ramda'
 	import getData from './getData'

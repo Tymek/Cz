@@ -1,4 +1,4 @@
-import type { DashboardItem } from '$lib/dashboardItem'
+import type { DashboardItem } from '#lib/dashboardItem.ts'
 
 const spotifyDashboard: DashboardItem = {
 	title: 'GitHub',

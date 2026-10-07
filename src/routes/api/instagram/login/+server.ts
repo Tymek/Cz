@@ -1,7 +1,7 @@
 import { json, redirect } from '@sveltejs/kit'
-import fetch from 'isomorphic-fetch'
-import { getConfig, updateIntegration } from '$lib/db'
-import { ensureAdmin, getErrorMessage, redirectToDashboard } from '$lib/server/dashboard'
+
+import { getConfig, updateIntegration } from '#lib/db.ts'
+import { ensureAdmin, getErrorMessage, redirectToDashboard } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 const authUrl = 'https://api.instagram.com/oauth'

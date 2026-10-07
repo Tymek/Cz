@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
-import { getConfig, updateConfigKey } from '$lib/db'
-import { ensureAdmin, redirectToDashboard } from '$lib/server/dashboard'
+import { getConfig, updateConfigKey } from '#lib/db.ts'
+import { ensureAdmin, redirectToDashboard } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 export const GET: RequestHandler = async ({ cookies }) => {

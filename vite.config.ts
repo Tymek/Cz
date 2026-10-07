@@ -1,3 +1,5 @@
+import adapter from '@sveltejs/adapter-vercel'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { sveltekit } from '@sveltejs/kit/vite'
 import svg from '@poppanator/sveltekit-svg'
 import { defineConfig } from 'vite'
@@ -45,6 +47,9 @@ export default defineConfig({
 				]
 			}
 		}),
-		sveltekit()
+		sveltekit({
+			preprocess: vitePreprocess(),
+			adapter: adapter({ runtime: 'nodejs24.x' })
+		})
 	]
 })

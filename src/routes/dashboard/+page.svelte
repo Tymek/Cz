@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-	import spotifyDashboard from '$lib/spotify/dashboard'
-	import githubDashboard from '$lib/github/dashbaord'
-	import stackoverflowDashboard from '$lib/stackoverflow/dashboard'
-	import gitlabDashboard from '$lib/gitlab/dashboard'
-	import instagramDashboard from '$lib/instagram/dashboard'
+	import { browser } from '$app/env'
+	import spotifyDashboard from '#lib/spotify/dashboard.ts'
+	import githubDashboard from '#lib/github/dashbaord.ts'
+	import stackoverflowDashboard from '#lib/stackoverflow/dashboard.ts'
+	import gitlabDashboard from '#lib/gitlab/dashboard.ts'
+	import instagramDashboard from '#lib/instagram/dashboard.ts'
 
 	const dashboardItems = [
 		spotifyDashboard,

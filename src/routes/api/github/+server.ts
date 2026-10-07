@@ -1,8 +1,8 @@
 import { json } from '@sveltejs/kit'
-import fetch from 'isomorphic-fetch'
-import { getConfig } from '$lib/db'
-import { pick } from '$lib/utils'
-import { getErrorMessage } from '$lib/server/dashboard'
+
+import { getConfig } from '#lib/db.ts'
+import { pick } from '#lib/utils.ts'
+import { getErrorMessage } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 type ActivityEvent = {
@@ -46,14 +46,12 @@ export const GET: RequestHandler = async () => {
 		const events: GithubApiEvent[] = await query(`/users/${user}/events/public`)
 
 		let activity = events
-			.map(
-				({ type, repo, created_at, payload }): ActivityEvent => ({
-					type,
-					repo: repo?.name || '',
-					created_at,
-					action: payload?.action
-				})
-			)
+			.map(({ type, repo, created_at, payload }): ActivityEvent => ({
+				type,
+				repo: repo?.name || '',
+				created_at,
+				action: payload?.action
+			}))
 			.filter((event) => event.repo)
 
 		activity = activity.filter(

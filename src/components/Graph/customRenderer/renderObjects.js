@@ -24,7 +24,7 @@ import {
 	MOUSE,
 	Quaternion,
 	Spherical,
-	Clock
+	Timer
 } from 'three'
 
 const three = window.THREE
@@ -47,7 +47,7 @@ const three = window.THREE
 			MOUSE,
 			Quaternion,
 			Spherical,
-			Clock
+			Timer
 		}
 
 import { CustomTrackballControls } from './customControls'
@@ -105,6 +105,7 @@ export default Kapsule({
 	methods: {
 		tick: function (state) {
 			if (state.initialised) {
+				state.clock.update()
 				state.controls.update && state.controls.update(state.clock.getDelta()) // timedelta is required for fly controls
 
 				state.postProcessingComposer
@@ -206,7 +207,7 @@ export default Kapsule({
 	stateInit: () => ({
 		scene: new three.Scene(),
 		camera: new three.PerspectiveCamera(),
-		clock: new three.Clock()
+		clock: new three.Timer()
 	}),
 
 	init(

@@ -3,7 +3,7 @@
 	import Theme from '../components/Theme.svelte'
 
 	import { onMount } from 'svelte'
-	import { locale, getPreferredLocale, setupI18n } from '$lib/i18n'
+	import { locale, getPreferredLocale, setupI18n } from '#lib/i18n'
 
 	setupI18n()
 	locale.set('en')

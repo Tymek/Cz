@@ -1,8 +1,8 @@
 import { json } from '@sveltejs/kit'
-import { recentlyPlayedLimit } from '$lib/spotify/config'
-import { getToken, queryApi } from '$lib/spotify/utils'
-import { getIntegration, updateIntegration } from '$lib/db'
-import { getErrorMessage } from '$lib/server/dashboard'
+import { recentlyPlayedLimit } from '#lib/spotify/config.ts'
+import { getToken, queryApi } from '#lib/spotify/utils.ts'
+import { getIntegration, updateIntegration } from '#lib/db.ts'
+import { getErrorMessage } from '#lib/server/dashboard.ts'
 import type { RequestHandler } from './$types'
 
 const refreshToken = async (token: string) =>
